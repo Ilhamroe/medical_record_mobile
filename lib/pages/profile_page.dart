@@ -1,4 +1,5 @@
 import 'package:e_klinik_pens/pages/editProfile_page.dart';
+import 'package:e_klinik_pens/pages/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,35 +36,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: EdgeInsets.only(top: 100),
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.239,
-                          height: MediaQuery.of(context).size.height * 0.113,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image(
-                              image: AssetImage("assets/images/profiles-pic.jpg")
-                            ),
-                          ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.239,
+                      height: MediaQuery.of(context).size.height * 0.113,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image(
+                          image: AssetImage("assets/images/profiles-pic.jpg")
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.07,
-                            height: MediaQuery.of(context).size.height * 0.035,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Colors.white
-                            ),
-                            child: Image.asset(
-                              "assets/images/camera.png",
-                              color: themeLight,                          
-                            ),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.025,
@@ -147,6 +128,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Image(image: AssetImage("assets/images/faq.png"))),
                       trailing: Icon(Icons.arrow_forward_ios_rounded, size: MediaQuery.of(context).size.width * 0.05),
                       iconColor: emperor,
+                      onTap: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => FaqPage())
+                          );
+                      },
                     ),
                     customDivider(context),
                       ListTile(

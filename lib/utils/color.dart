@@ -9,4 +9,6 @@ const Color textColor = Color(0xFF717784);
 const Color pureWhite = Color(0xFFFFFFFF);
 const Color fieldColor = Color(0xFFF4F4F4);
 const Color today = Color(0xFFFFD749);
-const Color card = Color(0xFFE8F3F1);
+const Color aquaHaze = Color(0xFFE8F3F1);
+const Color mintTulip= Color(0xFFC1F3EF);
+const Color emperor= Color(0xFF555555);

@@ -1,9 +1,15 @@
+import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/pages/profile_page.dart';
 import 'package:e_klinik_pens/pages/editProfile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/pages/cek.dart';
+import 'package:camera/camera.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras= await availableCameras();
+
   runApp(const MyApp());
 }
 

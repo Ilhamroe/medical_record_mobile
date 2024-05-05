@@ -1,8 +1,9 @@
+import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/models/user.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/profiles/profile.dart';
-import 'package:e_klinik_pens/widgets/profiles/text_field.dart';
+import 'package:e_klinik_pens/widgets/profiles/input_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -92,6 +93,10 @@ class _EditProfileState extends State<EditProfile> {
                                               child: GestureDetector(
                                                 onTap: () {
                                                  print("kontol");
+                                                 Navigator.push(
+                                                  context, 
+                                                  MaterialPageRoute(builder: (context) => CameraAction())
+                                                  );
                                                 },
                                                 child: Image(
                                                   image: AssetImage("assets/images/profiles-pic.jpg"),

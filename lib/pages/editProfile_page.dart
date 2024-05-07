@@ -62,7 +62,7 @@ class _EditProfileState extends State<EditProfile> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  icon: Icon(Icons.arrow_back_ios_new_rounded), 
+                                  icon: const Icon(Icons.arrow_back_ios_new_rounded), 
                                   color: pureWhite,
                                 ),
                               ],
@@ -77,8 +77,9 @@ class _EditProfileState extends State<EditProfile> {
                                       Text("Profil", style: TextStyle(
                                         fontWeight: FontWeight.bold, 
                                         color: pureWhite,
-                                        fontSize: 22
-                                      ),),
+                                        fontSize: MediaQuery.of(context).size.width * 0.055,
+                                      ),
+                                    ),
                                       Container(
                                         height: MediaQuery.of(context).size.height * 0.0275,
                                       ),
@@ -92,7 +93,6 @@ class _EditProfileState extends State<EditProfile> {
                                                   BorderRadius.circular(100),
                                               child: GestureDetector(
                                                 onTap: () {
-                                                 print("kontol");
                                                  Navigator.push(
                                                   context, 
                                                   MaterialPageRoute(builder: (context) => CameraAction())
@@ -108,14 +108,8 @@ class _EditProfileState extends State<EditProfile> {
                                             bottom: 0,
                                             right: 0,
                                             child: Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.07,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.035,
+                                              width: MediaQuery.of(context).size.width * 0.07,
+                                              height: MediaQuery.of(context).size.height * 0.035,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(100),
@@ -141,7 +135,7 @@ class _EditProfileState extends State<EditProfile> {
                 Expanded(
                   flex: 5,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(45),
@@ -162,7 +156,7 @@ class _EditProfileState extends State<EditProfile> {
                         Text(
                           "Jenis Kelamin :",
                           style: TextStyle(
-                            fontSize: 20
+                            fontSize: MediaQuery.of(context).size.width * 0.045
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.015,),
@@ -194,7 +188,7 @@ class _EditProfileState extends State<EditProfile> {
                         Text(
                           "Tanggal Lahir :",
                           style: TextStyle(
-                            fontSize: 20
+                            fontSize: MediaQuery.of(context).size.width * 0.045
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.015,),
@@ -312,14 +306,17 @@ class _EditProfileState extends State<EditProfile> {
                               elevation: 6,
                               padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.0175),
                               textStyle: TextStyle(
-                                fontSize: 20
+                                fontSize: MediaQuery.of(context).size.width * 0.045
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)
                               )
                             ),
                             child: Text(
-                              "Perbarui Profil"
+                              "Perbarui Profil",
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width * 0.045, 
+                              ),
                             )),
                         ),
                         customSpasi(context),

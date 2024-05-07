@@ -27,7 +27,7 @@ class _FaqTilesState extends State<FaqTiles> {
               title: Text(
               widget.faqLists.title, 
               style: TextStyle(
-                fontSize: 22,
+                fontSize: MediaQuery.of(context).size.width * 0.055,
                 fontWeight: FontWeight.w500
               ),
             ),

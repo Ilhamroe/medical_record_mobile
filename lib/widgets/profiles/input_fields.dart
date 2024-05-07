@@ -47,7 +47,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         Text(
           widget.label,
           style: TextStyle(
-            fontSize: 20
+            fontSize: MediaQuery.of(context).size.width * 0.045
           ),
         ),
         SizedBox(
@@ -121,7 +121,7 @@ class _CustomEmailWidgetState extends State<CustomEmailWidget> {
         Text(
           widget.label,
           style: TextStyle(
-            fontSize: 20
+            fontSize: MediaQuery.of(context).size.width * 0.045
           ),
         ),
         SizedBox(
@@ -209,7 +209,7 @@ class _CustomNumberFieldState extends State<CustomNumberField> {
         Text(
           widget.label,
           style: TextStyle(
-            fontSize: 20
+            fontSize: MediaQuery.of(context).size.width * 0.045
           ),
         ),
         SizedBox(

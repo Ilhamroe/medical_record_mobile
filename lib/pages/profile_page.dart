@@ -1,5 +1,6 @@
 import 'package:e_klinik_pens/pages/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/faq_page.dart';
+import 'package:e_klinik_pens/pages/medical_record_history.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
                Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -101,10 +102,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: ListView(
                   children:<Widget> [
                     ListTile(
-                      title: Text(
+                      title: const Text(
                         "Profil",
                         style: TextStyle(fontWeight: FontWeight.bold),),
-                      leading: CircleAvatar(
+                      leading: const CircleAvatar(
                         backgroundColor: aquaHaze,
                         child: Image(image: AssetImage("assets/images/profile.png")),
                         ),
@@ -122,8 +123,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   customDivider(context),
                     ListTile(
-                      title: Text("FAQ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      leading: CircleAvatar(
+                      title: const Text("FAQ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      leading: const CircleAvatar(
                         backgroundColor: aquaHaze,
                         child: Image(image: AssetImage("assets/images/faq.png"))),
                       trailing: Icon(Icons.arrow_forward_ios_rounded, size: MediaQuery.of(context).size.width * 0.05),
@@ -131,19 +132,27 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () {
                         Navigator.push(
                           context, 
-                          MaterialPageRoute(builder: (context) => FaqPage())
-                          );
+                          MaterialPageRoute(builder: (context) => FaqPage()
+                          )
+                        );
                       },
                     ),
                     customDivider(context),
                       ListTile(
-                      title: Text("Keluar", style: TextStyle(fontWeight: FontWeight.bold)),
+                      title: const Text("Keluar", style: TextStyle(fontWeight: FontWeight.bold)),
                       textColor: danger,
-                      leading: CircleAvatar(
+                      leading: const CircleAvatar(
                         backgroundColor: aquaHaze,
                         child: Image(image: AssetImage("assets/images/exit.png"))),
                       trailing: Icon(Icons.arrow_forward_ios_rounded, size: MediaQuery.of(context).size.width * 0.05),
                       iconColor: emperor,
+                      onTap: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => MedicalHistory()
+                          )
+                        );
+                      },
                     ),
                     customDivider(context)
                   ],

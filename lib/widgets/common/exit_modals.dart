@@ -37,13 +37,13 @@ class ExitModals{
                   ),
                 ),
                 customSpasi(context),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: themeDark,
                       foregroundColor: pureWhite,   
-                      elevation: 6,
+                      elevation: 2,
                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.0175),
                         textStyle: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.045
@@ -55,36 +55,36 @@ class ExitModals{
                     onPressed: () {
                          Navigator.of(context).pop(true);
                     }, 
-                    child:  Text("Keluar")
+                    child: const Text("Keluar")
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.005,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.4,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      side: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                      backgroundColor: pureWhite,
-                      foregroundColor: themeDark,                       
-                      elevation: 6,
-                       padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.0175),
-                        textStyle: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.045
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)
-                        )
-                    ),
+                  child: TextButton(
                     onPressed: () {
-                       Navigator.of(context).pop(false);
-                    }, 
-                    child: Text("Kembali")
+                      Navigator.pop(context);
+                    },
+                    style: ButtonStyle(
+                      overlayColor: MaterialStatePropertyAll(
+                        Colors.grey[200]
+                      ),
+                      padding: MaterialStatePropertyAll(
+                        EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.0175)
+                      ),
+                      foregroundColor: const MaterialStatePropertyAll(
+                        themeDark
+                      ),
+                    ),
+                    child: Text(
+                      "Kembali", style: TextStyle(
+                        fontSize: 18
+                      ),                   
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           )

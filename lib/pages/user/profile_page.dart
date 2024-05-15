@@ -1,7 +1,9 @@
+import 'package:e_klinik_pens/models/user.dart';
 import 'package:e_klinik_pens/pages/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/faq_page.dart';
 import 'package:e_klinik_pens/pages/medical_record_history.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +17,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  User user= UserProfiles.myUser;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: MediaQuery.of(context).size.width * 0.025,
                       ),
                       Text(
-                        "Aliridho Barakbah",
+                        user.name,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -66,9 +69,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Column(
                             children: [
-                              Image(image: AssetImage("assets/images/height.png"), width: 28, height: 43,),
-                              Text("Tinggi Badan", style: TextStyle(color: mintTulip),),
-                              Text("177 cm", style: TextStyle(color: pureWhite, fontWeight: FontWeight.bold, fontSize: 18),)
+                              const Image(image: AssetImage("assets/images/height.png"), width: 28, height: 43,),
+                              const Text("Tinggi Badan", style: TextStyle(color: mintTulip),),
+                              Text(user.height.toString(), style: TextStyle(color: pureWhite, fontWeight: FontWeight.bold, fontSize: 18),)
                             ],
                           ),
                           Container(
@@ -79,9 +82,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Column(
                             children: [
-                              Image(image: AssetImage("assets/images/weight.png"), width: 28, height: 44,),
-                              Text("Berat Badan", style: TextStyle(color: mintTulip)),
-                              Text("70 kg", style: TextStyle(color: pureWhite, fontWeight: FontWeight.bold, fontSize: 18),)
+                              const Image(image: AssetImage("assets/images/weight.png"), width: 28, height: 44,),
+                              const Text("Berat Badan", style: TextStyle(color: mintTulip)),
+                              Text(user.weight.toString(), style: TextStyle(color: pureWhite, fontWeight: FontWeight.bold, fontSize: 18),)
                             ],
                           ),
                         ],
@@ -104,7 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ListTile(
                         title: const Text(
                           "Profil",
-                          style: TextStyle(fontWeight: FontWeight.bold),),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         leading: const CircleAvatar(
                           backgroundColor: aquaHaze,
                           child: Image(image: AssetImage("assets/images/profile.png")),
@@ -117,7 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         onTap: (){
                           Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => EditProfile()),
+                          MaterialPageRoute(builder: (context) => EditProfile()
+                            ),
                           );
                         },
                       ),
@@ -132,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onTap: () {
                           Navigator.push(
                             context, 
-                            MaterialPageRoute(builder: (context) => FaqPage()
+                            MaterialPageRoute(builder: (context) => const FaqPage()
                             )
                           );
                         },
@@ -160,8 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),          
-            ],
-      
+            ],     
           ),
         ),
       ),

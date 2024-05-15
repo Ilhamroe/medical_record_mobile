@@ -1,5 +1,4 @@
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -229,7 +228,7 @@ class _CustomNumberFieldState extends State<CustomNumberField> {
           maxLines: widget.maxLines,
           textAlign: widget.textAlign,
           textAlignVertical: TextAlignVertical.center,
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: widget.inputFormat,
         )
       ],

@@ -13,3 +13,4 @@ const Color aquaHaze = Color(0xFFE8F3F1);
 const Color mintTulip= Color(0xFFC1F3EF);
 const Color emperor= Color(0xFF555555);
 const Color silverChalice= Color(0xFFA4A4A4);
+const Color divider= Color(0xFFE5E5E5);

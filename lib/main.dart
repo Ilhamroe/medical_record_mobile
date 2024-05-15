@@ -1,8 +1,7 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
-import 'package:e_klinik_pens/pages/profile_page.dart';
-import 'package:e_klinik_pens/pages/editProfile_page.dart';
+import 'package:e_klinik_pens/pages/user/profile_page.dart';
+import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/pages/cek.dart';
 import 'package:camera/camera.dart';
 
 Future<void> main() async{
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

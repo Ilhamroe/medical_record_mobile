@@ -49,7 +49,7 @@ class _FaqPageState extends State<FaqPage> {
             expandedHeight: MediaQuery.of(context).size.height * 0.115,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/atom.png",
+                "assets/images/atomic.png",
                 fit: BoxFit.cover,
               ),
             ),

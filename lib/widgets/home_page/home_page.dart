@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: Image.asset(
-                  'assets/images/atom.png',
+                  'assets/images/atomic.png',
                 ),
               ),
               Column(

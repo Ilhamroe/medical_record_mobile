@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/widgets/home_page/gejala_diagnosa_card_detail.dart';
-import 'package:e_klinik_pens/models/gejala_diagnosa_list.dart';
+import 'package:e_klinik_pens/widgets/home_page/saran_masukan_card_detail.dart';
+import 'package:e_klinik_pens/models/saran_masukan_list.dart';
 
-class GejalaDiagnosaDetail extends StatelessWidget {
-  const GejalaDiagnosaDetail({super.key});
+class SaranMasukanDetail extends StatelessWidget {
+  const SaranMasukanDetail({ super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class GejalaDiagnosaDetail extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          'Gejala & Diagnosa',
+          'Kritik & Masukan',
           style: TextStyle(
             color: pureWhite,
             fontWeight: FontWeight.normal,
@@ -34,8 +34,9 @@ class GejalaDiagnosaDetail extends StatelessWidget {
           Stack(
             children: [
               Transform.translate(
-                  offset: const Offset(200, -100),
-                  child: Image.asset("assets/images/atomic.png")),
+                offset: const Offset(200, -100),
+                child: Image.asset("assets/images/atomic.png"),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.85,
@@ -52,7 +53,7 @@ class GejalaDiagnosaDetail extends StatelessWidget {
                             topRight: Radius.circular(20),
                           ),
                         ),
-                        child: GejalaDiagnosaListView(gejalaDiagnosas: gejalaDiagnosaList),
+                        child: SaranMasukanListView()
                       ),
                     ],
                   ),

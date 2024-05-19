@@ -16,7 +16,7 @@ class BannerHomepage extends StatelessWidget {
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: card,
+              color: aquaHaze,
             ),
             child: Row(
               children: [

@@ -1,5 +1,5 @@
-  import 'package:flutter/material.dart';
-  import 'package:e_klinik_pens/models/doctor_list.dart';
+import 'package:flutter/material.dart';
+import 'package:e_klinik_pens/models/doctor_list.dart';
 
   class DoctorCard extends StatelessWidget {
       final Doctor doctor;
@@ -14,14 +14,6 @@
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.grey.withOpacity(0.5),
-        //     spreadRadius: 2,
-        //     blurRadius: 3,
-        //     offset: Offset(0, 2), 
-        //   ),
-        // ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

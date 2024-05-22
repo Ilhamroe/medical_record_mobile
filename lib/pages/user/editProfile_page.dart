@@ -34,107 +34,104 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: themeLight,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Image.asset("assets/images/atomic.png"),
-            ),
-            Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Container(
+          color: themeLight,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Image.asset("assets/images/atomic.png"),
+              ),
+              Column(
+                children: [
+                  Container(
                       width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).padding.top + 16),
-                        child: Stack(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).padding.top + 16),
+                    child: Stack(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(Icons.arrow_back_ios_new_rounded), 
-                                  color: pureWhite,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.0145),
-                                  child: Column(
-                                    children: [
-                                      Text("Profil", style: TextStyle(
-                                        fontWeight: FontWeight.bold, 
-                                        color: pureWhite,
-                                        fontSize: MediaQuery.of(context).size.width * 0.055,
-                                      ),
-                                    ),
-                                      Container(
-                                        height: MediaQuery.of(context).size.height * 0.0275,
-                                      ),
-                                      Stack(
-                                        children: [
-                                          SizedBox(
-                                            width: MediaQuery.of(context).size.width * 0.280,
-                                            height: MediaQuery.of(context).size.height * 0.133,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                 Navigator.push(
-                                                  context, 
-                                                  MaterialPageRoute(builder: (context) => CameraAction())
-                                                  );
-                                                },
-                                                child: Image(
-                                                  image: AssetImage("assets/images/profiles-pic.jpg"),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            bottom: 0,
-                                            right: 0,
-                                            child: Container(
-                                              width: MediaQuery.of(context).size.width * 0.07,
-                                              height: MediaQuery.of(context).size.height * 0.035,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(100),
-                                                  color: Colors.white),
-                                              child: Image.asset(
-                                                "assets/images/camera.png",
-                                                color: themeLight,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back_ios_new_rounded), 
+                              color: pureWhite,
                             ),
                           ],
                         ),
-                      )),
-                ),
-                
-                Expanded(
-                  flex: 5,
-                  child: Container(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.0145),
+                              child: Column(
+                                children: [
+                                  Text("Profil", style: TextStyle(
+                                    fontWeight: FontWeight.bold, 
+                                    color: pureWhite,
+                                    fontSize: MediaQuery.of(context).size.width * 0.055,
+                                  ),
+                                ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height * 0.0275,
+                                  ),
+                                  Stack(
+                                    children: [
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width * 0.280,
+                                        height: MediaQuery.of(context).size.height * 0.133,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                             Navigator.push(
+                                              context, 
+                                              MaterialPageRoute(builder: (context) => const CameraAction())
+                                              );
+                                            },
+                                            child: Image(
+                                              image: AssetImage("assets/images/profiles-pic.jpg"),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width * 0.07,
+                                          height: MediaQuery.of(context).size.height * 0.035,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: Colors.white),
+                                          child: Image.asset(
+                                            "assets/images/camera.png",
+                                            color: themeLight,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                  Container(
                     decoration:const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -142,6 +139,7 @@ class _EditProfileState extends State<EditProfile> {
                           topRight: Radius.circular(45)),
                     ),
                     width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
                       children: [
@@ -211,12 +209,15 @@ class _EditProfileState extends State<EditProfile> {
                                 final DateTime ?_date= await showDatePicker(
                                   context: context, 
                                   initialDate: DateTime(2000),
-                                  firstDate: DateTime.now().subtract(Duration(days: 365 * 100)), 
+                                  firstDate: DateTime.now().subtract(
+                                    const Duration(
+                                      days: 365 * 100)
+                                      ), 
                                   lastDate: DateTime.now(),
                                   );
                                   final _formattedDate= DateFormat("dd-MM-yyyy").format(_date!); 
                                   print(_formattedDate);                          
-
+                        
                                   setState(() {
                                     _dateController.text=_formattedDate.toString();
                                   });
@@ -252,7 +253,7 @@ class _EditProfileState extends State<EditProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.35,
                                 child: CustomNumberField(
                                   label: "Tinggi Badan :", 
@@ -262,7 +263,7 @@ class _EditProfileState extends State<EditProfile> {
                                   onChanged: (height) {}
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.35,
                                 child: CustomNumberField(
                                   label: "Berat Badan :", 
@@ -297,7 +298,7 @@ class _EditProfileState extends State<EditProfile> {
                               print("Nomor Telepon: $phoneNumber");
                               print("Tinggi Badan: $height");
                               print("Berat Badan: $weight");
-
+                        
                               print("TRANSGENDER :${UserProfiles.myUser.gender}");
                             }, 
                             style: ElevatedButton.styleFrom(
@@ -323,11 +324,11 @@ class _EditProfileState extends State<EditProfile> {
                         customSpasi(context),
                       ],
                     ),
-                  ),
-                )
-              ],
-            )
-          ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

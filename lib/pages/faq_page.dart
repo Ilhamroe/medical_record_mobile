@@ -75,10 +75,10 @@ class _FaqPageState extends State<FaqPage> {
                 final faqList= entry.value;
                 return Column(
                   children:[
-                    FaqTiles(
-                      faqLists: faqList, 
-                      isExpanded: isExpandedList[index],
-                    ),
+                    // FaqTiles(
+                    //   faqLists: faqList, 
+                    //   isExpanded: isExpandedList[index],
+                    // ), 
                     customDivider(context),
                   ],
                 ); 

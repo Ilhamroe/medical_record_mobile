@@ -1,6 +1,13 @@
+import 'package:e_klinik_pens/models/camera_actions.dart';
+import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/widgets/home_page/home_page.dart';
-void main() {
+import 'package:camera/camera.dart';
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras= await availableCameras();
+
   runApp(const MyApp());
 }
 
@@ -8,9 +15,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ProfilePage(),
     );
   }
 }

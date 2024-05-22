@@ -25,6 +25,11 @@ dev_dependencies:
 
   flutter_lints: ^3.0.0
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/images/applogo.png
+
 flutter:
   uses-material-design: true
   assets:

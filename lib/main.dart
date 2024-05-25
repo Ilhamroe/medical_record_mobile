@@ -1,13 +1,12 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
-import 'package:e_klinik_pens/pages/user/profile_page.dart';
-import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
+import 'package:e_klinik_pens/pages/dokter/tambah_rekam_medis.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  cameras= await availableCameras();
+  cameras = await availableCameras();
 
   runApp(const MyApp());
 }
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: ProfilePage(),
+      home: TambahRekamMedisPage(),
     );
   }
 }

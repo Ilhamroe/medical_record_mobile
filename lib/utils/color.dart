@@ -14,3 +14,6 @@ const Color mintTulip= Color(0xFFC1F3EF);
 const Color emperor= Color(0xFF555555);
 const Color silverChalice= Color(0xFFA4A4A4);
 const Color divider= Color(0xFFE5E5E5);
+const Color onBoard= Color(0xFFA1A8B0);
+const Color fill= Color(0xFFF9FAFB);
+const Color stroke= Color(0xFFE5E7EB);

@@ -33,86 +33,94 @@ class _ResetPasswordState extends State<ResetPassword> {
     }
   }
 
+  Future<bool> _onBackButtonPressed(BuildContext context) async {
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: pureWhite,
-      appBar: AppBar(
-        leading: Row(
-          children: [
-            Flexible(
-              child: IconButton(
-                iconSize: Checkbox.width,
-                key: const Key('back'),
-                onPressed: () {
-                  Navigator.popAndPushNamed(context, AppRoutes.login);
-                },
-                padding: const EdgeInsets.only(left: 20).w,
-                icon: SvgPicture.asset(
-                  "assets/images/back-button.svg",
-                  width: 28.w,
-                  height: 28.h,
+    return WillPopScope(
+      onWillPop: () => _onBackButtonPressed(context),
+      child: Scaffold(
+        backgroundColor: pureWhite,
+        appBar: AppBar(
+          leading: Row(
+            children: [
+              Flexible(
+                child: IconButton(
+                  iconSize: Checkbox.width,
+                  key: const Key('back'),
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, AppRoutes.login);
+                  },
+                  padding: const EdgeInsets.only(left: 20).w,
+                  icon: SvgPicture.asset(
+                    "assets/images/back-button.svg",
+                    width: 28.w,
+                    height: 28.h,
+                  ),
                 ),
               ),
+            ],
+          ),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, left: 24.0).w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Lupa Password Anda?",
+                    style: TextStyle(fontFamily: 'Inter-Bold', fontSize: 24.sp),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "Hubungi nomor admin berikut ini untuk mereset password Anda :",
+                      style: TextStyle(
+                          fontFamily: 'Inter-Regular',
+                          fontSize: 16.sp,
+                          color: onBoard),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0).w,
+              child: Text(
+                "+6289603443665",
+                style: TextStyle(
+                  fontFamily: 'Inter-Medium',
+                  fontSize: 24.sp,
+                ),
+              ),
+            ),
+            ButtonConfirm(
+              width: 300.w,
+              height: 50.h,
+              text: 'Lanjutkan ke Chat',
+              colorText: pureWhite,
+              borderColor: themeDark,
+              buttonColor: themeDark,
+              onPressed: () async {
+                try {
+                  await whatsAppOpen();
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch WhatsApp: $e')),
+                  );
+                }
+              },
             ),
           ],
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 24.0).w,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Lupa Password Anda?",
-                  style: TextStyle(fontFamily: 'Inter-Bold', fontSize: 24.sp),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "Hubungi nomor admin berikut ini untuk mereset password Anda :",
-                    style: TextStyle(
-                        fontFamily: 'Inter-Regular',
-                        fontSize: 16.sp,
-                        color: onBoard),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0).w,
-            child: Text(
-              "+6289603443665",
-              style: TextStyle(
-                fontFamily: 'Inter-Medium',
-                fontSize: 24.sp,
-              ),
-            ),
-          ),
-          ButtonConfirm(
-            width: 300.w,
-            height: 50.h,
-            text: 'Lanjutkan ke Chat',
-            colorText: pureWhite,
-            borderColor: themeDark,
-            buttonColor: themeDark,
-            onPressed: () async {
-              try {
-                await whatsAppOpen();
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Could not launch WhatsApp: $e')),
-                );
-              }
-            },
-          ),
-        ],
       ),
     );
   }

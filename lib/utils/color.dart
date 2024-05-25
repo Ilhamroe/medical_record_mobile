@@ -17,3 +17,5 @@ const Color divider= Color(0xFFE5E5E5);
 const Color onBoard= Color(0xFFA1A8B0);
 const Color fill= Color(0xFFF9FAFB);
 const Color stroke= Color(0xFFE5E7EB);
+const Color dark= Color(0xFF101623);
+const Color bg= Color(0xFFF5F8FF);

@@ -20,210 +20,237 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  Future<bool> _onBackButtonPressed(BuildContext context) async {
+    Navigator.pushReplacementNamed(context, AppRoutes.logreg);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: pureWhite,
-      appBar: AppBar(
-        leading: Row(
-          children: [
-            Flexible(
-              child: IconButton(
-                iconSize: Checkbox.width,
-                key: const Key('back'),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginRegisterPage(),
-                    ),
-                  );
-                },
-                padding: const EdgeInsets.only(left: 20).w,
-                icon: SvgPicture.asset(
-                  "assets/images/back-button.svg",
-                  width: 28.w,
-                  height: 28.h,
-                ),
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        title: Text(
-          "Masuk",
-          style: TextStyle(
-            fontFamily: 'Inter-Semi',
-            fontSize: 16.sp,
-          ),
-        ),
-        surfaceTintColor: pureWhite,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0).w,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    children: [
-                      FormField<String>(
-                        validator: (value) {
-                          if (_emailController.text.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          String pattern =
-                              r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-                          RegExp regex = RegExp(pattern);
-                          if (!regex.hasMatch(_emailController.text)) {
-                            return 'Please enter a valid email address';
-                          }
-                          return null;
-                        },
-                        builder: (FormFieldState<String> field) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomFormField(
-                                width: 300.w,
-                                height: 50.h,
-                                placeholder: 'Masukkan email Anda',
-                                leadingIcon: 'assets/images/email.png',
-                                controller: _emailController,
-                              ),
-                              if (field.hasError)
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                          horizontal: 20.0, vertical: 2.0)
-                                      .w,
-                                  child: Text(
-                                    field.errorText ?? '',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          );
-                        },
+    return WillPopScope(
+      onWillPop: () => _onBackButtonPressed(context),
+      child: Scaffold(
+        backgroundColor: pureWhite,
+        appBar: AppBar(
+          leading: Row(
+            children: [
+              Flexible(
+                child: IconButton(
+                  iconSize: Checkbox.width,
+                  key: const Key('back'),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginRegisterPage(),
                       ),
-                      FormField<String>(
-                        validator: (value) {
-                          if (_passwordController.text.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (_passwordController.text.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
-                        builder: (FormFieldState<String> field) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomFormField(
-                                width: 300.w,
-                                height: 50.h,
-                                placeholder: 'Masukkan password Anda',
-                                leadingIcon: 'assets/images/pw.png',
-                                controller: _passwordController,
-                                obscureText: true,
-                              ),
-                              if (field.hasError)
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                          horizontal: 20.0, vertical: 2.0)
-                                      .w,
-                                  child: Text(
-                                    field.errorText ?? '',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 10.0, bottom: 15.0).w,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.popAndPushNamed(
-                                    context, AppRoutes.resetpw);
-                              },
-                              child: Text(
-                                'Lupa Password?',
-                                style: TextStyle(
-                                    fontFamily: 'Inter-Regular',
-                                    fontSize: 15.sp,
-                                    color: themeDark),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5.0).w,
-                            child: ButtonConfirm(
-                              width: 300.w,
-                              height: 50.h,
-                              text: 'Masuk',
-                              colorText: pureWhite,
-                              borderColor: themeDark,
-                              buttonColor: themeDark,
-                              onPressed: () {
-                                if (_formKey.currentState?.validate() ?? false) {
-                                  print(
-                                      'Email: ${_emailController.text}, Password: ${_passwordController.text}');
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    );
+                  },
+                  padding: const EdgeInsets.only(left: 20).w,
+                  icon: SvgPicture.asset(
+                    "assets/images/back-button.svg",
+                    width: 28.w,
+                    height: 28.h,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0).w,
-                  child: RichText(
-                    text: TextSpan(
+              ),
+            ],
+          ),
+          centerTitle: true,
+          title: Text(
+            "Masuk",
+            style: TextStyle(
+              fontFamily: 'Inter-Semi',
+              fontSize: 16.sp,
+            ),
+          ),
+          surfaceTintColor: pureWhite,
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0).w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Form(
+                    key: _formKey,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Column(
                       children: [
-                        TextSpan(
-                          text: "Belum memiliki akun? ",
-                          style: TextStyle(
-                            fontFamily: 'Inter-Regular',
-                            fontSize: 15.sp,
-                            color: textColor,
-                          ),
+                        FormField<String>(
+                          validator: (value) {
+                            if (_emailController.text.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            String pattern =
+                                r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+                            RegExp regex = RegExp(pattern);
+                            if (!regex.hasMatch(_emailController.text)) {
+                              return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
+                          builder: (FormFieldState<String> field) {
+                            bool isValid = false;
+                            if (_emailController.text.isNotEmpty) {
+                              String pattern =
+                                  r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+                              RegExp regex = RegExp(pattern);
+                              if (regex.hasMatch(_emailController.text)) {
+                                isValid = true;
+                              }
+                            }
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomFormField(
+                                  width: 300.w,
+                                  height: 50.h,
+                                  placeholder: 'Masukkan email Anda',
+                                  leadingIcon: 'assets/images/email.png',
+                                  controller: _emailController,
+                                  trailing: isValid
+                                      ? SvgPicture.asset(
+                                          'assets/images/done.svg',
+                                          color: themeDark,
+                                        )
+                                      : null,
+                                ),
+                                if (field.hasError)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0, vertical: 2.0)
+                                        .w,
+                                    child: Text(
+                                      field.errorText ?? '',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 12.sp,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
-                        TextSpan(
-                          text: "Daftar",
-                          style: TextStyle(
-                            fontFamily: 'Inter-Regular',
-                            fontSize: 15.sp,
-                            color: themeDark,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushNamed(context, AppRoutes.register);
-                            },
+                        FormField<String>(
+                          validator: (value) {
+                            if (_passwordController.text.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            if (_passwordController.text.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
+                          builder: (FormFieldState<String> field) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomFormField(
+                                  width: 300.w,
+                                  height: 50.h,
+                                  placeholder: 'Masukkan password Anda',
+                                  leadingIcon: 'assets/images/pw.png',
+                                  trailingIcon: Icons.visibility,
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                ),
+                                if (field.hasError)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0, vertical: 2.0)
+                                        .w,
+                                    child: Text(
+                                      field.errorText ?? '',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 12.sp,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10.0, bottom: 15.0)
+                                      .w,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.popAndPushNamed(
+                                      context, AppRoutes.resetpw);
+                                },
+                                child: Text(
+                                  'Lupa Password?',
+                                  style: TextStyle(
+                                      fontFamily: 'Inter-Regular',
+                                      fontSize: 15.sp,
+                                      color: themeDark),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0).w,
+                              child: ButtonConfirm(
+                                width: 300.w,
+                                height: 50.h,
+                                text: 'Masuk',
+                                colorText: pureWhite,
+                                borderColor: themeDark,
+                                buttonColor: themeDark,
+                                onPressed: () {
+                                  if (_formKey.currentState?.validate() ??
+                                      false) {
+                                    print(
+                                        'Email: ${_emailController.text}, Password: ${_passwordController.text}');
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0).w,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Belum memiliki akun? ",
+                            style: TextStyle(
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 15.sp,
+                              color: textColor,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "Daftar",
+                            style: TextStyle(
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 15.sp,
+                              color: themeDark,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, AppRoutes.register);
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

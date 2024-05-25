@@ -3,52 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContentTemplate extends StatelessWidget {
+  final OnBoardItems item;
+
   const ContentTemplate({
     super.key,
     required this.item,
   });
 
-  final OnBoardItems item;
-
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Image.asset(
-          item.image,
-          height: size.height * 0.3.h,
-        ),
-        // FittedBox(
-        //   child: Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 30).r,
-        //     child: Text(
-        //       item.title,
-        //       style: Theme.of(context)
-        //           .textTheme
-        //           .headlineLarge!
-        //           .copyWith(fontFamily: 'Inter-Bold'),
-        //     ),
-        //   ),
-        // ),
-        SizedBox(height: size.height * 0.01.h),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30).r,
-          child: Text(
+    return Padding(
+      padding: const EdgeInsets.all(20.0).w,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 300.w,
+            height: 300.h,
+            child: Image.asset(item.image),
+          ),
+          SizedBox(height: 20.h),
+          Text(
             item.title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Inter-Bold'
-                ),
+            style: TextStyle(
+              fontFamily: 'Inter-Bold',
+              fontSize: 24.sp,
+              color: Colors.black,
+            ),
             textAlign: TextAlign.center,
           ),
-        ),
-        SizedBox(height: size.height * 0.1.h),
-      ],
+        ],
+      ),
     );
   }
 }

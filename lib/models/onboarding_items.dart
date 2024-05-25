@@ -1,10 +1,12 @@
+
 class OnBoardItems {
   final String image;
   final String title;
 
-  OnBoardItems(
-      {required this.image,
-      required this.title,});
+  OnBoardItems({
+    required this.image,
+    required this.title,
+  });
 }
 
 class OnboardData {

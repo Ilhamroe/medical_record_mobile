@@ -37,7 +37,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       appBar: AppBar(
         actions: [
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, right: 40.0).w,
+            padding: const EdgeInsets.only(top: 20.0, right: 40.0).r,
             child: GestureDetector(
                 onTap: () {
                   Navigator.popAndPushNamed(context, AppRoutes.navbar);
@@ -83,7 +83,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40).w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -91,15 +91,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     children: List.generate(
                       OnboardData.onBoardItemList.length,
                       (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                        height: 8,
-                        width: selectedIndex == index ? 24 : 8,
-                        margin: const EdgeInsets.only(right: 8),
+                        duration: const Duration(milliseconds: 100),
+                        curve: Curves.linear,
+                        height: 5.h,
+                        width: 16.w,
+                        margin: const EdgeInsets.only(right: 5).r,
                         decoration: BoxDecoration(
                             color:
                                 selectedIndex == index ? themeDark : themeLight,
-                            borderRadius: BorderRadius.circular(8)),
+                            borderRadius: BorderRadius.circular(8).w),
                       ),
                     ),
                   ),
@@ -115,8 +115,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       }
                     },
                     child: Container(
-                      height: 70.h,
-                      width: 70.w,
+                      height: 60.h,
+                      width: 60.w,
                       decoration: const BoxDecoration(
                         color: themeDark,
                         shape: BoxShape.circle,

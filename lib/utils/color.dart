@@ -15,3 +15,4 @@ const Color emperor= Color(0xFF555555);
 const Color silverChalice= Color(0xFFA4A4A4);
 const Color blackText= Color(0xFF101623);
 const Color divider= Color(0xFFE5E5E5);
+const Color sore= Color(0xFFFFCE6E);

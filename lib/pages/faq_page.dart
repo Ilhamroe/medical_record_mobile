@@ -1,14 +1,29 @@
+import 'package:e_klinik_pens/models/faq_lists.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/widgets/profiles/faq_tiles.dart';
+import 'package:e_klinik_pens/widgets/profiles/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class MedicalHistory extends StatefulWidget {
-  const MedicalHistory({super.key});
+class FaqPage extends StatefulWidget {
+  const FaqPage({super.key});
 
   @override
-  State<MedicalHistory> createState() => _MedicalHistoryState();
+  State<FaqPage> createState() => _FaqPageState();
 }
 
-class _MedicalHistoryState extends State<MedicalHistory> {
+class _FaqPageState extends State<FaqPage> {
+  List<FaqLists> faqLists= FaqContents.faqLists;
+  late List<bool> isExpandedList;
+
+  @override
+  void initState() {
+    super.initState();
+    isExpandedList= List.generate(
+      faqLists.length, (index) => false
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +39,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
               }, 
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: pureWhite,)
               ),
-            title: Text("Riwayat Rekam Medis", style: TextStyle(
+            title: Text("FAQ", style: TextStyle(
               fontWeight: FontWeight.bold, 
               fontSize: MediaQuery.of(context).size.width * 0.055, 
               color: pureWhite
@@ -38,7 +53,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                 fit: BoxFit.cover,
               ),
             ),
-             bottom: PreferredSize(
+            bottom: PreferredSize(
               preferredSize: const Size.fromHeight(0.0), 
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.0275,
@@ -55,22 +70,19 @@ class _MedicalHistoryState extends State<MedicalHistory> {
           ),
           SliverList(
             delegate: SliverChildListDelegate(
-              [
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset("assets/images/record.png"),
-                    Text(
-                        "Tidak ada riwayat\nrekam medis", style: TextStyle(
-                          color: silverChalice,
-                          fontSize: MediaQuery.of(context).size.width * 0.045
-                        ),
-                    )
-                    ],
-                  ),
-                ),
-              ]      
+              faqLists.asMap().entries.map((entry) {
+                final index= entry.key;
+                final faqList= entry.value;
+                return Column(
+                  children:[
+                    // FaqTiles(
+                    //   faqLists: faqList, 
+                    //   isExpanded: isExpandedList[index],
+                    // ), 
+                    customDivider(context),
+                  ],
+                ); 
+              }).toList(),
             )
           ),
         ],

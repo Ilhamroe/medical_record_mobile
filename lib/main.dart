@@ -1,5 +1,4 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
-
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/widgets/common/schedule_doctor.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:e_klinik_pens/utils/color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   cameras = await availableCameras();
   await ScreenUtil.ensureScreenSize();
 
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+      home: PasienTerakhirBerkunjung(),
     );
   }
 }

@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AlertConfirm extends StatefulWidget {
+class AlertDanger extends StatefulWidget {
   final String titleText;
   final String descText;
   final String route;
-  const AlertConfirm({required this.titleText, required this.descText, required this.route, super.key});
+  const AlertDanger({required this.titleText, required this.descText, required this.route, super.key});
 
   @override
-  State<AlertConfirm> createState() => _AlertConfirmState();
+  State<AlertDanger> createState() => _AlertDangerState();
 }
 
-class _AlertConfirmState extends State<AlertConfirm> {
+class _AlertDangerState extends State<AlertDanger> {
   bool _isNavigated = false;
 
   @override
@@ -48,9 +48,9 @@ class _AlertConfirmState extends State<AlertConfirm> {
           ),
           child: Center(
             child: SvgPicture.asset(
-              "assets/images/done.svg",
+              "assets/images/cross.svg",
               width: 40.w,
-              color: themeDark,
+              color: danger,
             ),
           ),
         ),
@@ -85,10 +85,10 @@ class _AlertConfirmState extends State<AlertConfirm> {
               child: ButtonConfirm(
                 width: 160.w,
                 height: 40.h,
-                text: 'Masuk',
+                text: 'Tutup',
                 colorText: pureWhite,
-                borderColor: themeDark,
-                buttonColor: themeDark,
+                borderColor: danger,
+                buttonColor: danger,
                 onPressed: _navigateToLogin,
               ),
             ),

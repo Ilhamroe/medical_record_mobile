@@ -3,10 +3,12 @@ import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
+import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
 import 'package:e_klinik_pens/pages/doctor/home_page_doctor.dart';
 import 'package:e_klinik_pens/pages/onboarding/onboarding_page.dart';
 import 'package:e_klinik_pens/pages/onboarding/splash.dart';
-import 'package:e_klinik_pens/widgets/common/bottom_navbar.dart';
+import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
+import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -16,7 +18,9 @@ class AppRoutes {
   static const String login = "/login";
   static const String register = "/register";
   static const String resetpw = "/resetpw";
-  static const String navbar = "/navbar";
+  static const String navbarAdmin = "/navbarAdmin";
+  static const String navbarDokter = "/navbarDokter";
+  static const String navbarUser = "/navbarUser";
   static const String homeadmin = "/home";
   static const String homedokter = "/dokter";
   static const String homeuser = "/user";
@@ -59,10 +63,22 @@ class AppRoutes {
           builder: (_) => const ResetPassword(),
         );
 
-      case AppRoutes.navbar:
+      case AppRoutes.navbarAdmin:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const NavbarBottom(),
+          builder: (_) => const NavbarBottomAdmin(),
+        );
+
+      case AppRoutes.navbarDokter:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const NavbarBottomDoctor(),
+        );
+
+      case AppRoutes.navbarUser:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const NavbarBottomUser(),
         );
 
       case AppRoutes.homeadmin:

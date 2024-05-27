@@ -1,4 +1,4 @@
-import 'package:e_klinik_pens/models/user.dart';
+import 'package:e_klinik_pens/models/user_profiles.dart';
 
 class UserProfiles{
   static User myUser= User(

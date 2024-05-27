@@ -1,7 +1,9 @@
+import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_field.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +24,50 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nrpController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final ServiceAuth _registService = ServiceAuth();
 
   Future<bool> _onBackButtonPressed(BuildContext context) async {
     Navigator.pushReplacementNamed(context, AppRoutes.logreg);
     return false;
+  }
+
+  void _register() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final userData = {
+        'name': _nameController.text,
+        'nrp': _nrpController.text,
+        'email': _emailController.text,
+        'password': _passwordController.text,
+        'role': 'user',
+      };
+
+      try {
+        final response = await _registService.registerUser(userData);
+        print('Registration successful: $response');
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertConfirm(
+              titleText: "Sukses",
+              descText: "Akun anda telah berhasil didaftarkan",
+              route: AppRoutes.login,
+            );
+          },
+        );
+      } catch (e) {
+        print('Registration failed: $e');
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDanger(
+              titleText: "Gagal",
+              descText: "Akun anda gagal untuk didaftarkan",
+              route: AppRoutes.register,
+            );
+          },
+        );
+      }
+    }
   }
 
   @override
@@ -261,22 +303,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             colorText: pureWhite,
                             borderColor: themeDark,
                             buttonColor: themeDark,
-                            onPressed: () {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                print(
-                                    'Name: ${_nameController.text}, NRP/NIP: ${_nrpController.text}, Email: ${_emailController.text}, Password: ${_passwordController.text}');
-                              }
-                              // showDialog(
-                              //   context: context,
-                              //   builder: (BuildContext context) {
-                              //     return const AlertConfirm(
-                              //       descText:
-                              //           "Akun anda telah berhasil didaftarkan",
-                              //       route: AppRoutes.login,
-                              //     );
-                              //   },
-                              // );
-                            },
+                            onPressed: _register,
                           ),
                         ),
                       ],

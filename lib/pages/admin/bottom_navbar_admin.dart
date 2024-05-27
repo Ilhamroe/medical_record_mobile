@@ -1,24 +1,24 @@
 import 'package:e_klinik_pens/pages/admin/home_page.admin.dart';
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
-import 'package:e_klinik_pens/pages/doctor/home_page_doctor.dart';
+import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class NavbarBottom extends StatefulWidget {
-  const NavbarBottom({super.key});
+class NavbarBottomAdmin extends StatefulWidget {
+  const NavbarBottomAdmin({super.key});
 
   @override
-  State<NavbarBottom> createState() => _NavbarBottomState();
+  State<NavbarBottomAdmin> createState() => _NavbarBottomAdminState();
 }
 
-class _NavbarBottomState extends State<NavbarBottom> {
+class _NavbarBottomAdminState extends State<NavbarBottomAdmin> {
   int currentTab = 0;
   final List<Widget> screens = [
     const HomePageAdmin(),
-    const HomePageDoctor(),
+    const TestPage(),
     const ResetPassword(),
     const ProfilePage(),
   ];
@@ -92,7 +92,7 @@ class _NavbarBottomState extends State<NavbarBottom> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const HomePageDoctor();
+                        currentScreen = const TestPage();
                         currentTab = 1;
                       });
                     },

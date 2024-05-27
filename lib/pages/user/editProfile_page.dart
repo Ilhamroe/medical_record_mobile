@@ -1,5 +1,5 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
-import 'package:e_klinik_pens/models/user.dart';
+import 'package:e_klinik_pens/models/user_profiles.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/profiles/profile.dart';

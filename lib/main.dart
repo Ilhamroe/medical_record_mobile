@@ -1,4 +1,5 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
+// import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.generateRoute,
         // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        // home: ProfilePage(),
+        // home: TestPage(),
       ),
     );
   }

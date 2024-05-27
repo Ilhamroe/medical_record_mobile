@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
+import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
+import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_field.dart';
 import 'package:flutter/gestures.dart';
@@ -17,12 +21,99 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final ServiceAuth _loginService = ServiceAuth();
 
   Future<bool> _onBackButtonPressed(BuildContext context) async {
     Navigator.pushReplacementNamed(context, AppRoutes.logreg);
     return false;
+  }
+
+  void _login() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final userData = {
+        'name': _nameController.text,
+        'password': _passwordController.text,
+      };
+
+      try {
+        final response = await _loginService.loginUser(userData);
+        print('Login successful: $response');
+        String userRole = response['user']['role'];
+        switch (userRole) {
+          case 'admin':
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const AlertConfirm(
+                  titleText: "Sukses",
+                  descText: "Akun anda telah berhasil login",
+                  route: AppRoutes.navbarAdmin,
+                );
+              },
+            );
+            break;
+          case 'dokter':
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const AlertConfirm(
+                  titleText: "Sukses",
+                  descText: "Akun anda telah berhasil login",
+                  route: AppRoutes.navbarDokter,
+                );
+              },
+            );
+            break;
+          case 'user':
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const AlertConfirm(
+                  titleText: "Sukses",
+                  descText: "Akun anda telah berhasil login",
+                  route: AppRoutes.navbarUser,
+                );
+              },
+            );
+            break;
+          default:
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const AlertDanger(
+                  titleText: "Gagal",
+                  descText: "Anda tidak memiliki hak akses yang valid.",
+                  route: AppRoutes.login,
+                );
+              },
+            );
+        }
+      } catch (e) {
+        print('Login failed: $e');
+        String errorMessage =
+            'Login failed. Please check your credentials and try again.';
+        if (e is DioError) {
+          if (e.response?.statusCode == 422) {
+            errorMessage = 'Invalid name or password.';
+          } else {
+            errorMessage =
+                'An error occurred while logging in. Please try again later.';
+          }
+        }
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDanger(
+              titleText: "Gagal",
+              descText: "{$errorMessage}",
+              route: AppRoutes.login,
+            );
+          },
+        );
+      }
+    }
   }
 
   @override
@@ -81,42 +172,21 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         FormField<String>(
                           validator: (value) {
-                            if (_emailController.text.isEmpty) {
-                              return 'Please enter your email';
-                            }
-                            String pattern =
-                                r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-                            RegExp regex = RegExp(pattern);
-                            if (!regex.hasMatch(_emailController.text)) {
-                              return 'Please enter a valid email address';
+                            if (_nameController.text.isEmpty) {
+                              return 'Please enter your name';
                             }
                             return null;
                           },
                           builder: (FormFieldState<String> field) {
-                            bool isValid = false;
-                            if (_emailController.text.isNotEmpty) {
-                              String pattern =
-                                  r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-                              RegExp regex = RegExp(pattern);
-                              if (regex.hasMatch(_emailController.text)) {
-                                isValid = true;
-                              }
-                            }
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomFormField(
                                   width: 300.w,
                                   height: 50.h,
-                                  placeholder: 'Masukkan email Anda',
-                                  leadingIcon: 'assets/images/email.png',
-                                  controller: _emailController,
-                                  trailing: isValid
-                                      ? SvgPicture.asset(
-                                          'assets/images/done.svg',
-                                          color: themeDark,
-                                        )
-                                      : null,
+                                  placeholder: 'Masukkan nama Anda',
+                                  leadingIcon: 'assets/images/id.png',
+                                  controller: _nameController,
                                 ),
                                 if (field.hasError)
                                   Padding(
@@ -206,13 +276,7 @@ class _LoginPageState extends State<LoginPage> {
                                 colorText: pureWhite,
                                 borderColor: themeDark,
                                 buttonColor: themeDark,
-                                onPressed: () {
-                                  if (_formKey.currentState?.validate() ??
-                                      false) {
-                                    print(
-                                        'Email: ${_emailController.text}, Password: ${_passwordController.text}');
-                                  }
-                                },
+                                onPressed: _login,
                               ),
                             ),
                           ],
@@ -242,7 +306,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushNamed(context, AppRoutes.register);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.register);
                               },
                           ),
                         ],

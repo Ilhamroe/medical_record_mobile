@@ -1,5 +1,5 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
-import 'package:e_klinik_pens/pages/dokter/tambah_rekam_medis.dart';
+import 'package:e_klinik_pens/pages/dokter/pasien_terakhir_berkunjung.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: TambahRekamMedisPage(),
+      home: PasienTerakhirBerkunjung(),
     );
   }
 }

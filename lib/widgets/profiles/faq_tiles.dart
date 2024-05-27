@@ -1,6 +1,4 @@
-import 'package:e_klinik_pens/models/faq_lists.dart';
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/widgets/profiles/profile.dart';
 import 'package:flutter/material.dart';
 
 class FaqTiles extends StatefulWidget {

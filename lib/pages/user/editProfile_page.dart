@@ -6,7 +6,6 @@ import 'package:e_klinik_pens/widgets/profiles/profile.dart';
 import 'package:e_klinik_pens/widgets/profiles/input_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class EditProfile extends StatefulWidget {
@@ -345,16 +344,14 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                               )),
                         ),
-                        customSpasi(context),
-                        customSpasi(context),
                       ],
-                    ),
-                  )
-                ],
-              )
-            ],
+                      ),
+                    )
+                  ],
+                )
+              ],            
+            ),
           ),
-        ),
       ),
     );
   }

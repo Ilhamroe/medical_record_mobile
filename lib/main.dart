@@ -7,9 +7,8 @@ import 'package:e_klinik_pens/utils/color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  cameras= await availableCameras();
   await ScreenUtil.ensureScreenSize();
-
   runApp(const MyApp());
 }
 

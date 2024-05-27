@@ -13,11 +13,15 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
-  intl: 
+  intl: ^0.17.0
   camera: ^0.10.5+9
   path_provider: ^2.1.3
   path: ^1.9.0
   flutter_launcher_icons: ^0.13.1
+  flutter_screenutil: ^5.9.1
+  shared_preferences: ^2.0.12
+  fluttertoast: ^8.2.5
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +46,12 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
+    - family: Inter-Medium
+      fonts:
+        - asset: assets/fonts/Inter-Medium.ttf
+    - family: Inter-Semi
+      fonts:
+        - asset: assets/fonts/Inter-SemiBold.ttf
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf

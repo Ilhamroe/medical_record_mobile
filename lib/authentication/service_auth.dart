@@ -66,25 +66,6 @@ class ServiceAuth {
     }
   }
 
-  //login as login
-  // Future<Map<String, dynamic>> loginUser(Map<String, dynamic> userData) async {
-  //   final response = await http.post(
-  //     Uri.parse(Config.apiUrl + 'login'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     },
-  //     body: jsonEncode(userData),
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     return jsonDecode(response.body);
-  //   } else {
-  //     print('Failed to login user: ${response.statusCode}');
-  //     print('Response body: ${response.body}');
-  //     throw Exception('Failed to login user');
-  //   }
-  // }
-
   Future<Map<String, dynamic>> loginUser(Map<String, dynamic> userData) async {
     final response = await http.post(
       Uri.parse(Config.apiUrl + 'login'),

@@ -26,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
       onWillPop: () => ExitModals.onBackButtonPressed(context),
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             color: themeLight,
             child: Stack(
@@ -47,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             height: MediaQuery.of(context).size.height * 0.113,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       "assets/images/profiles-pic.jpg")),
                             ),
@@ -57,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Text(
                             user.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold),
@@ -71,8 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Column(
                                 children: [
                                   const Image(
-                                    image:
-                                        AssetImage("assets/images/height.png"),
+                                    image: AssetImage("assets/images/height.png"),
                                     width: 28,
                                     height: 43,
                                   ),
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   Text(
                                     user.height.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: pureWhite,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18),
@@ -93,13 +93,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: 1,
                                 height: 44,
                                 color: mintTulip,
-                                margin: EdgeInsets.symmetric(horizontal: 20),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                               ),
                               Column(
                                 children: [
                                   const Image(
-                                    image:
-                                        AssetImage("assets/images/weight.png"),
+                                    image: AssetImage("assets/images/weight.png"),
                                     width: 28,
                                     height: 44,
                                   ),
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       style: TextStyle(color: mintTulip)),
                                   Text(
                                     user.weight.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: pureWhite,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18),
@@ -137,8 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             leading: const CircleAvatar(
                               backgroundColor: aquaHaze,
                               child: Image(
-                                  image:
-                                      AssetImage("assets/images/profile.png")),
+                                  image: AssetImage("assets/images/profile.png")),
                             ),
                             trailing: Icon(
                               Icons.arrow_forward_ios_rounded,
@@ -160,8 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             leading: const CircleAvatar(
                                 backgroundColor: aquaHaze,
                                 child: Image(
-                                    image:
-                                        AssetImage("assets/images/faq.png"))),
+                                    image: AssetImage("assets/images/faq.png"))),
                             trailing: Icon(Icons.arrow_forward_ios_rounded,
                                 size: MediaQuery.of(context).size.width * 0.05),
                             iconColor: emperor,
@@ -180,17 +178,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             leading: const CircleAvatar(
                                 backgroundColor: aquaHaze,
                                 child: Image(
-                                    image:
-                                        AssetImage("assets/images/exit.png"))),
+                                    image: AssetImage("assets/images/exit.png"))),
                             trailing: Icon(Icons.arrow_forward_ios_rounded,
                                 size: MediaQuery.of(context).size.width * 0.05),
                             iconColor: emperor,
                             onTap: () {
                               _logoutService.logoutUser(context);
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => MedicalHistory()));
                             },
                           ),
                           customDivider(context)

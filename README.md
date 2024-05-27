@@ -1,6 +1,6 @@
 # medical_record_mobile
 
-A new Flutter project.
+Tugas Pak Fahrul
 
 ## Getting Started
 

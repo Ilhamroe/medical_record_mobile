@@ -1,8 +1,8 @@
 import 'package:e_klinik_pens/models/user.dart';
+import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/pages/user/medical_record_history.dart';
-import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
 import 'package:flutter/material.dart';

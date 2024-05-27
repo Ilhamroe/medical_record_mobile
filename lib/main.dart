@@ -32,12 +32,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.generateRoute,
-        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
         // home: ProfilePage(),
       ),
       debugShowCheckedModeBanner: false,
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: PasienTerakhirBerkunjung(),
     );
   }
 }

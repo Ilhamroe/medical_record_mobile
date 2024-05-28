@@ -1,12 +1,13 @@
-import 'package:e_klinik_pens/authentication/service_auth.dart';
+import 'package:e_klinik_pens/models/homepages_tile.dart';
 import 'package:e_klinik_pens/models/user_profiles.dart';
+import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
+import 'package:e_klinik_pens/widgets/profiles/profile_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_klinik_pens/widgets/profiles/profile.dart';
-import 'package:e_klinik_pens/models/homepages_tile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,22 +17,25 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final ServiceAuth _logoutService = ServiceAuth();
-  User user = UserProfiles.myUser;
+  User user= UserProfiles.myUser;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => ExitModals.onBackButtonPressed(context),
       child: Scaffold(
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Container(
-            color: themeLight,
-            child: Stack(
+        body: Container(
+          color: themeLight,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Image.asset("assets/images/atomic.png"),
+              ),
+              Column(
               children: [
                 Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 75).r,
                     child: Column(
@@ -45,6 +49,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               image: AssetImage("assets/images/profiles-pic.jpg")
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 8.h,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0).w,
@@ -148,10 +155,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
                       }
                     ),
-                                   ),
+                  ),
                  ),
               ],
-            ),
+            ),          
+            ],     
           ),
         ),
       ),

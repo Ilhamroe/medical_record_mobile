@@ -33,8 +33,8 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
       snackBarMessage: 'Tekan sekali lagi untuk keluar',
       child: Scaffold(
         body: PageStorage(
-          child: currentScreen,
           bucket: bucket,
+          child: currentScreen,
         ),
         bottomNavigationBar: Container(
           height: 64.h,
@@ -96,20 +96,15 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                         currentTab = 1;
                       });
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        currentTab == 1
-                            ? Image.asset(
-                                'assets/images/calendar1.png',
-                                color: currentTab == 1 ? themeDark : navbar,
-                              )
-                            : Image.asset(
-                                'assets/images/calendar2.png',
-                                color: currentTab == 1 ? themeDark : navbar,
-                              ),
-                      ],
-                    ),
+                    child: currentTab == 1
+                        ? Image.asset(
+                            'assets/images/calendar1.png',
+                            color: currentTab == 1 ? themeDark : navbar,
+                          )
+                        : Image.asset(
+                            'assets/images/calendar2.png',
+                            color: currentTab == 1 ? themeDark : navbar,
+                          ),
                   ),
                   MaterialButton(
                     highlightColor: pureWhite,
@@ -123,20 +118,15 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                         currentTab = 2;
                       });
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        currentTab == 2
-                            ? Image.asset(
-                                'assets/images/history1.png',
-                                color: currentTab == 2 ? themeDark : navbar,
-                              )
-                            : Image.asset(
-                                'assets/images/history2.png',
-                                color: currentTab == 2 ? themeDark : navbar,
-                              ),
-                      ],
-                    ),
+                    child: currentTab == 2
+                        ? Image.asset(
+                            'assets/images/history1.png',
+                            color: currentTab == 2 ? themeDark : navbar,
+                          )
+                        : Image.asset(
+                            'assets/images/history2.png',
+                            color: currentTab == 2 ? themeDark : navbar,
+                          ),
                   ),
                   MaterialButton(
                     highlightColor: pureWhite,
@@ -150,20 +140,15 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                         currentTab = 3;
                       });
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        currentTab == 3
-                            ? Image.asset(
-                                'assets/images/profile1.png',
-                                color: currentTab == 3 ? themeDark : navbar,
-                              )
-                            : Image.asset(
-                                'assets/images/profile2.png',
-                                color: currentTab == 3 ? themeDark : navbar,
-                              ),
-                      ],
-                    ),
+                    child: currentTab == 3
+                        ? Image.asset(
+                            'assets/images/profile1.png',
+                            color: currentTab == 3 ? themeDark : navbar,
+                          )
+                        : Image.asset(
+                            'assets/images/profile2.png',
+                            color: currentTab == 3 ? themeDark : navbar,
+                          ),
                   ),
                 ],
               ),

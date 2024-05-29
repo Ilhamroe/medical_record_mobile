@@ -1,3 +1,4 @@
+import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
 import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/editcoba.dart';
@@ -102,7 +103,7 @@ class AdminTile{
           backgroundColor: aquaHaze,
           child: Image(
             image: AssetImage(
-              "assets/images/profile.png"), 
+              "assets/images/profile1.png"), 
           ),
         ), 
       trailing: 
@@ -168,8 +169,8 @@ class AdminTile{
         "assets/images/arrow.png"
       ),
       onTap: (context) {
-        // _logoutService.logoutUser(context);
-        // Navigator.
+        final ServiceAuth _logoutService = ServiceAuth();
+        _logoutService.logoutUser(context);
       },
     ),
   ];

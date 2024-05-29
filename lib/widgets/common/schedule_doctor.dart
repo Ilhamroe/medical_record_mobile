@@ -3,6 +3,7 @@ import 'package:e_klinik_pens/widgets/common/day_card.dart';
 import 'package:e_klinik_pens/widgets/common/schedule_doctor_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScheduleDoctorScreen extends StatefulWidget {
   final List<ScheduleDoctor> scheduleDoctors;
@@ -16,10 +17,22 @@ class ScheduleDoctorScreen extends StatefulWidget {
 class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
   String? selectedDay;
 
+  @override
+  void initState() {
+    super.initState();
+    DateTime now= DateTime.now();
+    selectedDay= _formatDay(now);
+  }
+
   void _onDaySelected(String day) {
     setState(() {
       selectedDay = day;
     });
+  }
+
+  String _formatDay(DateTime date) {
+  List<String> days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+  return days[date.weekday % 7];
   }
 
   String formatTanggal(DateTime date) {
@@ -41,7 +54,7 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
     }
 
     DateTime now = DateTime.now();
-    String formattedDate = formatTanggal(now);
+    String formattedDate =  formatTanggal(now);
     print('Current date and time: $now');
 
     return Scaffold(
@@ -53,8 +66,8 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
           'Jadwal Dokter',
           style: TextStyle(
             color: pureWhite,
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            fontSize: 20.sp,
           ),
         ),
         leading: IconButton(
@@ -77,14 +90,14 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 alignment: Alignment.center, 
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, 
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
                   children: [
                     Text(
                       formattedDate,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
                         color: pureWhite,
                       ),
                     ),
@@ -96,9 +109,7 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                         ),
                         color: today,
                         child: Container(
-                          width: 80,  
-                          height: 40,
-                          alignment: Alignment.center, 
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                           child: Text(
                             'Hari Ini',
                             style: TextStyle(
@@ -123,11 +134,11 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Color(0xFFF6F8FF),
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                            topLeft: const Radius.circular(35).r,
+                            topRight: const Radius.circular(35).r,
                           ),
                         ),
                         child: Column(

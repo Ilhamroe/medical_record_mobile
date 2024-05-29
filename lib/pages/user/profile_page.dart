@@ -1,10 +1,8 @@
 import 'package:e_klinik_pens/models/homepages_tile.dart';
 import 'package:e_klinik_pens/models/user_profiles.dart';
-import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
-import 'package:e_klinik_pens/widgets/profiles/profile_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_klinik_pens/widgets/profiles/profile.dart';
@@ -158,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                  ),
               ],
-            ),          
+            ),
             ],     
           ),
         ),

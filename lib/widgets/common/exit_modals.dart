@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/profiles/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExitModals{
     static Future<bool> onBackButtonPressed(BuildContext context) async{
@@ -80,7 +81,7 @@ class ExitModals{
                     ),
                     child: Text(
                       "Kembali", style: TextStyle(
-                        fontSize: 18
+                        fontSize: 18.sp
                       ),                   
                     ),
                   ),

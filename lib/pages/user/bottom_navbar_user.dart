@@ -1,9 +1,12 @@
+import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
 import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/user/home_page_users.dart';
+import 'package:e_klinik_pens/pages/user/medical_record_history.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';
+import 'package:e_klinik_pens/widgets/common/schedule_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,10 +19,11 @@ class NavbarBottomUser extends StatefulWidget {
 
 class _NavbarBottomUserState extends State<NavbarBottomUser> {
   int currentTab = 0;
+
   final List<Widget> screens = [
     const HomePageUser(),
-    const TestPage(),
-    const ResetPassword(),
+     ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+    const MedicalHistory(),
     const ProfilePage(),
   ];
 
@@ -54,7 +58,7 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
             child: Container(
               height: 50.h,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   MaterialButton(
@@ -69,20 +73,15 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                         currentTab = 0;
                       });
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        currentTab == 0
-                            ? Image.asset(
-                                'assets/images/home1.png',
-                                color: currentTab == 0 ? themeDark : navbar,
-                              )
-                            : Image.asset(
-                                'assets/images/home2.png',
-                                color: currentTab == 0 ? themeDark : navbar,
-                              ),
-                      ],
-                    ),
+                    child: currentTab == 0
+                        ? Image.asset(
+                            'assets/images/home1.png',
+                            color: currentTab == 0 ? themeDark : navbar,
+                          )
+                        : Image.asset(
+                            'assets/images/home2.png',
+                            color: currentTab == 0 ? themeDark : navbar,
+                          ),
                   ),
                   MaterialButton(
                     highlightColor: pureWhite,
@@ -92,7 +91,7 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const TestPage();
+                        currentScreen = ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors);
                         currentTab = 1;
                       });
                     },
@@ -114,7 +113,7 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const ResetPassword();
+                        currentScreen = const MedicalHistory();
                         currentTab = 2;
                       });
                     },

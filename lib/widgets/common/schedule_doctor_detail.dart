@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScheduleDoctorDetail extends StatelessWidget {
   final ScheduleDoctor scheduleDoctor;
   const ScheduleDoctorDetail({required this.scheduleDoctor, super.key});
 
-  // Function to determine text based on time of day
   String determineTimeOfDay(TimeOfDay startTime) {
     if (startTime.period == DayPeriod.am) {
       return 'Pagi';
@@ -28,82 +28,91 @@ class ScheduleDoctorDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      surfaceTintColor: Colors.transparent,
+      color: pureWhite,
       elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
           children: [
-            Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      formatTime(scheduleDoctor.startTime), 
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    Container(
-                      width: 2.0,
-                      height: 27.0,
-                      color: determineLineColor(scheduleDoctor.startTime), // Determine line color
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      formatTime(scheduleDoctor.endTime), // Display formatted end time
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 16.0),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 7.0).w,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start, 
+                children: [
+                  Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3.0).r,
+                        child: Text(
+                          formatTime(scheduleDoctor.startTime),
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6.0).w,
+                        child: Container(
+                          width: 2.0,
+                          height: 27.0,
+                          color: determineLineColor(scheduleDoctor.startTime), 
+                        ),
+                      ),
                       Text(
-                        scheduleDoctor.doctor.name,
-                        style: const TextStyle(
-                          fontSize: 13,
+                        formatTime(scheduleDoctor.endTime), 
+                        style: TextStyle(
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 42.0),
-                      Text(
-                        scheduleDoctor.doctor.role,
-                        style: const TextStyle(
-                          fontSize: 9,
-                          color: Colors.grey,
-                        ),
-                      ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(width: 16.0.w),
+                  Flexible( 
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          scheduleDoctor.doctor.name,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 31.0.h), 
+                        Text(
+                          scheduleDoctor.doctor.role,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Positioned(
-              right: 8.0,
+              right: 0, 
+              top: 7.0.w, 
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0).w,
                 child: Text(
                   determineTimeOfDay(scheduleDoctor.startTime),
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: determineTimeOfDay(scheduleDoctor.startTime) == 'Sore'
-                        ? themeDark 
-                        : themeDark, 
+                        ? themeDark
+                        : themeDark,
                   ),
                 ),
               ),
@@ -112,6 +121,7 @@ class ScheduleDoctorDetail extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 
@@ -123,9 +133,8 @@ class ScheduleDoctorListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxWidth: double.infinity),
+      constraints: const BoxConstraints(maxWidth: double.infinity),
       child: ListView.builder(
-        padding: EdgeInsets.all(8.0),
         shrinkWrap: true,
         itemCount: scheduleDoctor.length,
         itemBuilder: (context, index) {

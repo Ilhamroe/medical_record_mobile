@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DayCard extends StatefulWidget {
   final ValueChanged<String> onDaySelected;
+  final String initialSelectedDay;
 
-  const DayCard({required this.onDaySelected, super.key});
+  const DayCard({required this.onDaySelected, super.key, required this.initialSelectedDay});
 
   @override
   _DayCardState createState() => _DayCardState();
@@ -13,6 +15,18 @@ class DayCard extends StatefulWidget {
 class _DayCardState extends State<DayCard> {
   final daysOfWeek = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
   int selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        selectedIndex= daysOfWeek.indexOf(widget.initialSelectedDay);
+      });
+      widget.onDaySelected(widget.initialSelectedDay);
+     });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +38,7 @@ class _DayCardState extends State<DayCard> {
           children: List.generate(daysOfWeek.length, (index) {
             return Padding(
               padding: const EdgeInsets.all(2.0),
-              child: GestureDetector(
+              child: GestureDetector(   
                 onTap: () {
                   setState(() {
                     selectedIndex = index;
@@ -43,8 +57,8 @@ class _DayCardState extends State<DayCard> {
                       child: Text(
                         daysOfWeek[index],
                         style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
                           color: selectedIndex == index ? Colors.white : Colors.black,
                         ),
                         textAlign: TextAlign.center,

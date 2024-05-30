@@ -1,6 +1,9 @@
+import 'package:e_klinik_pens/models/patients_data.dart';
+import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataPasien extends StatefulWidget {
   const DataPasien({super.key});
@@ -19,13 +22,16 @@ class _DataPasienState extends State<DataPasien> {
         slivers: [
           SliverAppBar(
             backgroundColor: themeLight,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: pureWhite,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 12.0).r,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: pureWhite,
+                ),
               ),
             ),
             title: Text(
@@ -40,7 +46,7 @@ class _DataPasienState extends State<DataPasien> {
             expandedHeight: MediaQuery.of(context).size.height * 0.115,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/atom.png",
+                "assets/images/atomic.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,12 +67,12 @@ class _DataPasienState extends State<DataPasien> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10).w,
               child: SizedBox(
                 width: 0, // Adjust the width as needed
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(250, 250, 250, 1), // Using RGB values
+                    color: const Color.fromRGBO(250, 250, 250, 1), // Using RGB values
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: TextFormField(
@@ -95,146 +101,53 @@ class _DataPasienState extends State<DataPasien> {
               ),
             ),
           ),
-          // Add other SliverList or SliverGrid here as per your requirement
           SliverList(
-  delegate: SliverChildBuilderDelegate(
-    (BuildContext context, int index) {
-      if (index == 0) {
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Ilham Ramadhani',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              subtitle: Text('3122500020',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.edit_square, size: 25,color: Color.fromRGBO(26, 154, 142, 1)),
-                  SizedBox(width: 10), // Add space between icons
-                  Icon(Icons.delete, color: Color.fromRGBO(26, 154, 142, 1)), // Another icon example
-                ],
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
-            ),
-          ),
-        );
-      } else if (index == 1) {
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Rifqi Rayita',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              subtitle: Text('3122500025',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.edit_square, size: 25,color: Color.fromRGBO(26, 154, 142, 1)),
-                  SizedBox(width: 10), // Add space between icons
-                  Icon(Icons.delete, color: Color.fromRGBO(26, 154, 142, 1)), // Another icon example
-                ],
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                final patientData= patientsData[index];     
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 5).r,
+                        child: Card(
+                          surfaceTintColor: Colors.transparent,
+                          color: pureWhite,
+                          elevation: 5,
+                          child: ListTile(
+                            leading: Image.asset(patientData.profilePhoto),
+                            title: Text(patientData.name, style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold
+                            ),),
+                            subtitle: Text(patientData.nrp, style: TextStyle(
+                              fontSize: 16.sp,
+                            ),),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => EditAkun()
+                                      ),
+                                    );
+                                  },
+                                  child: Image.asset(patientData.trailing1, width: 35.w, height: 35.w,)
+                                  ),
+                                SizedBox(width: 5.w),
+                                Image.asset(patientData.trailing2, width: 35.w, height: 35.w,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+              },
+              childCount: patientsData.length,
             ),
           ),
-        );
-      } else {
-        // Add more ListTiles as needed
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Syahrul Ramadhan',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              subtitle: Text('3122500030',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-               trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.edit_square, size: 25,color: Color.fromRGBO(26, 154, 142, 1)),
-                  SizedBox(width: 10), // Add space between icons
-                  Icon(Icons.delete, color: Color.fromRGBO(26, 154, 142, 1)), // Another icon example
-                ],
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
-            ),
-          ),
-        );
-      }
-    },
-    childCount: 3, // Set the total number of ListTiles
-  ),
-),
-
         ],
       ),
     );

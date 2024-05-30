@@ -1,32 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 class RecentPatients{
-  String profilePhoto;
-  String name;
-  String nrp;
+  final String profilePhoto;
+  final String name;
+  final String nrp;
 
-  RecentPatients({
+  const RecentPatients({
     required this.profilePhoto,
     required this.name,
-    required this.nrp
+    required this.nrp,
   });
 }
 
 List <RecentPatients> recentPatients=[
-  RecentPatients(
+  const RecentPatients(
     profilePhoto: "assets/images/profiles-pic.jpg",
     name: "Muhammad Ilham Ramadani", 
-    nrp: "3122500021"
+    nrp: "3122500021",
   ),
 
-    RecentPatients(
+  const RecentPatients(
     profilePhoto: "assets/images/profiles-pic.jpg",
     name: "Shofira Izza Nurrohmah", 
     nrp: "3122500026"
   ),
 
-    RecentPatients(
+  const RecentPatients(
     profilePhoto: "assets/images/profiles-pic.jpg",
     name: "Arsyita Devanaya Arianto", 
     nrp: "3122500008"

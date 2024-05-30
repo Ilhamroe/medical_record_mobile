@@ -112,9 +112,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                               );
                             }
                           ),
-                          //Banner dokter
                           const DoctorBanner(),
-                          //Pasien terakhir berkunjung
                           const RecentPatientsTile(), 
                         ],
                       ),

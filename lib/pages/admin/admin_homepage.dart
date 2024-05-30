@@ -1,13 +1,8 @@
 import 'package:e_klinik_pens/models/homepages_tile.dart';
-import 'package:e_klinik_pens/models/recent_patients.dart';
-import 'package:e_klinik_pens/pages/doctor/doctor_homepage.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/doctor/recentPatients_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:marquee/marquee.dart';
 
 class AdminHomepage extends StatefulWidget {
   const AdminHomepage({super.key});
@@ -118,36 +113,13 @@ class _AdminHomepageState extends State<AdminHomepage> {
                                           ),
                                         ),
                                       ),
-                                      onTap: () {
-                                        Navigator.push(context, 
-                                        MaterialPageRoute(builder: (context) => const DoctorHomePage()),
-                                        );
-                                      },
-                                      
+                                      onTap: () => adminTile.onTap(context),
                                     ),
                                   ),
                                 );
                               },
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20).r,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0).r,
-                                    child: Text(
-                                      "Pasien Terakhir Berkunjung",
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  const RecentPatientsTile(),
-                                ],
-                              ),
-                            ),
+                            const RecentPatientsTile(),
                           ],
                         ),
                       ),

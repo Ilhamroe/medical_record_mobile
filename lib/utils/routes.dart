@@ -1,4 +1,4 @@
-import 'package:e_klinik_pens/pages/admin/home_page.admin.dart';
+import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';
@@ -85,7 +85,7 @@ class AppRoutes {
       case AppRoutes.homeadmin:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const HomePageAdmin(),
+          builder: (_) => const AdminHomepage(),
         );
 
       case AppRoutes.homedokter:

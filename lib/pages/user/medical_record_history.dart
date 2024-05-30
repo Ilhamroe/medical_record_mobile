@@ -1,6 +1,8 @@
 import 'package:e_klinik_pens/models/faq_list.dart';
+import 'package:e_klinik_pens/models/medical_records.dart';
 import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/widgets/common/medicalHistoryUser_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,22 +14,15 @@ class MedicalHistory extends StatefulWidget {
 }
 
 class _MedicalHistoryState extends State<MedicalHistory> {
-  final int contoh=0;
+  final int contoh=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pureWhite,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             backgroundColor: themeLight,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              }, 
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, color: pureWhite,)
-              ),
             title: Text("Riwayat Rekam Medis", style: TextStyle(
               fontWeight: FontWeight.bold, 
               fontSize: MediaQuery.of(context).size.width * 0.055, 
@@ -58,36 +53,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
             ),
           ),
           contoh == 1 
-            ? SliverList(
-                delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final faqTile= faqTiles[index];
-                  return Column(
-                    children: [
-                      ExpansionTile(
-                        tilePadding: const EdgeInsets.only(left: 35, top: 7.5, bottom: 7.5, right: 25).r,
-                        childrenPadding: const EdgeInsets.only(left: 25).r,
-                        title: faqTile.title,
-                        shape: const RoundedRectangleBorder(
-                          side: BorderSide.none
-                        ),
-                        collapsedIconColor: themeDark,
-                        iconColor: themeDark,      
-                        children: [
-                          ListTile(
-                            title: faqTile.desc,
-                          )
-                        ],
-                      ),
-                      const Divider(
-                        color: divider,
-                      )
-                    ],
-                  );
-                },
-                childCount: faqTiles.length,
-              ),
-            )
+            ?  const MedicalHistoryUser()
           : SliverFillRemaining(
             child: Center(
               child: Column(

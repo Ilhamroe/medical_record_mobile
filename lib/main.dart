@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // initialRoute: AppRoutes.splash,
         // onGenerateRoute: AppRoutes.generateRoute,
-        home: NavbarBottomAdmin(),
+        home: NavbarBottomDoctor(),
       ),
     );
   }

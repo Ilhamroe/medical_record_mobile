@@ -1,4 +1,4 @@
-import 'package:e_klinik_pens/pages/admin/home_page.admin.dart';
+import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';
@@ -10,6 +10,7 @@ import 'package:e_klinik_pens/pages/onboarding/onboarding_page.dart';
 import 'package:e_klinik_pens/pages/onboarding/splash.dart';
 import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
+import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -92,13 +93,19 @@ class AppRoutes {
       case AppRoutes.homeadmin:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const HomePageAdmin(),
+          builder: (_) => const AdminHomepage(),
         );
 
       case AppRoutes.homedokter:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const HomePageDoctor(),
+        );
+
+      case AppRoutes.homeuser:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const ProfilePage(),
         );
 
       default:

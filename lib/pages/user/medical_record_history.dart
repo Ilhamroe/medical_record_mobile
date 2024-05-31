@@ -1,5 +1,10 @@
+import 'package:e_klinik_pens/models/faq_list.dart';
+import 'package:e_klinik_pens/models/medical_records.dart';
+import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/widgets/common/medicalHistoryUser_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MedicalHistory extends StatefulWidget {
   const MedicalHistory({super.key});
@@ -9,21 +14,15 @@ class MedicalHistory extends StatefulWidget {
 }
 
 class _MedicalHistoryState extends State<MedicalHistory> {
+  final int contoh=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pureWhite,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             backgroundColor: themeLight,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              }, 
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, color: pureWhite,)
-              ),
             title: Text("Riwayat Rekam Medis", style: TextStyle(
               fontWeight: FontWeight.bold, 
               fontSize: MediaQuery.of(context).size.width * 0.055, 
@@ -53,26 +52,42 @@ class _MedicalHistoryState extends State<MedicalHistory> {
               )
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Center(
-                  child: Column(
+          contoh == 1 
+            ?  const MedicalHistoryUser()
+          : SliverFillRemaining(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/images/record.png"),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/images/record.png"),
-                    Text(
-                        "Tidak ada riwayat\nrekam medis", style: TextStyle(
+                      Text(
+                        "Tidak ada riwayat",
+                        style: TextStyle(
                           color: silverChalice,
-                          fontSize: MediaQuery.of(context).size.width * 0.045
+                          fontSize: 18.sp
                         ),
-                    )
+                      ),
                     ],
                   ),
-                ),
-              ]      
-            )
-          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "rekam medis",
+                        style: TextStyle(
+                          color: silverChalice,
+                          fontSize: 18.sp
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

@@ -1,6 +1,7 @@
+import 'package:e_klinik_pens/models/doctor_data.dart';
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataDokter extends StatefulWidget {
   const DataDokter({super.key});
@@ -10,6 +11,31 @@ class DataDokter extends StatefulWidget {
 }
 
 class _DataDokterState extends State<DataDokter> {
+  List<DoctorData> _allDoctors = doctorsData;
+  List<DoctorData> _filteredDoctors = doctorsData;
+  String _searchMessage = '';
+
+  void _runFilter(String enteredKeyword) {
+    List<DoctorData> results;
+    if (enteredKeyword.isEmpty) {
+      results = _allDoctors;
+      _searchMessage = '';
+    } else {
+      results = _allDoctors
+          .where((doctor) => doctor.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      if (results.isNotEmpty) {
+        _searchMessage = '';
+      } else {
+        _searchMessage = 'Tidak Ada Dokter Bernama: "$enteredKeyword"';
+      }
+    }
+
+    setState(() {
+      _filteredDoctors = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +45,16 @@ class _DataDokterState extends State<DataDokter> {
         slivers: [
           SliverAppBar(
             backgroundColor: themeLight,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: pureWhite,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 12.0).r,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: pureWhite,
+                ),
               ),
             ),
             title: Text(
@@ -40,7 +69,7 @@ class _DataDokterState extends State<DataDokter> {
             expandedHeight: MediaQuery.of(context).size.height * 0.115,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/atom.png",
+                "assets/images/atomic.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,15 +90,16 @@ class _DataDokterState extends State<DataDokter> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10).w,
               child: SizedBox(
                 width: 0, // Adjust the width as needed
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(250, 250, 250, 1), // Using RGB values
+                    color: const Color.fromRGBO(250, 250, 250, 1), // Using RGB values
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: TextFormField(
+                    onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: 10), // Adjust the padding
                       prefixIcon: Icon(
@@ -95,142 +125,59 @@ class _DataDokterState extends State<DataDokter> {
               ),
             ),
           ),
-          // Add other SliverList or SliverGrid here as per your requirement
+          SliverToBoxAdapter(
+            child: _searchMessage.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20).w,
+                    child: Center(
+                      child: Text(
+                        _searchMessage,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
           SliverList(
-  delegate: SliverChildBuilderDelegate(
-    (BuildContext context, int index) {
-      if (index == 0) {
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Dr. M. Dwiya Lakhsmana',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              subtitle: Text('Umum',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              trailing: Text('4 th',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                final doctorData = _filteredDoctors[index];
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 5).r,
+                      child: Card(
+                        surfaceTintColor: Colors.transparent,
+                        color: pureWhite,
+                        elevation: 5,
+                        child: ListTile(
+                          leading: Image.asset(doctorData.profilePhoto),
+                          title: Text(
+                            doctorData.name,
+                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            doctorData.role,
+                            style: TextStyle(fontSize: 16.sp),
+                          ),
+                          trailing: Text(
+                            doctorData.exp,
+                            style: TextStyle(fontSize: 12.sp),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              childCount: _filteredDoctors.length,
             ),
           ),
-        );
-      } else if (index == 1) {
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Dr. Firza Sharfina Izzati',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              subtitle: Text('Umum',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              trailing: Text('3 th',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
-            ),
-          ),
-        );
-      } else {
-        // Add more ListTiles as needed
-        return Container(
-          padding: EdgeInsets.all(10),
-          child: Card(
-            color: Colors.white,
-            shadowColor: Colors.black87,
-            elevation: 8, // Adjust the elevation value for a more prominent shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Optional: rounded corners
-            ),
-            child: ListTile(
-              title: Text('Dr. Budi Utomo',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.bold, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),),
-              subtitle: Text('Umum',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              trailing: Text('5 th',
-              style: TextStyle(
-                fontSize: 16.0, // Ukuran teks
-                fontWeight: FontWeight.w400, // Ketebalan teks
-                color: Colors.black, // Warna teks
-              ),
-              ),
-              leading: Icon(Icons.account_circle_sharp, size: 60, color: Color.fromRGBO(204, 204, 204, 1)),
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 3, // Top padding
-                bottom: 1, 
-              ),
-            ),
-          ),
-        );
-      }
-    },
-    childCount: 3, // Set the total number of ListTiles
-  ),
-),
-
         ],
       ),
     );

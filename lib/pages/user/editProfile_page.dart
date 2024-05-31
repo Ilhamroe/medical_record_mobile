@@ -46,15 +46,14 @@ class _EditProfileState extends State<EditProfile> {
         final user = await ServiceAuth().getUserById(userId);
         setState(() {
           _user = user;
-          _nameController.text = _user?.name ?? "Masukkan nama Anda";
-          _nrpController.text = _user?.nrp ?? "Masukkan nama Anda";
-          _emailController.text = _user?.email ?? "Masukkan nama Anda";
-          _genderController.text = _user?.gender ?? "-";
-          _dateController.text = _user?.birth ?? "Masukkan tanggal lahir Anda";
-          _numberController.text =
-              _user?.number ?? "Masukkan nomor telepon Anda";
-          _heightController.text = _user?.height?.toString() ?? "-";
-          _weightController.text = _user?.weight?.toString() ?? "-";
+          _nameController.text = _user?.name ?? "";
+          _nrpController.text = _user?.nrp ?? "";
+          _emailController.text = _user?.email ?? "";
+          _genderController.text = _user?.gender ?? "";
+          _dateController.text = _user?.birth ?? "";
+          _numberController.text = _user?.number ?? "";
+          _heightController.text = _user?.height?.toString() ?? "";
+          _weightController.text = _user?.weight?.toString() ?? "";
         });
       } catch (e) {
         print('Failed to load user data: $e');
@@ -221,14 +220,14 @@ class _EditProfileState extends State<EditProfile> {
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _nameController.text,
+                            placeholder: "Masukkan nama Anda",
                             controller: _nameController,
                           ),
                           const TextLabel(label: 'NRP/NIP:'),
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _nrpController.text,
+                            placeholder: "Masukkan NRP/NIP Anda",
                             controller: _nrpController,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
@@ -239,7 +238,7 @@ class _EditProfileState extends State<EditProfile> {
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _emailController.text,
+                            placeholder: "Masukkan email Anda",
                             controller: _emailController,
                           ),
                           const TextLabel(label: 'Password:'),
@@ -255,7 +254,7 @@ class _EditProfileState extends State<EditProfile> {
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _genderController.text,
+                            placeholder: "Masukkan jenis kelamin Anda",
                             controller: _genderController,
                             keyboardType: TextInputType.none,
                             readOnly: true,
@@ -274,7 +273,7 @@ class _EditProfileState extends State<EditProfile> {
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _dateController.text,
+                            placeholder: "Masukkan tanggal lahir Anda",
                             controller: _dateController,
                             trailingIcon: Icons.calendar_today,
                             keyboardType: TextInputType.none,
@@ -284,7 +283,7 @@ class _EditProfileState extends State<EditProfile> {
                           CustomProfilesField(
                             width: 300.w,
                             height: 50.h,
-                            placeholder: _numberController.text,
+                            placeholder: "Masukkan nomor telepon Anda",
                             controller: _numberController,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
@@ -308,7 +307,7 @@ class _EditProfileState extends State<EditProfile> {
                                     CustomProfilesField(
                                       width: 300.w,
                                       height: 50.h,
-                                      placeholder: _heightController.text,
+                                      placeholder: "-",
                                       controller: _heightController,
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [
@@ -332,7 +331,7 @@ class _EditProfileState extends State<EditProfile> {
                                     CustomProfilesField(
                                       width: 300.w,
                                       height: 50.h,
-                                      placeholder: _weightController.text,
+                                      placeholder: "-",
                                       controller: _weightController,
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [

@@ -1,9 +1,12 @@
+import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
 import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/user/home_page_users.dart';
+import 'package:e_klinik_pens/pages/user/medical_record_history.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';
+import 'package:e_klinik_pens/widgets/common/schedule_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,10 +19,11 @@ class NavbarBottomUser extends StatefulWidget {
 
 class _NavbarBottomUserState extends State<NavbarBottomUser> {
   int currentTab = 0;
+
   final List<Widget> screens = [
     const HomePageUser(),
-    const TestPage(),
-    const ResetPassword(),
+     ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+    const MedicalHistory(),
     const ProfilePage(),
   ];
 
@@ -32,8 +36,8 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
       snackBarMessage: 'Tekan sekali lagi untuk keluar',
       child: Scaffold(
         body: PageStorage(
-          child: currentScreen,
           bucket: bucket,
+          child: currentScreen,
         ),
         bottomNavigationBar: Container(
           height: 64.h,

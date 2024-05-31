@@ -9,6 +9,7 @@ class ButtonConfirm extends StatelessWidget {
   final Color buttonColor;
   final Color colorText;
   final VoidCallback onPressed;
+  final double borderRadius;
 
   const ButtonConfirm({
     Key? key,
@@ -19,6 +20,7 @@ class ButtonConfirm extends StatelessWidget {
     required this.buttonColor,
     required this.colorText,
     required this.onPressed,
+    this.borderRadius = 32.0,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class ButtonConfirm extends StatelessWidget {
           backgroundColor: buttonColor,
           side: BorderSide(color: borderColor),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32.0).w,
+            borderRadius: BorderRadius.circular(borderRadius).w,
           ),
         ),
         child: Text(

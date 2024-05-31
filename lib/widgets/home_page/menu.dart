@@ -1,3 +1,4 @@
+import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/widgets/home_page/banner_homepage.dart';
 import 'package:e_klinik_pens/widgets/home_page/icon_menu.dart'; 
@@ -10,7 +11,7 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFFF6F8FF),
+        color: onBoard,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),

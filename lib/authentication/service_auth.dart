@@ -1,96 +1,93 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:e_klinik_pens/config/config.dart';
+import 'package:e_klinik_pens/models/users.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:e_klinik_pens/models/users.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ServiceAuth {
-  //getAlldata as index
-  Future<List<User>> getAllData() async {
-    final response = await http.get(Uri.parse(Config.apiUrl + 'user/data'));
-
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
-
-    if (response.statusCode == 200) {
-      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      List<dynamic> userData = jsonResponse['user'];
-      return userData.map((user) => User.fromJson(user)).toList();
-    } else {
-      throw Exception('Failed to load Data');
-    }
-  }
-
-  //register as register
+  final Dio _dio = Dio();
+  
   Future<Map<String, dynamic>> registerUser(
       Map<String, dynamic> userData) async {
-    final url = Uri.parse(Config.apiUrl + 'register');
-    final client = http.Client();
+    final url = Config.apiUrl + 'register';
 
     try {
-      final response = await client.post(
+      final response = await _dio.post(
         url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(userData),
-      );
-
-      if (response.statusCode == 302) {
-        final redirectedUrl = response.headers['location'];
-        final redirectedResponse = await client.post(
-          Uri.parse(redirectedUrl!),
+        data: jsonEncode(userData),
+        options: Options(
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode(userData),
+          followRedirects: false,
+        ),
+      );
+
+      if (response.statusCode == 302) {
+        final redirectedUrl = response.headers['location']![0];
+        final redirectedResponse = await _dio.post(
+          redirectedUrl,
+          data: jsonEncode(userData),
+          options: Options(
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+          ),
         );
+
         if (redirectedResponse.statusCode == 201 ||
             redirectedResponse.statusCode == 200) {
-          return jsonDecode(redirectedResponse.body);
+          final data = redirectedResponse.data;
+          return data;
         } else {
           throw Exception('Failed to register user after redirect');
         }
       } else if (response.statusCode == 201 || response.statusCode == 200) {
-        return jsonDecode(response.body);
+        final data = response.data;
+        return data;
       } else {
         throw Exception('Failed to register user');
       }
-    } finally {
-      client.close();
+    } catch (e) {
+      throw Exception('Failed to register user: $e');
     }
   }
 
   Future<Map<String, dynamic>> loginUser(Map<String, dynamic> userData) async {
-    final response = await http.post(
-      Uri.parse(Config.apiUrl + 'login'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(userData),
-    );
+    final url = Config.apiUrl + 'login';
 
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
+    try {
+      final response = await _dio.post(
+        url,
+        data: jsonEncode(userData),
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        ),
+      );
 
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('accessToken', responseData['token']);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
 
-      return responseData;
-    } else {
-      print('Failed to login user: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      throw Exception('Failed to login user');
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('accessToken', responseData['token']);
+        await prefs.setInt('userId', responseData['user']['id']);
+
+        return responseData;
+      } else {
+        print('Failed to login user: ${response.statusCode}');
+        print('Response body: ${response.data}');
+        throw Exception('Failed to login user');
+      }
+    } catch (e) {
+      throw Exception('Failed to login user: $e');
     }
   }
-
-  //Logout as logout
-  final Dio _dio = Dio();
 
   Future<void> logoutUser(BuildContext context) async {
     try {
@@ -119,7 +116,8 @@ class ServiceAuth {
             return const AlertConfirm(
               titleText: "Sukses",
               descText: "Akun anda telah berhasil logout",
-              route: AppRoutes.logreg,
+              route: AppRoutes.login,
+              confirmText: 'Tutup',
             );
           },
         );
@@ -134,10 +132,66 @@ class ServiceAuth {
           return const AlertDanger(
             titleText: "Gagal",
             descText: "Anda gagal untuk logout.",
-            route: AppRoutes.homeuser,
           );
         },
       );
+    }
+  }
+
+  Future<List<User>> getAllUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('accessToken');
+
+    if (token == null) {
+      throw Exception('Token not found');
+    }
+
+    final response = await _dio.get(
+      Config.apiUrl + 'user/data',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonResponse = response.data;
+      List<dynamic> userData = jsonResponse['user'];
+      return userData.map((user) => User.fromJson(user)).toList();
+    } else {
+      throw Exception('Failed to load Data');
+    }
+  }
+
+  Future<User> getUserById(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('accessToken');
+
+    if (token == null) {
+      throw Exception('Token not found');
+    }
+
+    final response = await _dio.get(
+      Config.apiUrl + 'user/data/$id',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      final data = response.data['user'];
+      if (data != null) {
+        return User.fromJson(data);
+      } else {
+        throw Exception('User data is null');
+      }
+    } else {
+      throw Exception('Failed to load user');
     }
   }
 }

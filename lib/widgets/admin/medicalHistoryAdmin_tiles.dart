@@ -1,9 +1,12 @@
+import 'package:e_klinik_pens/models/medical_records.dart';
+import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MedicalHistoryAdminTiles extends StatefulWidget {
   const MedicalHistoryAdminTiles({super.key});
 
-  @override
+  @override 
   State<MedicalHistoryAdminTiles> createState() => _MedicalHistoryAdminTilesState();
 }
 
@@ -11,286 +14,181 @@ class _MedicalHistoryAdminTilesState extends State<MedicalHistoryAdminTiles> {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Theme(
-                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+            delegate: SliverChildBuilderDelegate(
+              (context, index){
+                final medicalRecord= medicalRecordsUser[index];
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 16, bottom: 8).r,
+                  child: Card(
+                    elevation: 2,
+                    surfaceTintColor: Colors.transparent,
+                    color: pureWhite,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: ExpansionTile(
-                      leading: Container(
-                        width: 75,
-                        height: 150,
+                      shape: const RoundedRectangleBorder(
+                        side: BorderSide.none,
+                      ),
+                      leading: AnimatedContainer(
+                        height: medicalRecord.isExpanded ? 150.w : 75.w,
+                        width: medicalRecord.isExpanded ? 150.w : 75.w,
+                        duration: const Duration(milliseconds: 300),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/dokter_1.png'),
+                          borderRadius: BorderRadius.circular(15.0).r,
+                        ),
+                        child: AnimatedScale(
+                          duration: const Duration(milliseconds: 300),
+                          scale: medicalRecord.isExpanded ? 1.05 : 1.0,
+                          child: Image.asset(
+                            medicalRecord.profilePhoto.toString(),
                             fit: BoxFit.cover,
                           ),
-                          shape: BoxShape.rectangle,
-                           borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
-                      title: Text('Muhammad Ilham Ramadhani',
-                       style: TextStyle(
-                            fontSize: 18,
+                      title: Text(medicalRecord.patient.toString(),
+                      style: TextStyle(
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w600,
                           ),
                           ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('3122500023'), // Subtitle pertama
+                          Text(medicalRecord.nrp.toString(), 
+                          style: TextStyle(
+                            color: navbar,
+                            fontSize: 14.sp
+                          ),
+                          ), 
                         ],
                       ),
                       children: <Widget>[
                         ListTile(
-                          title: Text(
-                            'Tanggal Periksa: 01 Mei 2024',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 8), 
-                              Text(
-                                'Dokter: Dr. M. Dwiya Lakhsmana',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                            children: [     
+                              Row(
+                                children: [
+                                  Text(
+                                    'Tanggal Periksa: ',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    medicalRecord.checkDate.toString(),
+                                    style: TextStyle(
+                                      fontSize: 14.sp
+                                    ),
+                                  )
+                                ],
+                              ),        
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0).w,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Dokter: ',
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      medicalRecord.doctor,
+                                      style: TextStyle(
+                                        fontSize: 14.sp
+                                    ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 8), // Add some spacing between the lines
+                              Column(
+                                children: [
+                                  Text(
+                                    'Gejala: ',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Text(
-                                'Gejala:',
+                                medicalRecord.symptoms,
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                                  fontSize: 14.sp,
                                 ),
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                '• Kepala pusing\n'
-                                '• Muntah\n'
-                                '• Nafsu makan berkurang\n'
-                                '• Perut kembung / tidak nyaman',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0).r,
+                                child: Text(
+                                  'Diagnosa:',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 8),
                               Text(
-                                'Diagnosa:',
+                                medicalRecord.diagnose,
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Maag',
-                                style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.red.shade500,
+                                  color: danger,
                                 ),
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Obat:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0).r,
+                                child: Text(
+                                  'Obat:',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 8),
                               Text(
-                                'Mylanta',
+                                medicalRecord.medicine,
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
+                                  fontSize: 14.sp,
                                 ),
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Kritik & Saran:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0).r,
+                                child: Text(
+                                  'Kritik & Saran:',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 8),
                               Text(
-                                '• Minum obat 2x sehari\n'
-                                '• Minum air putih yang cukup sepanjang hari untuk menjaga hidrasi.\n'
-                                '• Istirahat dan hindari stres berlebihan.\n'
-                                '• Jangan makan makanan pedas, asam.',
+                                medicalRecord.advice,
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                             ],
                           ),
                         )
                       ],
+                      onExpansionChanged: (isExpanded){
+                        setState(() {
+                          medicalRecord.isExpanded= isExpanded;
+                        });
+                      },
                     ),
                   ),
-                ),
-                Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Theme(
-                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      leading: Container(
-                        width: 75,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/Orang_2.png'),
-                            fit: BoxFit.cover,
-                          ),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
-                      title: Text('Shofira Izza Nurrohmah',
-                       style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('3122500023'), // Subtitle pertama
-                        ],
-                      ),
-                      children: <Widget>[
-                        ListTile(
-                          title: Text(
-                            'Tanggal Periksa: 01 Mei 2024',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 8), 
-                              Text(
-                                'Dokter: Dr. M. Dwiya Lakhsmana',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8), // Add some spacing between the lines
-                              Text(
-                                'Gejala:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                '• Kepala pusing\n'
-                                '• Muntah\n'
-                                '• Nafsu makan berkurang\n'
-                                '• Perut kembung / tidak nyaman',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Diagnosa:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Maag',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.red.shade500,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Obat:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Mylanta',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Kritik & Saran:',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                '• Minum obat 2x sehari\n'
-                                '• Minum air putih yang cukup sepanjang hari untuk menjaga hidrasi.\n'
-                                '• Istirahat dan hindari stres berlebihan.\n'
-                                '• Jangan makan makanan pedas, asam.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),// Tambahkan Card lainnya di sini jika diperlukan
-              ],
+                );
+              },
+              childCount: medicalRecordsUser.length
             ),
           );
-  }
+        }
 }

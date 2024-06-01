@@ -5,7 +5,7 @@ import 'package:e_klinik_pens/pages/common/register.dart';
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
 import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
-import 'package:e_klinik_pens/pages/doctor/home_page_doctor.dart';
+import 'package:e_klinik_pens/pages/doctor/doctor_homepage.dart';
 import 'package:e_klinik_pens/pages/onboarding/onboarding_page.dart';
 import 'package:e_klinik_pens/pages/onboarding/splash.dart';
 import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
@@ -99,7 +99,7 @@ class AppRoutes {
       case AppRoutes.homedokter:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const HomePageDoctor(),
+          builder: (_) => const DoctorHomePage(),
         );
 
       case AppRoutes.homeuser:

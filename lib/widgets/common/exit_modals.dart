@@ -1,5 +1,5 @@
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/widgets/profiles/profile.dart';
+import 'package:e_klinik_pens/widgets/user/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

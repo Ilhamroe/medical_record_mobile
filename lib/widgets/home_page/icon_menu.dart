@@ -13,7 +13,7 @@ class IconMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 160.h,
-      padding: const EdgeInsets.only(left: 35.0, right: 35, top: 40).r,
+      padding: const EdgeInsets.only(left: 26, right: 26, top: 40).r,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -2,6 +2,8 @@
   import 'package:flutter/material.dart';
   import 'package:e_klinik_pens/utils/color.dart';
   import 'package:e_klinik_pens/models/doctor_list.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
   class DoctorProfileDetail extends StatelessWidget {
     const DoctorProfileDetail({ super.key});
@@ -9,58 +11,68 @@
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: themeLight,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true, 
-        title: Text(
-          'Dokter',
-          style: TextStyle(
-            color: pureWhite,
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new_outlined,
-          color: pureWhite,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              Transform.translate(
-                offset: const Offset(200,-100),
-                child: Image.asset("assets/images/atomic.png")),
-              Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.85,
-            padding: EdgeInsets.symmetric(vertical: 40.0),
-            child: Container(
-              child: Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF6F8FF),
+      body: Container(
+        color: themeLight,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Image.asset("assets/images/atomic.png"),
+            ),
+            Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 35.0).r,
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }, 
+                              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                              color: pureWhite,
+                              )
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0).r,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Text("Dokter",
+                            style: TextStyle(
+                              color: pureWhite,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20.sp
+                            ),),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 14,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: pureWhite,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+                        topLeft: const Radius.circular(35).w,
+                        topRight: const Radius.circular(35).w,
                       ),
                     ),
                     child: DoctorDetailListView(),
                   ),
+                ),
                 ],
-              ),
             ),
-          ),
-        
-            ],
-          ),
           ],
+        ),
       ),
     );
   }

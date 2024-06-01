@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/models/doctor_list.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorCardDetail extends StatelessWidget {
   final Doctor doctor;
@@ -9,13 +10,14 @@ class DoctorCardDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: aquaHaze,
+      surfaceTintColor: Colors.transparent,
+      color: pureWhite,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8).r,
       ),
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0).r,
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,13 +27,13 @@ class DoctorCardDetail extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image(
-                    image: doctor.icon,
-                    height: 111,
-                    width: 111,
+                    image: AssetImage(doctor.icon.toString()),
+                    height: 100.w,
+                    width: 100.w,
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,14 +43,15 @@ class DoctorCardDetail extends StatelessWidget {
                         style: TextStyle(
                           color: blackText,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 20.sp,
                         ),
                       ),
+                      SizedBox(height: 8.h,),
                       Text(
                         doctor.role,
                         style: TextStyle(
                           color: textColor,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ],
@@ -56,19 +59,22 @@ class DoctorCardDetail extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8), 
-            Text(
-              'Deskripsi:',
-              style: TextStyle(
-                color: blackText,
-                fontSize: 16,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0).w,
+              child: Text(
+                'Deskripsi:',
+                style: TextStyle(
+                  color: blackText,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600
+                ),
               ),
             ),
             Text(
-              doctor.desc,
+              doctor.desc.toString(),
               style: TextStyle(
                 color: textColor,
-                fontSize: 12,
+                fontSize: 12.sp,
               ),
             ),
           ],
@@ -79,19 +85,21 @@ class DoctorCardDetail extends StatelessWidget {
 }
 
 class DoctorDetailListView extends StatelessWidget {
+  const DoctorDetailListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxWidth: double.infinity),
+      constraints: const BoxConstraints(maxWidth: double.infinity),
       child: ListView.separated(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0).r,
         shrinkWrap: true,
         itemCount: doctors.length,
         itemBuilder: (context, index) {
           return DoctorCardDetail(doctor: doctors[index]);
         },
         separatorBuilder: (context, index) {
-          return SizedBox(height: 10);
+          return SizedBox(height: 10.h);
         },
       ),
     );

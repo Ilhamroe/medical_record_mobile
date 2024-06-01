@@ -1,27 +1,27 @@
-import 'package:e_klinik_pens/models/recent_patients.dart';
+import 'package:e_klinik_pens/models/doctor_list.dart';
 import 'package:e_klinik_pens/pages/admin/pasien_terakhir_berkunjung.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marquee/marquee.dart';
 
-class RecentPatientsTile extends StatefulWidget {
-  const RecentPatientsTile({super.key});
+class BestDoctorTile extends StatefulWidget {
+  const BestDoctorTile({super.key});
 
   @override
-  State<RecentPatientsTile> createState() => _RecentPatientsTileState();
+  State<BestDoctorTile> createState() => _BestDoctorTileState();
 }
 
-class _RecentPatientsTileState extends State<RecentPatientsTile> {
+class _BestDoctorTileState extends State<BestDoctorTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20).r,
+      padding: const EdgeInsets.only(top: 20, left: 23.5, right: 23.5).r,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Pasien Terakhir Berkunjung",
+            "Dokter Terbaik",
             style: TextStyle(
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
@@ -33,9 +33,9 @@ class _RecentPatientsTileState extends State<RecentPatientsTile> {
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: recentPatients.length,
+                itemCount: doctors.length,
                 itemBuilder: (context, index) {
-                  final recentPatient = recentPatients[index];
+                  final doctorTile = doctors[index];
                   return Padding(
                     padding: const EdgeInsets.only(right: 10, top: 10).r,
                     child: Container(
@@ -51,12 +51,12 @@ class _RecentPatientsTileState extends State<RecentPatientsTile> {
                         child: Column(
                           children: [
                             SizedBox(
-                              width: 70.w,
-                              height: 70.w,
+                              width: 60.w,
+                              height: 60.w,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
+                                borderRadius: BorderRadius.circular(100.r),
                                 child: Image(
-                                  image: AssetImage(recentPatient.profilePhoto),
+                                  image: AssetImage(doctorTile.icon.toString()),
                                 ),
                               ),
                             ),
@@ -65,7 +65,7 @@ class _RecentPatientsTileState extends State<RecentPatientsTile> {
                               child: SizedBox(
                                 height: 20.h,
                                 child: Marquee(
-                                  text: recentPatient.name,
+                                  text: doctorTile.name,
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500
@@ -81,11 +81,15 @@ class _RecentPatientsTileState extends State<RecentPatientsTile> {
                                 ),
                               ),
                             ),
-                            Text(recentPatient.nrp,
-                            style: const TextStyle(
-                              color: navbar
-                            ),
-                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                doctorTile.role,
+                                style: const TextStyle(
+                                  color: navbar
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),

@@ -1,9 +1,10 @@
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditAkun extends StatefulWidget {
-  const EditAkun({Key? key}) : super(key: key);
+  const EditAkun({super.key});
 
   @override
   State<EditAkun> createState() => _EditAkunState();
@@ -183,15 +184,15 @@ class _EditAkunState extends State<EditAkun> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromRGBO(48, 173, 162, 1), // Contoh warna RGB
-                          shape: StadiumBorder(),
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16).w,
                         ),
                         child: Text(
-                          'Buat Akun',
+                          'Edit Akun',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white, // Warna teks
+                            color: pureWhite
                           ),
                         ),
                       ),

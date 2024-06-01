@@ -1,6 +1,3 @@
-import 'package:e_klinik_pens/models/faq_list.dart';
-import 'package:e_klinik_pens/models/medical_records.dart';
-import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/medicalHistoryUser_tiles.dart';
 import 'package:flutter/material.dart';

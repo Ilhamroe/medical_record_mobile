@@ -1,9 +1,9 @@
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TambahAkun extends StatefulWidget {
-  const TambahAkun({Key? key}) : super(key: key);
+  const TambahAkun({super.key});
 
   @override
   State<TambahAkun> createState() => _TambahAkunState();
@@ -43,7 +43,7 @@ class _TambahAkunState extends State<TambahAkun> {
             expandedHeight: MediaQuery.of(context).size.height * 0.115,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/atom.png",
+                "assets/images/atomic.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -95,6 +95,10 @@ class _TambahAkunState extends State<TambahAkun> {
                           hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
                           prefixIcon: Image.asset('assets/images/password.png', width: 20, height: 20),
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
                       SizedBox(height: 16),
                       TextFormField(
@@ -105,8 +109,18 @@ class _TambahAkunState extends State<TambahAkun> {
                             borderSide: BorderSide(),
                           ),
                           hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/Email.png', width: 20, height: 20),
+                          prefixIcon: Image.asset('assets/images/email.png', width: 20, height: 20),
                         ),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value){
+                          if( value == null || value.isEmpty){
+                            return "Email tidak boleh kosong";
+                          }
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                          return 'Masukkan email yang valid';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 16),
                       TextFormField(
@@ -129,65 +143,38 @@ class _TambahAkunState extends State<TambahAkun> {
                               });
                             },
                           ),
-                        ),
+                        ), 
                         obscureText: _isObscure,
+                        validator: (value){
+                          if(value== null || value.isEmpty){
+                            return 'Password harus diisi';
+                          }if(value.length < 6){
+                            return 'Password minimal 6 karakter';
+                          }
+                        },
                       ),
                       SizedBox(height: 16),
-                    InputDecorator(
+                      DropdownButtonFormField(
+                        value: _selectedRole,
                         decoration: InputDecoration(
-                          hintText: 'Masukkan role', // Teks hint
+                          hintText: "Masukkan Role",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25), // Set border radius
                             borderSide: BorderSide(),
                           ),
-                          hintStyle: TextStyle(color: Colors.black),
-                          prefixIcon: Image.asset('assets/images/Group.png', width: 20, height: 20),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                          isDense: true,
+                         hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
+                         prefixIcon: Image.asset("assets/images/Group.png")
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButtonFormField<String>(
-                            value: _selectedRole,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedRole = newValue;
-                              });
-                            },
-                            items: [
-                               DropdownMenuItem<String>(
-                                value: 'Pasien',
-                                child: Text(
-                                  'Pasien',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(173, 173, 173, 1),
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem<String>(
-                                enabled: false,
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(vertical: 4.0),
-                                  child: Divider(
-                                    color: Colors.grey,
-                                    thickness: 1,
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem<String>(
-                                value: 'Dokter',
-                                child: Text(
-                                  'Dokter',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(173, 173, 173, 1),
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            decoration: InputDecoration.collapsed(hintText: 'Masukkan role'),
-                          ),
-                        ),
+                        items: ["Pasien", "Dokter"].map((String e) {
+                          return DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(e));
+                        }).toList(), 
+                        onChanged: (String? value){
+                          setState(() {
+                            _selectedRole= value;
+                          });
+                        }
                       ),
                       SizedBox(height: 16),
                       ElevatedButton(

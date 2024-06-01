@@ -3,14 +3,8 @@ import 'package:e_klinik_pens/models/faq_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FaqPage extends StatefulWidget {
+class FaqPage extends StatelessWidget {
   const FaqPage({super.key});
-
-  @override
-  State<FaqPage> createState() => _FaqPageState();
-}
-
-class _FaqPageState extends State<FaqPage> {
 
   @override
   Widget build(BuildContext context) {

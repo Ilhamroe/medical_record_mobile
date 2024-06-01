@@ -5,7 +5,7 @@ import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:e_klinik_pens/widgets/profiles/profile.dart';
+import 'package:e_klinik_pens/widgets/user/profile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

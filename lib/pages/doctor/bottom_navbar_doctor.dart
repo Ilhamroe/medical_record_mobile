@@ -1,7 +1,6 @@
 import 'package:e_klinik_pens/pages/common/reset_password.dart';
 import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/doctor/doctor_homepage.dart';
-import 'package:e_klinik_pens/pages/doctor/home_page_doctor.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';

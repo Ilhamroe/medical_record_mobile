@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
+import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        // initialRoute: AppRoutes.splash,
-        // onGenerateRoute: AppRoutes.generateRoute,
-        home: NavbarBottomUser(),
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: AppRoutes.generateRoute,
+        // home: NavbarBottomUser(),
       ),
     );
   }

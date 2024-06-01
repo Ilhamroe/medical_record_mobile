@@ -250,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       width: 300.w,
                                       height: 50.h,
                                       placeholder: 'Masukkan email Anda',
-                                      leadingIcon: 'assets/images/Email.png',
+                                      leadingIcon: 'assets/images/email.png',
                                       controller: _emailController,
                                       trailing: isValid
                                           ? SvgPicture.asset(

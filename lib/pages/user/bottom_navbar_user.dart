@@ -88,7 +88,7 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                   splashColor: pureWhite,
                   onPressed: () {
                     setState(() {
-                      currentScreen = const TestPage();
+                      currentScreen = ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors);
                       currentTab = 1;
                     });
                   },
@@ -111,7 +111,7 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                   splashColor: pureWhite,
                   onPressed: () {
                     setState(() {
-                      currentScreen = const ResetPassword();
+                      currentScreen = const MedicalHistory();
                       currentTab = 2;
                     });
                   },

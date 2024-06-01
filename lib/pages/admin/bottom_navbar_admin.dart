@@ -31,7 +31,6 @@ class _NavbarBottomAdminState extends State<NavbarBottomAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    // final Size screenSize = MediaQuery.of(context).size;
     return DoubleBackToCloseApp(
       snackBarMessage: 'Tekan sekali lagi untuk keluar',
       child: Scaffold(

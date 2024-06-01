@@ -3,63 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class CustomFormField extends StatelessWidget {
-//   final double width;
-//   final double height;
-//   final String placeholder;
-//   final String leadingIcon;
-//   final String? Function(String?) validator;
-//   final TextEditingController controller;
-
-//   CustomFormField({
-//     required this.width,
-//     required this.height,
-//     required this.placeholder,
-//     required this.leadingIcon,
-//     required this.validator,
-//     required this.controller,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 5.0).w,
-//       child: Container(
-//         width: width,
-//         height: height,
-//         padding: const EdgeInsets.symmetric(horizontal: 20.0).w,
-//         decoration: BoxDecoration(
-//           color: fill,
-//           border: Border.all(color: stroke),
-//           borderRadius: BorderRadius.circular(24.0).w,
-//         ),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             TextFormField(
-//               controller: controller,
-//               decoration: InputDecoration(
-//                 icon: Image.asset(leadingIcon),
-//                 hintText: placeholder,
-//                 hintStyle: TextStyle(
-//                     fontFamily: 'Inter-Regular', fontSize: 16.sp, color: onBoard),
-//                 border: InputBorder.none,
-//               ),
-//               validator: validator,
-//               autovalidateMode: AutovalidateMode.onUserInteraction,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class CustomFormField extends StatefulWidget {
   final double width;
   final double height;
   final String placeholder;
-  final String leadingIcon;
+  final String? leadingIcon;
   final IconData? trailingIcon;
   final Widget? trailing;
   final TextEditingController controller;
@@ -71,7 +19,7 @@ class CustomFormField extends StatefulWidget {
     required this.width,
     required this.height,
     required this.placeholder,
-    required this.leadingIcon,
+    this.leadingIcon,
     this.trailingIcon,
     required this.controller,
     this.keyboardType = TextInputType.text,
@@ -134,10 +82,8 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   icon: Image.asset(
-                    widget.leadingIcon,
-                    color: _isFieldNotEmpty
-                        ? themeDark
-                        : null, // Change color based on field state
+                    widget.leadingIcon!,
+                    color: _isFieldNotEmpty ? themeDark : null,
                   ),
                   hintText: widget.placeholder,
                   hintStyle: TextStyle(

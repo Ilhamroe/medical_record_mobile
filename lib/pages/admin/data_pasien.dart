@@ -13,6 +13,31 @@ class DataPasien extends StatefulWidget {
 }
 
 class _DataPasienState extends State<DataPasien> {
+  List<PatientData> _allPatients = patientsData;
+  List<PatientData> _filteredPatients = patientsData;
+  String _searchMessage = '';
+
+  void _runFilter(String enteredKeyword) {
+    List<PatientData> results;
+    if (enteredKeyword.isEmpty) {
+      results = _allPatients;
+      _searchMessage = '';
+    } else {
+      results = _allPatients
+          .where((patient) => patient.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      if (results.isNotEmpty) {
+        _searchMessage = '';
+      } else {
+        _searchMessage = 'Tidak Ada Pasien Bernama: "$enteredKeyword"';
+      }
+    }
+
+    setState(() {
+      _filteredPatients = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +101,7 @@ class _DataPasienState extends State<DataPasien> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: TextFormField(
+                    onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: 10), // Adjust the padding
                       prefixIcon: Icon(
@@ -101,51 +127,77 @@ class _DataPasienState extends State<DataPasien> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: _searchMessage.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20).w,
+                    child: Center(
+                      child: Text(
+                        _searchMessage,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final patientData= patientsData[index];     
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 5).r,
-                        child: Card(
-                          surfaceTintColor: Colors.transparent,
-                          color: pureWhite,
-                          elevation: 5,
-                          child: ListTile(
-                            leading: Image.asset(patientData.profilePhoto),
-                            title: Text(patientData.name, style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold
-                            ),),
-                            subtitle: Text(patientData.nrp, style: TextStyle(
-                              fontSize: 16.sp,
-                            ),),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => EditAkun()
-                                      ),
-                                    );
-                                  },
-                                  child: Image.asset(patientData.trailing1, width: 35.w, height: 35.w,)
-                                  ),
-                                SizedBox(width: 5.w),
-                                Image.asset(patientData.trailing2, width: 35.w, height: 35.w,)
-                              ],
-                            ),
+                final patientData = _filteredPatients[index];
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 5).r,
+                      child: Card(
+                        surfaceTintColor: Colors.transparent,
+                        color: pureWhite,
+                        elevation: 5,
+                        child: ListTile(
+                          leading: Image.asset(patientData.profilePhoto),
+                          title: Text(
+                            patientData.name,
+                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            patientData.nrp,
+                            style: TextStyle(fontSize: 16.sp),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => EditAkun()),
+                                  );
+                                },
+                                child: Image.asset(
+                                  patientData.trailing1,
+                                  width: 35.w,
+                                  height: 35.w,
+                                ),
+                              ),
+                              SizedBox(width: 5.w),
+                              Image.asset(
+                                patientData.trailing2,
+                                width: 35.w,
+                                height: 35.w,
+                              ),
+                            ],
                           ),
                         ),
-                      )
-                    ],
-                  );
+                      ),
+                    ),
+                  ],
+                );
               },
-              childCount: patientsData.length,
+              childCount: _filteredPatients.length,
             ),
           ),
         ],
@@ -153,3 +205,4 @@ class _DataPasienState extends State<DataPasien> {
     );
   }
 }
+

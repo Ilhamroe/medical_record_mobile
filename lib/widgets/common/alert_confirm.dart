@@ -7,8 +7,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 class AlertConfirm extends StatefulWidget {
   final String titleText;
   final String descText;
+  final String confirmText;
   final String route;
-  const AlertConfirm({required this.titleText, required this.descText, required this.route, super.key});
+  const AlertConfirm(
+      {required this.titleText,
+      required this.descText,
+      required this.confirmText,
+      required this.route,
+      super.key});
 
   @override
   State<AlertConfirm> createState() => _AlertConfirmState();
@@ -27,7 +33,7 @@ class _AlertConfirmState extends State<AlertConfirm> {
     });
   }
 
-  void _navigateToLogin() {
+  void _navigateToPage() {
     if (!_isNavigated) {
       _isNavigated = true;
       Navigator.pushNamed(context, widget.route);
@@ -85,11 +91,11 @@ class _AlertConfirmState extends State<AlertConfirm> {
               child: ButtonConfirm(
                 width: 160.w,
                 height: 40.h,
-                text: 'Masuk',
+                text: widget.confirmText,
                 colorText: pureWhite,
                 borderColor: themeDark,
                 buttonColor: themeDark,
-                onPressed: _navigateToLogin,
+                onPressed: _navigateToPage,
               ),
             ),
           ],

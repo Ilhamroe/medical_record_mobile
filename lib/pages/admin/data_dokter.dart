@@ -11,6 +11,31 @@ class DataDokter extends StatefulWidget {
 }
 
 class _DataDokterState extends State<DataDokter> {
+  List<DoctorData> _allDoctors = doctorsData;
+  List<DoctorData> _filteredDoctors = doctorsData;
+  String _searchMessage = '';
+
+  void _runFilter(String enteredKeyword) {
+    List<DoctorData> results;
+    if (enteredKeyword.isEmpty) {
+      results = _allDoctors;
+      _searchMessage = '';
+    } else {
+      results = _allDoctors
+          .where((doctor) => doctor.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      if (results.isNotEmpty) {
+        _searchMessage = '';
+      } else {
+        _searchMessage = 'Tidak Ada Dokter Bernama: "$enteredKeyword"';
+      }
+    }
+
+    setState(() {
+      _filteredDoctors = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +99,7 @@ class _DataDokterState extends State<DataDokter> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: TextFormField(
+                    onChanged: (value) => _runFilter(value),
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: 10), // Adjust the padding
                       prefixIcon: Icon(
@@ -99,10 +125,28 @@ class _DataDokterState extends State<DataDokter> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: _searchMessage.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20).w,
+                    child: Center(
+                      child: Text(
+                        _searchMessage,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final doctordata= doctorsData[index];
+                final doctorData = _filteredDoctors[index];
                 return Column(
                   children: [
                     Padding(
@@ -112,28 +156,26 @@ class _DataDokterState extends State<DataDokter> {
                         color: pureWhite,
                         elevation: 5,
                         child: ListTile(
-                          leading: Image.asset(doctordata.profilePhoto),
-                          title: Text(doctordata.name, style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold
-                          ),),
-                          subtitle: Text(doctordata.role, style: TextStyle(
-                            fontSize: 16.sp,
+                          leading: Image.asset(doctorData.profilePhoto),
+                          title: Text(
+                            doctorData.name,
+                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        trailing: Text(
-                          doctordata.exp, 
-                          style: TextStyle(
-                            fontSize: 12.sp
+                          subtitle: Text(
+                            doctorData.role,
+                            style: TextStyle(fontSize: 16.sp),
                           ),
-                        ),
+                          trailing: Text(
+                            doctorData.exp,
+                            style: TextStyle(fontSize: 12.sp),
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               },
-              childCount: doctorsData.length,
+              childCount: _filteredDoctors.length,
             ),
           ),
         ],

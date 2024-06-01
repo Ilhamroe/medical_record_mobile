@@ -7,8 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class AlertDanger extends StatefulWidget {
   final String titleText;
   final String descText;
-  final String route;
-  const AlertDanger({required this.titleText, required this.descText, required this.route, super.key});
+  const AlertDanger(
+      {required this.titleText, required this.descText, super.key});
 
   @override
   State<AlertDanger> createState() => _AlertDangerState();
@@ -20,17 +20,17 @@ class _AlertDangerState extends State<AlertDanger> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       if (!_isNavigated) {
-        Navigator.pushNamed(context, widget.route);
+        Navigator.pop(context);
       }
     });
   }
 
-  void _navigateToLogin() {
+  void _navigateToPage() {
     if (!_isNavigated) {
       _isNavigated = true;
-      Navigator.pushNamed(context, widget.route);
+      Navigator.pop(context);
     }
   }
 
@@ -89,7 +89,7 @@ class _AlertDangerState extends State<AlertDanger> {
                 colorText: pureWhite,
                 borderColor: danger,
                 buttonColor: danger,
-                onPressed: _navigateToLogin,
+                onPressed: _navigateToPage,
               ),
             ),
           ],

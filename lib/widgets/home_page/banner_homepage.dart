@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 
@@ -8,14 +9,14 @@ class BannerHomepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0).w,
       child: Card(
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20).w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20).r,
               color: aquaHaze,
             ),
             child: Row(
@@ -28,26 +29,32 @@ class BannerHomepage extends StatelessWidget {
                         'Klinik Pens, Sarana \nberobat gratis',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10).w,
                       ),
-                      StatefulBuilder( // Use StatefulBuilder for state management
+                      StatefulBuilder(
+                        // Use StatefulBuilder for state management
                         builder: (context, setState) => InkWell(
                           onTap: () {
-                            setState(() => _isButtonPressed = !_isButtonPressed);
+                            setState(
+                                () => _isButtonPressed = !_isButtonPressed);
                             _launchURL();
                           },
-                          child: AnimatedContainer( 
+                          child: AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.easeIn,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: _isButtonPressed ? themeDark.withOpacity(0.7) : themeDark,
+                              borderRadius: BorderRadius.circular(30).w,
+                              color: _isButtonPressed
+                                  ? themeDark.withOpacity(0.7)
+                                  : themeDark,
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10).w,
                             child: Text(
                               'Baca selengkapnya',
                               style: TextStyle(
@@ -61,13 +68,12 @@ class BannerHomepage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 20),
                 Column(
                   children: [
                     Image.asset(
                       'assets/images/doctor_banner.png',
-                      width: 100,
-                      height: 140,
+                      width: 100.w,
+                      height: 140.h,
                     ),
                   ],
                 ),
@@ -80,7 +86,8 @@ class BannerHomepage extends StatelessWidget {
   }
 
   Future<void> _launchURL() async {
-    const String url = 'https://www.pens.ac.id/2018/10/26/klinik-pens-sarana-berobat-gratis/';
+    const String url =
+        'https://www.pens.ac.id/2018/10/26/klinik-pens-sarana-berobat-gratis/';
     Uri uri = Uri.parse(url);
 
     if (!await launchUrl(uri)) {
@@ -88,5 +95,5 @@ class BannerHomepage extends StatelessWidget {
     }
   }
 
-  bool _isButtonPressed = false; 
+  bool _isButtonPressed = false;
 }

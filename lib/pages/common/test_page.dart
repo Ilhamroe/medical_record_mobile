@@ -17,7 +17,7 @@ class _TestPageState extends State<TestPage> {
   @override
   void initState() {
     super.initState();
-    listData = serviceAPI.getAllData();
+    listData = serviceAPI.getAllUsers();
   }
 
   @override

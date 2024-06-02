@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ServiceAuth {
   final Dio _dio = Dio();
-  
+
   Future<Map<String, dynamic>> registerUser(
       Map<String, dynamic> userData) async {
     final url = Config.apiUrl + 'register';
@@ -192,6 +192,57 @@ class ServiceAuth {
       }
     } else {
       throw Exception('Failed to load user');
+    }
+  }
+
+  //buat fungsi untuk update
+  Future<Map<String, dynamic>> updateUserData(
+      Map<String, dynamic> userData, String id) async {
+    final url = Config.apiUrl + 'user/update/$id';
+
+    try {
+      final response = await _dio.patch(
+        url,
+        data: jsonEncode(userData),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          followRedirects: false,
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else {
+        throw Exception('Failed to update user: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to update user: $e');
+    }
+  }
+
+  //buat fungsi untuk delete
+  Future<void> deleteUser(String id) async {
+    final url = Config.apiUrl + 'user/delete/$id';
+
+    try {
+      final response = await _dio.delete(
+        url,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          followRedirects: false,
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+      } else {
+        throw Exception('Failed to delete user: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to delete user: $e');
     }
   }
 }

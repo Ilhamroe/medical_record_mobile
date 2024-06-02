@@ -30,6 +30,7 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   User? _user;
+  final ServiceAuth _serviceAPI = ServiceAuth();
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _EditProfileState extends State<EditProfile> {
 
     if (userId != null) {
       try {
-        final user = await ServiceAuth().getUserById(userId);
+        final user = await _serviceAPI.getUserById(userId);
         setState(() {
           _user = user;
           _nameController.text = _user?.name ?? "";
@@ -60,6 +61,25 @@ class _EditProfileState extends State<EditProfile> {
       }
     } else {
       print('User ID not found');
+    }
+  }
+
+  void _updateData() async {
+    Map<String, dynamic> userData = {
+      'name': _nameController.text,
+      'nrp': _nrpController.text,
+      'email': _emailController.text,
+      'gender': selectedValue ?? _genderController.text,
+      'birth': _dateController.text,
+      'number': _numberController.text,
+      'height': double.tryParse(_heightController.text) ?? 0.0,
+      'weight': double.tryParse(_weightController.text) ?? 0.0,
+    };
+    try {
+      await _serviceAPI.updateUserData(userData, _user!.id.toString());
+      print('Profile berhasil diperbarui!');
+    } catch (e) {
+      print('Gagal memperbarui profile: $e');
     }
   }
 
@@ -100,106 +120,7 @@ class _EditProfileState extends State<EditProfile> {
                       height: MediaQuery.of(context).size.height * 0.3,
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).padding.top + 16),
-                      child: Stack(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                    Icons.arrow_back_ios_new_rounded),
-                                color: pureWhite,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height *
-                                        0.0145),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Profil",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: pureWhite,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.055,
-                                      ),
-                                    ),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.0275,
-                                    ),
-                                    Stack(
-                                      children: [
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.280,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.133,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const CameraAction()));
-                                              },
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    "assets/images/profiles-pic.jpg"),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          right: 0,
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.07,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.035,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                color: Colors.white),
-                                            child: Image.asset(
-                                              "assets/images/camera.png",
-                                              color: themeLight,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: Container(),
                     ),
                     Container(
                       decoration: const BoxDecoration(
@@ -354,7 +275,7 @@ class _EditProfileState extends State<EditProfile> {
                               colorText: pureWhite,
                               borderColor: themeDark,
                               buttonColor: themeDark,
-                              onPressed: () => print("object"),
+                              onPressed: _updateData, //arahkan dan buat fungsi update data
                             ),
                           ),
                         ],

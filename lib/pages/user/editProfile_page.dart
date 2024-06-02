@@ -1,8 +1,10 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/utils/user_profiles.dart';
+import 'package:e_klinik_pens/widgets/user/profile.dart';
+import 'package:e_klinik_pens/widgets/user/input_fields.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_edit_profiles.dart';
-import 'package:e_klinik_pens/widgets/profiles/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

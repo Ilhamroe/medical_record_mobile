@@ -1,28 +1,32 @@
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/widgets/doctor/doctor_banner.dart';
+import 'package:e_klinik_pens/widgets/user/best_doctor_tiles.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/widgets/home_page/banner_homepage.dart';
 import 'package:e_klinik_pens/widgets/home_page/icon_menu.dart'; 
-import 'package:e_klinik_pens/widgets/home_page/doctor_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: onBoard,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+    return Expanded(
+      flex: 10,
+      child: Container(
+        decoration: BoxDecoration(
+          color: pureWhite,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(35.r),
+            topRight: Radius.circular(35.r),
+          ),
         ),
-      ),
-      child: Column(
-         children: [
-           IconMenu(),
-          BannerHomepage(), 
-          DoctorListView()
-        ],
+        child: const Column(
+           children: [
+            IconMenu(),
+            DoctorBanner(), 
+            BestDoctorTile(),
+          ],
+        ),
       ),
     );
   }

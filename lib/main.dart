@@ -1,4 +1,6 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
+import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
+import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.generateRoute,
-        // home: NavbarBottomDoctor(),
+        // home: NavbarBottomUser(),
       ),
     );
   }

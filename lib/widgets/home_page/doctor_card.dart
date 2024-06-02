@@ -21,7 +21,7 @@ import 'package:e_klinik_pens/models/doctor_list.dart';
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: CircleAvatar(
-              backgroundImage: doctor.icon,
+              backgroundImage: AssetImage(doctor.icon.toString()),
               radius: 30,
             ),
           ),

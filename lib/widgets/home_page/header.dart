@@ -1,52 +1,65 @@
+import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Header extends StatelessWidget {
    const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
-   
-    final Size screenSize = MediaQuery.of(context).size;
-    final double fontSize = screenSize.width * 0.04;
-
-    return Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        left: 25,
-        right: 25,
-        bottom: 20
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Hello Mirta!',
-                style: TextStyle(
-                  fontSize: 32,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+    return Expanded(
+      flex: 2,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 25.0, right: 25, top: 35).r,
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hello Mirta!',
+                      style: TextStyle(
+                        fontSize: 32.sp,
+                        color: pureWhite,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                'Cek Hasil rekam medismu',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 45.w,
+                      height: 45.w,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100.r),
+                        child: Image.asset(
+                          "assets/images/profiles-pic.jpg",
+                        )
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/profile.png',
-              fit: BoxFit.cover,
+              ],
             ),
-          )
-        ],
+            SizedBox(height: 5.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Cek Hasil rekam medismu',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: pureWhite
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

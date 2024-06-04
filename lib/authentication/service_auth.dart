@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:e_klinik_pens/config/config.dart';
 import 'package:e_klinik_pens/models/users.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
-import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:e_klinik_pens/widgets/common/alert_success.dart';
 import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

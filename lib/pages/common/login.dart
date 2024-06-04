@@ -4,7 +4,7 @@ import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
-import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:e_klinik_pens/widgets/common/alert_success.dart';
 import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_field.dart';

@@ -20,6 +20,7 @@ class _DataPasienState extends State<DataPasien> {
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
   List<User> userList = [];
+  List<User> filteredList = [];
 
   void _runFilter(String enteredKeyword) {
     List<User> results;
@@ -40,7 +41,7 @@ class _DataPasienState extends State<DataPasien> {
     }
 
     setState(() {
-      userList = results;
+      filteredList = results;
     });
   }
 
@@ -48,6 +49,16 @@ class _DataPasienState extends State<DataPasien> {
   void initState() {
     super.initState();
     listData = serviceAPI.getAllUsers();
+    listData.then((data) {
+      setState(() {
+        userList = data;
+        filteredList = data;
+      });
+    }).catchError((error) {
+      setState(() {
+        _searchMessage = 'Error: $error';
+      });
+    });
   }
 
   @override
@@ -62,7 +73,6 @@ class _DataPasienState extends State<DataPasien> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            userList = snapshot.data!;
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
@@ -131,7 +141,7 @@ class _DataPasienState extends State<DataPasien> {
                               Icons.search,
                               color: Color.fromRGBO(26, 154, 142, 1),
                             ),
-                            hintText: "Cari nama pasien",
+                            hintText: "Cari pasien",
                             hintStyle: TextStyle(
                               color: Color.fromRGBO(171, 171, 171, 1),
                               fontSize: 16,
@@ -173,7 +183,7 @@ class _DataPasienState extends State<DataPasien> {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      User user = userList[index];
+                      User user = filteredList[index];
                       if (user.role == "user") {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
@@ -247,7 +257,7 @@ class _DataPasienState extends State<DataPasien> {
                         return SizedBox.shrink();
                       }
                     },
-                    childCount: userList.length,
+                    childCount: filteredList.length,
                   ),
                 ),
               ],

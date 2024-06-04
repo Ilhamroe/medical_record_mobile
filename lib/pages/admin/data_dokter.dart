@@ -16,6 +16,7 @@ class _DataDokterState extends State<DataDokter> {
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
   List<User> userList = [];
+  List<User> filteredList = []; 
 
   void _runFilter(String enteredKeyword) {
     List<User> results;
@@ -31,12 +32,12 @@ class _DataDokterState extends State<DataDokter> {
       if (results.isNotEmpty) {
         _searchMessage = '';
       } else {
-        _searchMessage = 'Tidak Ada Pasien Bernama atau NIP: "$enteredKeyword"';
+        _searchMessage = 'Tidak Ada Dokter Bernama atau NIP: "$enteredKeyword"';
       }
     }
 
     setState(() {
-      userList = results;
+      filteredList = results;
     });
   }
 
@@ -44,6 +45,16 @@ class _DataDokterState extends State<DataDokter> {
   void initState() {
     super.initState();
     listData = serviceAPI.getAllUsers();
+    listData.then((data) {
+      setState(() {
+        userList = data;
+        filteredList = data;
+      });
+    }).catchError((error) {
+      setState(() {
+        _searchMessage = 'Error: $error';
+      });
+    });
   }
 
   @override
@@ -58,7 +69,6 @@ class _DataDokterState extends State<DataDokter> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            userList = snapshot.data!;
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
@@ -169,7 +179,7 @@ class _DataDokterState extends State<DataDokter> {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      User user = userList[index];
+                      User user = filteredList[index];
                       if (user.role == "dokter") {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
@@ -201,7 +211,7 @@ class _DataDokterState extends State<DataDokter> {
                         return SizedBox.shrink();
                       }
                     },
-                    childCount: userList.length,
+                    childCount: filteredList.length,
                   ),
                 ),
               ],

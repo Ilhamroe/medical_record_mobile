@@ -8,14 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class AlertConfirmation extends StatefulWidget {
   final String titleText;
   final String descText;
-  final String confirmText;
   final String route;
   final String userId;
 
   const AlertConfirmation({
     required this.titleText,
     required this.descText,
-    required this.confirmText,
     required this.route,
     required this.userId,
     super.key,

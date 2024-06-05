@@ -197,15 +197,22 @@ class ServiceAuth {
 
   //buat fungsi untuk update
   Future<Map<String, dynamic>> updateUserData(
-      Map<String, dynamic> userData, String id) async {
-    final url = Config.apiUrl + 'user/update/$id';
+      Map<String, dynamic> userData, int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('accessToken');
 
+    if (token == null) {
+      throw Exception('Token not found');
+    }
+
+    final url = Config.apiUrl + 'user/update/$id';
     try {
       final response = await _dio.patch(
         url,
         data: jsonEncode(userData),
         options: Options(
           headers: {
+            'Authorization': 'Bearer $token',
             'Content-Type': 'application/json; charset=UTF-8',
           },
           followRedirects: false,
@@ -222,15 +229,22 @@ class ServiceAuth {
     }
   }
 
-  //buat fungsi untuk delete
+  //delete data
   Future<void> deleteUser(String id) async {
-    final url = Config.apiUrl + 'user/delete/$id';
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('accessToken');
 
+    if (token == null) {
+      throw Exception('Token not found');
+    }
+
+    final url = Config.apiUrl + 'user/delete/$id';
     try {
       final response = await _dio.delete(
         url,
         options: Options(
           headers: {
+            'Authorization': 'Bearer $token',
             'Content-Type': 'application/json; charset=UTF-8',
           },
           followRedirects: false,
@@ -238,6 +252,7 @@ class ServiceAuth {
       );
 
       if (response.statusCode == 200 || response.statusCode == 204) {
+        // Do something after successful deletion
       } else {
         throw Exception('Failed to delete user: ${response.statusCode}');
       }

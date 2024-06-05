@@ -1,8 +1,5 @@
-import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/utils/user_profiles.dart';
 import 'package:e_klinik_pens/widgets/user/profile.dart';
-import 'package:e_klinik_pens/widgets/user/input_fields.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_edit_profiles.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +75,7 @@ class _EditProfileState extends State<EditProfile> {
       'weight': double.tryParse(_weightController.text) ?? 0.0,
     };
     try {
-      await _serviceAPI.updateUserData(userData, _user!.id.toString());
+      await _serviceAPI.updateUserData(userData, _user!.id);
       print('Profile berhasil diperbarui!');
     } catch (e) {
       print('Gagal memperbarui profile: $e');

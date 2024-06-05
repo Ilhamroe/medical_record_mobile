@@ -225,8 +225,7 @@ class _DataPasienState extends State<DataPasien> {
                                             titleText: "Sukses",
                                             descText:
                                                 "Apakah Anda yakin untuk menghapus akun Anda?",
-                                            route: AppRoutes.homeadmin,
-                                            confirmText: 'Hapus',
+                                            route: AppRoutes.navbarAdmin,
                                             userId: '${user.id}',
                                           );
                                         },

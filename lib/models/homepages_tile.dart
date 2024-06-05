@@ -2,6 +2,7 @@ import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/pages/admin/data_dokter.dart';
 import 'package:e_klinik_pens/pages/admin/data_pasien.dart';
 import 'package:e_klinik_pens/pages/admin/tambah_akun.dart';
+import 'package:e_klinik_pens/pages/doctor/tambah_rekam_medis.dart';
 import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
@@ -67,22 +68,18 @@ class DoctorTile {
 
 final List<DoctorTile> doctorTiles = [
   DoctorTile(
-    icon: Image.asset("assets/images/profile-big.png"),
-    title: "Pasien",
-    onTap: (context) {
-      Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DataPasienDoctor()),
-      );
-    },
+      icon: Image.asset("assets/images/profile-big.png"), 
+      title: "Pasien",
+      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => DataPasien()
+      )
+    ), 
   ),
   DoctorTile(
-    icon: Image.asset("assets/images/medical-record.png"),
-    title: "Tambah Rekam Medis",
-    onTap: (context) {
-      Navigator.push(
-        context, MaterialPageRoute(builder: (context) => TambahRekamMedisPage()),
-      );
-    },
+      icon: Image.asset("assets/images/medical-record.png"),
+      title: "Tambah Rekam Medis",
+      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => TambahRekamMedisPage()
+      )
+    )  
   ),
 ];
 

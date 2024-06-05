@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/models/doctor_list.dart';
 import 'package:e_klinik_pens/pages/admin/pasien_terakhir_berkunjung.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/widgets/user/best_doctor_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marquee/marquee.dart';

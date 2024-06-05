@@ -99,15 +99,18 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                               final doctorTile= doctorTiles[index];
                               return Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 25.0).r,
-                                child: Card(
-                                  surfaceTintColor: Colors.transparent,
-                                  elevation: 2,
-                                  color: pureWhite,
-                                  child: ListTile(
-                                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).r,
-                                    leading: doctorTile.icon,
-                                    title: Text(doctorTile.title)
-                                  )
+                                child: InkWell(
+                                  onTap: () => doctorTile.onTap(context),
+                                  child: Card(
+                                    surfaceTintColor: Colors.transparent,
+                                    elevation: 2,
+                                    color: pureWhite,
+                                    child: ListTile(
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).r,
+                                      leading: doctorTile.icon,
+                                      title: Text(doctorTile.title)
+                                    )
+                                  ),
                                 ),
                               );
                             }

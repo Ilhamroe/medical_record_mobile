@@ -69,7 +69,8 @@ class _EditAkunState extends State<EditAkun> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Container(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding inside the container
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0), // Add padding inside the container
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,11 +79,14 @@ class _EditAkunState extends State<EditAkun> {
                         decoration: InputDecoration(
                           hintText: 'Masukkan username',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
+                            borderRadius:
+                                BorderRadius.circular(25), // Set border radius
                             borderSide: BorderSide(),
                           ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/user.png', width: 20, height: 20),
+                          hintStyle: TextStyle(
+                              color: Color.fromRGBO(161, 168, 176, 1)),
+                          prefixIcon: Image.asset('assets/images/user.png',
+                              width: 20, height: 20),
                         ),
                       ),
                       SizedBox(height: 16),
@@ -90,11 +94,14 @@ class _EditAkunState extends State<EditAkun> {
                         decoration: InputDecoration(
                           hintText: 'Masukkan NRP/NIP',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
+                            borderRadius:
+                                BorderRadius.circular(25), // Set border radius
                             borderSide: BorderSide(),
                           ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/password.png', width: 20, height: 20),
+                          hintStyle: TextStyle(
+                              color: Color.fromRGBO(161, 168, 176, 1)),
+                          prefixIcon: Image.asset('assets/images/password.png',
+                              width: 20, height: 20),
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
@@ -106,19 +113,23 @@ class _EditAkunState extends State<EditAkun> {
                         decoration: InputDecoration(
                           hintText: 'Masukkan email',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
+                            borderRadius:
+                                BorderRadius.circular(25), // Set border radius
                             borderSide: BorderSide(),
                           ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/email.png', width: 20, height: 20),
+                          hintStyle: TextStyle(
+                              color: Color.fromRGBO(161, 168, 176, 1)),
+                          prefixIcon: Image.asset('assets/images/email.png',
+                              width: 20, height: 20),
                         ),
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value){
-                          if( value == null || value.isEmpty){
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
                             return "Email tidak boleh kosong";
                           }
-                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                          return 'Masukkan email yang valid';
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
+                            return 'Masukkan email yang valid';
                           }
                           return null;
                         },
@@ -128,14 +139,19 @@ class _EditAkunState extends State<EditAkun> {
                         decoration: InputDecoration(
                           hintText: 'Masukkan password',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
+                            borderRadius:
+                                BorderRadius.circular(25), // Set border radius
                             borderSide: BorderSide(),
                           ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/lock.png', width: 20, height: 20),
+                          hintStyle: TextStyle(
+                              color: Color.fromRGBO(161, 168, 176, 1)),
+                          prefixIcon: Image.asset('assets/images/lock.png',
+                              width: 20, height: 20),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isObscure ? Icons.visibility : Icons.visibility_off,
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               color: Colors.grey,
                             ),
                             onPressed: () {
@@ -144,56 +160,59 @@ class _EditAkunState extends State<EditAkun> {
                               });
                             },
                           ),
-                        ), 
+                        ),
                         obscureText: _isObscure,
-                        validator: (value){
-                          if(value== null || value.isEmpty){
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
                             return 'Password harus diisi';
-                          }if(value.length < 6){
+                          }
+                          if (value.length < 6) {
                             return 'Password minimal 6 karakter';
                           }
                         },
                       ),
                       SizedBox(height: 16),
                       DropdownButtonFormField(
-                        value: _selectedRole,
-                        decoration: InputDecoration(
-                          hintText: "Masukkan Role",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
-                          ),
-                         hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                         prefixIcon: Image.asset("assets/images/Group.png")
-                        ),
-                        items: ["Pasien", "Dokter"].map((String e) {
-                          return DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e));
-                        }).toList(), 
-                        onChanged: (String? value){
-                          setState(() {
-                            _selectedRole= value;
-                          });
-                        }
-                      ),
+                          value: _selectedRole,
+                          decoration: InputDecoration(
+                              hintText: "Masukkan Role",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                    25), // Set border radius
+                                borderSide: BorderSide(),
+                              ),
+                              hintStyle: TextStyle(
+                                  color: Color.fromRGBO(161, 168, 176, 1)),
+                              prefixIcon:
+                                  Image.asset("assets/images/Group.png")),
+                          items: ["Pasien", "Dokter"].map((String e) {
+                            return DropdownMenuItem<String>(
+                                value: e, child: Text(e));
+                          }).toList(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedRole = value;
+                            });
+                          }),
                       SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
                           // Add your form submission logic here
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(48, 173, 162, 1), // Contoh warna RGB
+                          backgroundColor: Color.fromRGBO(
+                              48, 173, 162, 1), // Contoh warna RGB
                           shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16).w,
+                          padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16)
+                              .w,
                         ),
                         child: Text(
                           'Edit Akun',
                           style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w600,
-                            color: pureWhite
-                          ),
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w600,
+                              color: pureWhite),
                         ),
                       ),
                     ],

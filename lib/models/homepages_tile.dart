@@ -8,7 +8,7 @@ import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/pages/doctor/tambah_rekam_medis.dart';
-import 'package:e_klinik_pens/pages/doctor/data_pasien.dart';
+import 'package:e_klinik_pens/pages/doctor/data_pasien_doctor.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminTile {
@@ -70,7 +70,7 @@ final List<DoctorTile> doctorTiles = [
   DoctorTile(
       icon: Image.asset("assets/images/profile-big.png"), 
       title: "Pasien",
-      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => DataPasien()
+      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => DataPasienDoctor()
       )
     ), 
   ),

@@ -1,6 +1,6 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
-import 'package:e_klinik_pens/pages/doctor/data_pasien.dart';
+import 'package:e_klinik_pens/pages/doctor/data_pasien_doctor.dart';
 import 'package:e_klinik_pens/pages/doctor/tambah_rekam_medis.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
 import 'package:e_klinik_pens/utils/routes.dart';

@@ -1,6 +1,6 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';

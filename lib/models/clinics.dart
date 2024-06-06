@@ -2,8 +2,9 @@ import 'users.dart';
 
 class Clinic {
   final int id;
-  final User doctor;
-  final User patient;
+  final String doctor;
+  final String patient;
+  final String dated;
   final String symptom;
   final String diagnosis;
   final String drug;
@@ -13,6 +14,7 @@ class Clinic {
     required this.id,
     required this.doctor,
     required this.patient,
+    required this.dated,
     required this.symptom,
     required this.diagnosis,
     required this.drug,
@@ -22,8 +24,9 @@ class Clinic {
   factory Clinic.fromJson(Map<String, dynamic> json) {
     return Clinic(
       id: json['id'],
-      doctor: User.fromJson(json['doctor']),
-      patient: User.fromJson(json['patient']),
+      doctor: json['doctor'],
+      patient: json['patient'] ?? "",
+      dated: json['dated'],
       symptom: json['symptom'],
       diagnosis: json['diagnosis'],
       drug: json['drug'],

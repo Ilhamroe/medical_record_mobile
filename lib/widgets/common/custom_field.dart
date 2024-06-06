@@ -14,6 +14,8 @@ class CustomFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final List<TextInputFormatter>? inputFormatters;
+  final List<String>? dropdownItems;
+  final ValueChanged<String?>? onChangedDropdown;
 
   CustomFormField({
     required this.width,
@@ -26,6 +28,8 @@ class CustomFormField extends StatefulWidget {
     this.obscureText = false,
     this.inputFormatters,
     this.trailing,
+    this.dropdownItems,
+    this.onChangedDropdown,
   });
 
   @override
@@ -105,6 +109,27 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 ),
                 onPressed: _toggleObscureText,
               ),
+            if (widget.trailingIcon != null)
+              if (widget.dropdownItems != null)
+                DropdownButton<String>(
+                  icon: Icon(widget.trailingIcon),
+                  underline: SizedBox(),
+                  items: widget.dropdownItems!
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      widget.controller.text = newValue ?? "";
+                      if (widget.onChangedDropdown != null) {
+                        widget.onChangedDropdown!(newValue);
+                      }
+                    });
+                  },
+                )
           ],
         ),
       ),

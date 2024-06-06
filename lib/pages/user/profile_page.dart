@@ -6,7 +6,6 @@ import 'package:e_klinik_pens/widgets/common/exit_modals.dart';
 import 'package:e_klinik_pens/widgets/user/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:e_klinik_pens/widgets/user/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {

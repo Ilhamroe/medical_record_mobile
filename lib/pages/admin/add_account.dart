@@ -1,6 +1,15 @@
+import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/utils/routes.dart';
+import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
+import 'package:e_klinik_pens/widgets/common/alert_success.dart';
+import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
+import 'package:e_klinik_pens/widgets/common/custom_edit_profiles.dart';
+import 'package:e_klinik_pens/widgets/common/custom_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TambahAkun extends StatefulWidget {
   const TambahAkun({super.key});
@@ -10,198 +19,438 @@ class TambahAkun extends StatefulWidget {
 }
 
 class _TambahAkunState extends State<TambahAkun> {
-  bool _isObscure = true;
-  String? _selectedRole;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nrpController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final ServiceAuth _registService = ServiceAuth();
+  bool _isLoading = false;
+  String? selectedValue;
+
+  void _addAkun() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      final userData = {
+        'name': _nameController.text,
+        'nrp': _nrpController.text,
+        'email': _emailController.text,
+        'password': _passwordController.text,
+        'role': selectedValue,
+        'description': _descriptionController.text,
+      };
+
+      try {
+        final response = await _registService.registerUser(userData);
+        print('Registration successful: $response');
+        _showDialog(const AlertConfirm(
+          titleText: "Sukses",
+          descText: "Akun anda telah berhasil didaftarkan",
+          route: AppRoutes.addAkun,
+          confirmText: 'Tutup',
+        ));
+      } catch (e) {
+        print('Registration failed: $e');
+        _showDialog(const AlertDanger(
+          titleText: "Gagal",
+          descText: "Akun anda gagal untuk didaftarkan, Cek koneksi internetmu",
+        ));
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  void _showDialog(Widget dialog) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => dialog,
+    ).then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _nrpController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _roleController.dispose();
+    _descriptionController.dispose();
+    selectedValue = null;
+    super.dispose();
+  }
+
+  Future<bool> _onBackButtonPressed(BuildContext context) async {
+    Navigator.pushReplacementNamed(context, AppRoutes.navbarAdmin);
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: pureWhite,
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            backgroundColor: themeLight,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: pureWhite,
-              ),
-            ),
-            title: Text(
-              "Tambah Akun",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: MediaQuery.of(context).size.width * 0.055,
-                color: pureWhite,
-              ),
-            ),
-            centerTitle: true,
-            expandedHeight: MediaQuery.of(context).size.height * 0.115,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/atomic.png",
-                fit: BoxFit.cover,
-              ),
-            ),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(0.0),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.0275,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
+    return WillPopScope(
+      onWillPop: () => _onBackButtonPressed(context),
+      child: Scaffold(
+        backgroundColor: pureWhite,
+        body: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              backgroundColor: themeLight,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
                   color: pureWhite,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
+                ),
+              ),
+              title: Text(
+                "Tambah Akun",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width * 0.055,
+                  color: pureWhite,
+                ),
+              ),
+              centerTitle: true,
+              expandedHeight: MediaQuery.of(context).size.height * 0.115,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  "assets/images/atomic.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(0.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.0275,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: pureWhite,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(32),
+                      topRight: Radius.circular(32),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding inside the container
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan username',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Form(
+                          key: _formKey,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          child: Column(
+                            children: [
+                              FormField<String>(
+                                validator: (value) {
+                                  if (_nameController.text.isEmpty) {
+                                    return 'Please enter your name';
+                                  }
+                                  return null;
+                                },
+                                builder: (FormFieldState<String> field) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomFormField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder: 'Masukkan nama Anda',
+                                        leadingIcon: 'assets/images/id.png',
+                                        controller: _nameController,
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              FormField<String>(
+                                validator: (value) {
+                                  if (_nrpController.text.isEmpty) {
+                                    return 'Please enter your NRP/NIP';
+                                  }
+                                  return null;
+                                },
+                                builder: (FormFieldState<String> field) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomFormField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder: 'Masukkan NRP/NIP Anda',
+                                        leadingIcon: 'assets/images/nrp.png',
+                                        controller: _nrpController,
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                        ],
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              FormField<String>(
+                                validator: (value) {
+                                  if (_emailController.text.isEmpty) {
+                                    return 'Please enter your email';
+                                  }
+                                  String pattern =
+                                      r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+                                  RegExp regex = RegExp(pattern);
+                                  if (!regex.hasMatch(_emailController.text)) {
+                                    return 'Please enter a valid email address';
+                                  }
+                                  return null;
+                                },
+                                builder: (FormFieldState<String> field) {
+                                  bool isValid = false;
+                                  if (_emailController.text.isNotEmpty) {
+                                    String pattern =
+                                        r'^[a-zA-Z0-9.a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
+                                    RegExp regex = RegExp(pattern);
+                                    if (regex.hasMatch(_emailController.text)) {
+                                      isValid = true;
+                                    }
+                                  }
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomFormField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder: 'Masukkan email Anda',
+                                        leadingIcon: 'assets/images/email.png',
+                                        controller: _emailController,
+                                        trailing: isValid
+                                            ? SvgPicture.asset(
+                                                'assets/images/done.svg',
+                                                color: themeDark,
+                                              )
+                                            : null,
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              FormField<String>(
+                                validator: (value) {
+                                  if (_passwordController.text.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  if (_passwordController.text.length < 6) {
+                                    return 'Password must be at least 6 characters';
+                                  }
+                                  return null;
+                                },
+                                builder: (FormFieldState<String> field) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomFormField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder: 'Masukkan password Anda',
+                                        leadingIcon: 'assets/images/pw.png',
+                                        trailingIcon: Icons.visibility,
+                                        controller: _passwordController,
+                                        obscureText: true,
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              FormField<String>(
+                                validator: (value) {
+                                  if (selectedValue == null) {
+                                    return 'Please select a role';
+                                  }
+                                  return null;
+                                },
+                                builder: (FormFieldState<String> field) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomProfilesField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder:
+                                            "Masukkan role Anda",
+                                        controller: _roleController,
+                                        keyboardType: TextInputType.none,
+                                        readOnly: true,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                        ],
+                                        trailingIcon: Icons.arrow_drop_down,
+                                        dropdownItems: [
+                                          "Admin",
+                                          "Dokter",
+                                          "User"
+                                        ],
+                                        onChangedDropdown: (String? value) {
+                                          setState(() {
+                                            selectedValue = value;
+                                          });
+                                        },
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              FormField<String>(
+                                builder: (FormFieldState<String> field) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomFormField(
+                                        width: 300.w,
+                                        height: 50.h,
+                                        placeholder: 'Masukkan deskripsi Anda',
+                                        leadingIcon: 'assets/images/desc.png',
+                                        controller: _descriptionController,
+                                      ),
+                                      if (field.hasError)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20.0,
+                                                  vertical: 2.0)
+                                              .w,
+                                          child: Text(
+                                            field.errorText ?? '',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0).w,
+                                child: ButtonConfirm(
+                                  width: 300.w,
+                                  height: 50.h,
+                                  text: 'Buat Akun',
+                                  colorText: pureWhite,
+                                  borderColor: themeDark,
+                                  buttonColor: themeDark,
+                                  onPressed: _addAkun,
+                                ),
+                              ),
+                            ],
                           ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/user.png', width: 20, height: 20),
                         ),
-                      ),
-                      SizedBox(height: 16),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan NRP/NIP',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
-                          ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/password.png', width: 20, height: 20),
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan email',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
-                          ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/email.png', width: 20, height: 20),
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value){
-                          if( value == null || value.isEmpty){
-                            return "Email tidak boleh kosong";
-                          }
-                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                          return 'Masukkan email yang valid';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 16),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
-                          ),
-                          hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                          prefixIcon: Image.asset('assets/images/lock.png', width: 20, height: 20),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure ? Icons.visibility : Icons.visibility_off,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
-                          ),
-                        ), 
-                        obscureText: _isObscure,
-                        validator: (value){
-                          if(value== null || value.isEmpty){
-                            return 'Password harus diisi';
-                          }if(value.length < 6){
-                            return 'Password minimal 6 karakter';
-                          }
-                        },
-                      ),
-                      SizedBox(height: 16),
-                      DropdownButtonFormField(
-                        value: _selectedRole,
-                        decoration: InputDecoration(
-                          hintText: "Masukkan Role",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25), // Set border radius
-                            borderSide: BorderSide(),
-                          ),
-                         hintStyle: TextStyle(color: Color.fromRGBO(161, 168, 176, 1)),
-                         prefixIcon: Image.asset("assets/images/Group.png")
-                        ),
-                        items: ["Pasien", "Dokter"].map((String e) {
-                          return DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e));
-                        }).toList(), 
-                        onChanged: (String? value){
-                          setState(() {
-                            _selectedRole= value;
-                          });
-                        }
-                      ),
-                      SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Add your form submission logic here
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(48, 173, 162, 1), // Contoh warna RGB
-                          shape: StadiumBorder(),
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                        ),
-                        child: Text(
-                          'Buat Akun',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white, // Warna teks
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/doctor/doctor_banner.dart';
 import 'package:e_klinik_pens/widgets/user/best_doctor_tiles.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/widgets/home_page/icon_menu.dart'; 
+import 'package:e_klinik_pens/widgets/home_page/icon_menu.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Menu extends StatelessWidget {
@@ -21,9 +21,9 @@ class Menu extends StatelessWidget {
           ),
         ),
         child: const Column(
-           children: [
+          children: [
             IconMenu(),
-            DoctorBanner(), 
+            DoctorBanner(),
             BestDoctorTile(),
           ],
         ),

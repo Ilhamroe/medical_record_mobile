@@ -60,11 +60,11 @@ class _CustomProfilesFieldState extends State<CustomProfilesField> {
           Container(
             width: widget.width,
             height: widget.height,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0).w,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0).w,
             decoration: BoxDecoration(
-              color: fieldColor,
+              color: fill,
               border: Border.all(color: stroke),
-              borderRadius: BorderRadius.circular(12.0).w,
+              borderRadius: BorderRadius.circular(24.0).w,
             ),
             child: Row(
               children: [

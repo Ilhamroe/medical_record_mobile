@@ -40,7 +40,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             padding: const EdgeInsets.only(top: 20.0, right: 40.0).r,
             child: GestureDetector(
                 onTap: () {
-                  Navigator.popAndPushNamed(context, AppRoutes.navbarAdmin);
+                  Navigator.popAndPushNamed(context, AppRoutes.logreg);
                 },
                 child: Text(
                   "Skip",
@@ -83,7 +83,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40).w,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 40).w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

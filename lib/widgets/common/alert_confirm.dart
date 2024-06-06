@@ -8,14 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class AlertConfirmation extends StatefulWidget {
   final String titleText;
   final String descText;
-  final String confirmText;
   final String route;
   final String userId;
 
   const AlertConfirmation({
     required this.titleText,
     required this.descText,
-    required this.confirmText,
     required this.route,
     required this.userId,
     super.key,
@@ -40,7 +38,6 @@ class _AlertConfirmationState extends State<AlertConfirmation> {
       try {
         await serviceAPI.deleteUser(widget.userId);
         Navigator.pop(context);
-        Navigator.pushNamed(context, widget.route);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to delete user: $e')),

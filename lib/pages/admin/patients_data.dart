@@ -1,20 +1,22 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DataDokter extends StatefulWidget {
-  const DataDokter({super.key});
+class DataPasien extends StatefulWidget {
+  const DataPasien({super.key});
 
   @override
-  State<DataDokter> createState() => _DataDokterState();
+  State<DataPasien> createState() => _DataPasienState();
 }
 
-class _DataDokterState extends State<DataDokter> {
+class _DataPasienState extends State<DataPasien> {
   String _searchMessage = '';
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
@@ -35,7 +37,7 @@ class _DataDokterState extends State<DataDokter> {
       if (results.isNotEmpty) {
         _searchMessage = '';
       } else {
-        _searchMessage = 'Tidak Ada Dokter Bernama atau NIP: "$enteredKeyword"';
+        _searchMessage = 'Tidak Ada Pasien Bernama atau NRP: "$enteredKeyword"';
       }
     }
 
@@ -68,7 +70,7 @@ class _DataDokterState extends State<DataDokter> {
         future: listData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
@@ -90,7 +92,7 @@ class _DataDokterState extends State<DataDokter> {
                     ),
                   ),
                   title: Text(
-                    "Data Dokter",
+                    "Data Pasien",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: MediaQuery.of(context).size.width * 0.055,
@@ -129,7 +131,7 @@ class _DataDokterState extends State<DataDokter> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: pureWhite,
+                          color: fill,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -140,7 +142,7 @@ class _DataDokterState extends State<DataDokter> {
                               Icons.search,
                               color: themeDark,
                             ),
-                            hintText: "Cari nama dokter",
+                            hintText: "Cari pasien",
                             hintStyle: TextStyle(
                               color: dark,
                               fontSize: 16,
@@ -183,7 +185,7 @@ class _DataDokterState extends State<DataDokter> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       User user = filteredList[index];
-                      if (user.role == "dokter") {
+                      if (user.role == "user") {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 5.0),
@@ -203,7 +205,7 @@ class _DataDokterState extends State<DataDokter> {
                                     fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                user.nrp ?? 'No NIP available',
+                                user.nrp ?? 'No NRP available',
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               trailing: Row(
@@ -265,8 +267,15 @@ class _DataDokterState extends State<DataDokter> {
               child: Text("Error: ${snapshot.error}"),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ),
           );
         },
       ),

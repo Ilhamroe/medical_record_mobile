@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/widgets/home_page/gejala_diagnosa_card_detail.dart';
-import 'package:e_klinik_pens/models/gejala_diagnosa_list.dart';
+import 'package:e_klinik_pens/widgets/home_page/diagnose_card_detail.dart';
+import 'package:e_klinik_pens/models/diagnose_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GejalaDiagnosaDetail extends StatelessWidget {
@@ -23,8 +23,9 @@ class GejalaDiagnosaDetail extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 35.0).r,
+                    padding: const EdgeInsets.only(top: 12.5).r,
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -39,17 +40,17 @@ class GejalaDiagnosaDetail extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0).r,
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Text("Gejala & Diagnosa",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Gejala & Diagnosa",
                             style: TextStyle(
                               color: pureWhite,
                               fontWeight: FontWeight.w600,
                               fontSize: 20.sp
-                            ),),
-                          ),
+                            ),
+                            ),
+                          ],
                         )
                       ],
                     ),

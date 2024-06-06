@@ -83,7 +83,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40).w,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 40).w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

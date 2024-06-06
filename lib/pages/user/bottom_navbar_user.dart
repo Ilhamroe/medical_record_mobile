@@ -1,4 +1,5 @@
 import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
+import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/user/medical_record_history.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
@@ -20,7 +21,8 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
 
   final List<Widget> screens = [
     const HomePageUser(),
-     ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+    //  ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+    const TestPage(),
     const MedicalHistory(),
     const ProfilePage(),
   ];
@@ -88,7 +90,8 @@ class _NavbarBottomUserState extends State<NavbarBottomUser> {
                   splashColor: pureWhite,
                   onPressed: () {
                     setState(() {
-                      currentScreen = ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors);
+                      // currentScreen = ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors);
+                      currentScreen = const TestPage();
                       currentTab = 1;
                     });
                   },

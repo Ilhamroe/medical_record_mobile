@@ -6,6 +6,7 @@ import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataPasien extends StatefulWidget {
@@ -130,7 +131,7 @@ class _DataPasienState extends State<DataPasien> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(250, 250, 250, 1),
+                          color: fill,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -139,11 +140,11 @@ class _DataPasienState extends State<DataPasien> {
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Color.fromRGBO(26, 154, 142, 1),
+                              color: themeDark,
                             ),
                             hintText: "Cari pasien",
                             hintStyle: TextStyle(
-                              color: Color.fromRGBO(171, 171, 171, 1),
+                              color: dark,
                               fontSize: 16,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -235,7 +236,7 @@ class _DataPasienState extends State<DataPasien> {
                                             titleText: "Sukses",
                                             descText:
                                                 "Apakah Anda yakin untuk menghapus akun Anda?",
-                                            route: AppRoutes.navbarAdmin,
+                                            route: AppRoutes.dataPasien,
                                             userId: '${user.id}',
                                           );
                                         },
@@ -266,8 +267,15 @@ class _DataPasienState extends State<DataPasien> {
               child: Text("Error: ${snapshot.error}"),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ),
           );
         },
       ),

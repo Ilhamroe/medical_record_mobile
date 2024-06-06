@@ -13,6 +13,7 @@ class ServiceAuth {
 
   Future<Map<String, dynamic>> registerUser(
       Map<String, dynamic> userData) async {
+    print('$userData');
     final url = Config.apiUrl + 'register';
 
     try {
@@ -152,6 +153,7 @@ class ServiceAuth {
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
         },
       ),
     );
@@ -179,6 +181,7 @@ class ServiceAuth {
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
         },
       ),
     );
@@ -200,7 +203,7 @@ class ServiceAuth {
       Map<String, dynamic> userData, int id) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('accessToken');
-
+    print('user data : $userData');
     if (token == null) {
       throw Exception('Token not found');
     }
@@ -214,6 +217,7 @@ class ServiceAuth {
           headers: {
             'Authorization': 'Bearer $token',
             'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json'
           },
           followRedirects: false,
         ),
@@ -225,6 +229,7 @@ class ServiceAuth {
         throw Exception('Failed to update user: ${response.statusCode}');
       }
     } catch (e) {
+      print(e);
       throw Exception('Failed to update user: $e');
     }
   }
@@ -246,13 +251,13 @@ class ServiceAuth {
           headers: {
             'Authorization': 'Bearer $token',
             'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json'
           },
           followRedirects: false,
         ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 204) {
-        // Do something after successful deletion
       } else {
         throw Exception('Failed to delete user: ${response.statusCode}');
       }

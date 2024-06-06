@@ -1,6 +1,15 @@
+import 'package:e_klinik_pens/authentication/service_auth.dart';
+import 'package:e_klinik_pens/authentication/service_clinic.dart';
+import 'package:e_klinik_pens/models/users.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/utils/routes.dart';
+import 'package:e_klinik_pens/widgets/common/alert_danger.dart';
+import 'package:e_klinik_pens/widgets/common/alert_success.dart';
+import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TambahRekamMedisPage extends StatefulWidget {
   const TambahRekamMedisPage({super.key});
@@ -16,19 +25,86 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
   final TextEditingController _medicationController = TextEditingController();
   final TextEditingController _diagnosisController = TextEditingController();
   final TextEditingController _feedbackController = TextEditingController();
-
+  final ServiceClinic _clinicService = ServiceClinic();
+  bool _isLoading = false;
   String? _selectedName;
+  User? _user;
 
-  final List<String> _patientNames = [
-    '3122500001 - Ade Hafis Rabbani',
-    '3122500002 - Nadila Aulia Mirdianti',
-    '3122500003 - Zahrotul Hidayah',
-    '3122500004 - Denti Widayati',
-    '3122500005 - Ari Yoga',
-    '3122500020 - Ilham Ramadhani',
-    '3122500025 - Rifqi Rayita',
-    '3122500030 - Syahrul Ramadhan',
-  ];
+  List<String> _patientNames = [];
+  List<User> _users = [];
+
+  Future<void> _loadPatientNames() async {
+    try {
+      final patients = await ServiceAuth().getAllUsers();
+      print('Loaded users: $patients');
+
+      setState(() {
+        _users = patients.where((user) => user.role == 'user').toList();
+        _patientNames = _users.map((user) => '${user.nrp} - ${user.name}').toList();
+      });
+    } catch (e) {
+      print('Failed to load users: $e');
+    }
+  }
+
+  void _addData() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      final selectedNameIndex = _patientNames.indexOf(_selectedName ?? '');
+
+      if (selectedNameIndex != -1) {
+        final selectedPatient = _users[selectedNameIndex];
+        final userData = {
+          'doctor_id': _user?.id,
+          'patient_id': selectedPatient.id,
+          'symptom': _symptomsController.text,
+          'dated': _dateController.text,
+          'diagnosis': _diagnosisController.text,
+          'drug': _medicationController.text,
+          'advice': _feedbackController.text,
+        };
+
+        print('$userData');
+
+        try {
+          final response = await _clinicService.clinicStore(userData);
+          print('successful: $response');
+          _showDialog(const AlertConfirm(
+            titleText: "Sukses",
+            descText: "Anda telah berhasil menambahkan rekam medis",
+            route: AppRoutes.navbarDokter,
+            confirmText: 'Tutup',
+          ));
+        } catch (e) {
+          print('Registration failed: $e');
+          _showDialog(const AlertDanger(
+            titleText: "Gagal",
+            descText: "Gagal untuk menambahkan data, Cek koneksi internetmu",
+          ));
+        } finally {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      } else {
+        print('Selected name not found in the list');
+      }
+    }
+  }
+
+  void _showDialog(Widget dialog) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => dialog,
+    ).then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
@@ -41,6 +117,42 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
       setState(() {
         _dateController.text = DateFormat('yyyy-MM-dd').format(picked);
       });
+    }
+  }
+
+  @override
+  void dispose() {
+    _selectedName = null;
+    _dateController.dispose();
+    _symptomsController.dispose();
+    _medicationController.dispose();
+    _diagnosisController.dispose();
+    _feedbackController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+    _loadPatientNames();
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getInt('userId');
+
+    if (userId != null) {
+      try {
+        final user = await ServiceAuth().getUserById(userId);
+        setState(() {
+          _user = user;
+        });
+      } catch (e) {
+        print('Failed to load user data: $e');
+      }
+    } else {
+      print('User ID not found');
     }
   }
 
@@ -72,22 +184,22 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: MediaQuery.of(context).size.width * 0.055,
+                            fontSize: 16.sp,
                             color: pureWhite,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.105,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/atom.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   height: MediaQuery.of(context).size.height * 0.105,
+                  //   decoration: const BoxDecoration(
+                  //     image: DecorationImage(
+                  //       image: AssetImage("assets/images/atom.png"),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.0275,
                     alignment: Alignment.center,
@@ -106,7 +218,7 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0).w,
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -231,29 +343,18 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 5),
                       Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // Simpan rekam medis
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Rekam medis tersimpan')),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: const Color(0xFF30ADA2),
-                            minimumSize: const Size(210, 48), // Ukuran minimum
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(11),
-                            ),
-                          ),
-                          child: const Text(
-                            '+ Tambah Rekam Medis',
-                            style: TextStyle(fontSize: 16),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20.0).w,
+                          child: ButtonConfirm(
+                            width: 160.w,
+                            height: 40.h,
+                            text: 'Tambah data',
+                            borderRadius: 16.0.w,
+                            colorText: pureWhite,
+                            borderColor: themeDark,
+                            buttonColor: themeDark,
+                            onPressed: _addData,
                           ),
                         ),
                       ),
@@ -271,21 +372,17 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
   Widget _buildFormRow(BuildContext context,
       {required String label, required Widget child}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 8.0), // Pastikan padding tidak terlalu besar
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0).w,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width *
-                0.2, // Kurangi lebar label lebih lanjut
-            padding: const EdgeInsets.only(top: 15), // Padding atas untuk label
-            child: Text(label, style: const TextStyle(fontSize: 16)),
+            width: 100.0.w,
+            padding: const EdgeInsets.only(top: 15).r,
+            child: Text(label, style: TextStyle(fontSize: 16.sp)),
           ),
-          SizedBox(width: 3), // Jaga ruang antara label dan dropdown
+          SizedBox(width: 3),
           Expanded(
-            // Gunakan Expanded untuk dropdown
             child: child,
           ),
         ],

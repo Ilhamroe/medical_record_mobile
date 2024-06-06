@@ -1,4 +1,7 @@
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
+import 'package:e_klinik_pens/pages/admin/data_dokter.dart';
+import 'package:e_klinik_pens/pages/admin/data_pasien.dart';
+import 'package:e_klinik_pens/pages/admin/tambah_akun.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';
@@ -27,6 +30,9 @@ class AppRoutes {
   static const String homedokter = "/dokter";
   static const String homeuser = "/user";
   static const String tes = "/tes";
+  static const String addAkun = "/addAkun";
+  static const String dataPasien = "/dataPasien";
+  static const String dataDokter = "/dataDokter";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -70,6 +76,23 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const ResetPassword(),
+        );
+
+      case AppRoutes.addAkun:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const TambahAkun(),
+        );
+      case AppRoutes.dataPasien:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const DataPasien(),
+        );
+
+      case AppRoutes.dataDokter:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const DataDokter(),
         );
 
       case AppRoutes.navbarAdmin:

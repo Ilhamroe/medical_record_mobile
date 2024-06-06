@@ -274,7 +274,7 @@ class _EditProfileState extends State<EditProfile> {
                               colorText: pureWhite,
                               borderColor: themeDark,
                               buttonColor: themeDark,
-                              onPressed: _updateData, //arahkan dan buat fungsi update data
+                              onPressed: _updateData,
                             ),
                           ),
                         ],

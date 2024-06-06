@@ -38,7 +38,6 @@ class _AlertConfirmationState extends State<AlertConfirmation> {
       try {
         await serviceAPI.deleteUser(widget.userId);
         Navigator.pop(context);
-        Navigator.pushNamed(context, widget.route);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to delete user: $e')),

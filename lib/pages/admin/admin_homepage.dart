@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/models/homepages_tile.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/doctor/recentPatients_tile.dart';
+import 'package:e_klinik_pens/widgets/home_page/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,45 +26,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
             ),
             Column(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 21.75, right: 21.75, top: 45).r,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hello Admin!",
-                              style: TextStyle(
-                                color: pureWhite,
-                                fontSize: 30.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 7.5).r,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kelola akun & data rekam medis",
-                                style: TextStyle(
-                                  color: pureWhite,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const Header(),
                 Expanded(
                   flex: 10,
                   child: Container(
@@ -85,14 +48,20 @@ class _AdminHomepageState extends State<AdminHomepage> {
                               final adminTile = adminTiles[index];
                               return Ink(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 21.75, right: 21.75, bottom: 10).r,
+                                  padding: const EdgeInsets.only(
+                                          left: 21.75, right: 21.75, bottom: 10)
+                                      .r,
                                   child: InkWell(
                                     child: Card(
                                       color: pureWhite,
                                       surfaceTintColor: Colors.transparent,
                                       elevation: 2,
                                       child: ListTile(
-                                        contentPadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 7.5).r,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                    horizontal: 30,
+                                                    vertical: 7.5)
+                                                .r,
                                         leading: adminTile.icon,
                                         horizontalTitleGap: 30.w,
                                         title: Text(

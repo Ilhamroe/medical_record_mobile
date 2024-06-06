@@ -1,6 +1,9 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
+import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
 import 'package:e_klinik_pens/utils/color.dart';
+import 'package:e_klinik_pens/utils/routes.dart';
+import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,7 +19,7 @@ class _DataDokterState extends State<DataDokter> {
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
   List<User> userList = [];
-  List<User> filteredList = []; 
+  List<User> filteredList = [];
 
   void _runFilter(String enteredKeyword) {
     List<User> results;
@@ -126,7 +129,7 @@ class _DataDokterState extends State<DataDokter> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(250, 250, 250, 1),
+                          color: pureWhite,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -135,11 +138,11 @@ class _DataDokterState extends State<DataDokter> {
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Color.fromRGBO(26, 154, 142, 1),
+                              color: themeDark,
                             ),
                             hintText: "Cari nama dokter",
                             hintStyle: TextStyle(
-                              color: Color.fromRGBO(171, 171, 171, 1),
+                              color: dark,
                               fontSize: 16,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -203,7 +206,48 @@ class _DataDokterState extends State<DataDokter> {
                                 user.nrp ?? 'No NIP available',
                                 style: TextStyle(fontSize: 16.sp),
                               ),
-                              trailing: Text("Umum"),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditAkun(),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/tabler_edit.png",
+                                      width: 35.w,
+                                      height: 35.w,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertConfirmation(
+                                            titleText: "Sukses",
+                                            descText:
+                                                "Apakah Anda yakin untuk menghapus akun Anda?",
+                                            route: AppRoutes.dataPasien,
+                                            userId: '${user.id}',
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/mynaui_trash.png",
+                                      width: 35.w,
+                                      height: 35.w,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

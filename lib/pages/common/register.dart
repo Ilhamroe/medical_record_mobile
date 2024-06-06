@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
         'nrp': _nrpController.text,
         'email': _emailController.text,
         'password': _passwordController.text,
-        'role': 'dokter',
+        'role': 'user',
       };
 
       try {

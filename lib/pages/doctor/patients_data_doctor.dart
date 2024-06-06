@@ -1,6 +1,6 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
@@ -8,14 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DataPasien extends StatefulWidget {
-  const DataPasien({Key? key}) : super(key: key);
+class DataPasienDoctor extends StatefulWidget {
+  const DataPasienDoctor({Key? key}) : super(key: key);
 
   @override
-  State<DataPasien> createState() => _DataPasienState();
+  State<DataPasienDoctor> createState() => _DataPasienDoctorState();
 }
 
-class _DataPasienState extends State<DataPasien> {
+class _DataPasienDoctorState extends State<DataPasienDoctor> {
   String _searchMessage = '';
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
@@ -209,46 +209,6 @@ class _DataPasienState extends State<DataPasien> {
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EditAkun(),
-                                        ),
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      "assets/images/tabler_edit.png",
-                                      width: 35.w,
-                                      height: 35.w,
-                                    ),
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertConfirmation(
-                                            titleText: "Sukses",
-                                            descText:
-                                                "Apakah Anda yakin untuk menghapus akun Anda?",
-                                            route: AppRoutes.homeadmin,
-                                            confirmText: 'Hapus',
-                                            userId: '${user.id}',
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      "assets/images/mynaui_trash.png",
-                                      width: 35.w,
-                                      height: 35.w,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ),

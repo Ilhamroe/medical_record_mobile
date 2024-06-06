@@ -60,12 +60,13 @@ class _AdminHomepageState extends State<AdminHomepage> {
                             ],
                           ),
                         ),
+                        SizedBox(height: 10.h,)
                       ],
                     ),
                   ),
                 ),
                 Expanded(
-                  flex: 10,
+                  flex: 9,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(

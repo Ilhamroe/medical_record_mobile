@@ -32,7 +32,7 @@ class FaqPage extends StatelessWidget {
             expandedHeight: 75.h,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/atom.png",
+                "assets/images/atomic.png",
                 fit: BoxFit.cover,
               ),
             ),

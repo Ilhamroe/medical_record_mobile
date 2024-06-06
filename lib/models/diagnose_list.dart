@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/models/doctor_list.dart';
-import 'package:e_klinik_pens/widgets/home_page/gejala_diagnosa_card_detail.dart';
+import 'package:e_klinik_pens/widgets/home_page/diagnose_card_detail.dart';
 
 class GejalaDiagnosaList extends StatelessWidget {
   final List<GejalaDiagnosa> gejalaDiagnosas;

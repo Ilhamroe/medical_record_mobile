@@ -38,7 +38,7 @@ class _PasienTerakhirBerkunjungState extends State<PasienTerakhirBerkunjung> {
               ),
             ),
             centerTitle: true,
-            expandedHeight: MediaQuery.of(context).size.height * 0.140,
+            expandedHeight: MediaQuery.of(context).size.height * 0.125,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
                 "assets/images/atomic.png",
@@ -50,11 +50,11 @@ class _PasienTerakhirBerkunjungState extends State<PasienTerakhirBerkunjung> {
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.0275,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: pureWhite,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: const Radius.circular(35).w,
+                    topRight: const Radius.circular(35).w,
                   ),
                 ),
               ),

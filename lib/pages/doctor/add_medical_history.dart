@@ -17,6 +17,7 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
   final TextEditingController _medicationController = TextEditingController();
   final TextEditingController _diagnosisController = TextEditingController();
   final TextEditingController _feedbackController = TextEditingController();
+  bool isClicked = false;
 
   String? _selectedName;
 
@@ -87,7 +88,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: MediaQuery.of(context).size.width * 0.055,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.055,
                                 color: pureWhite,
                               ),
                             ),
@@ -109,7 +111,9 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                     ),
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15).w,
+                        padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 15)
+                            .w,
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -121,8 +125,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                 child: DropdownButtonFormField<String>(
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                   ),
                                   value: _selectedName,
                                   items: _patientNames.map((name) {
@@ -145,7 +149,6 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                 ),
                               ),
                               SizedBox(height: 5.h),
-
                               _buildFormRow(
                                 context,
                                 label: 'Tanggal:',
@@ -153,8 +156,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   controller: _dateController,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                     suffixIcon: IconButton(
                                       icon: const Icon(Icons.calendar_today),
                                       onPressed: () => _selectDate(context),
@@ -178,8 +181,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   controller: _symptomsController,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -197,8 +200,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   controller: _medicationController,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -216,8 +219,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   controller: _diagnosisController,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -236,8 +239,8 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   controller: _feedbackController,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24.w)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(24.w)),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -251,7 +254,9 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                               Center(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12.5).w,
+                                    padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 12.5)
+                                        .w,
                                     elevation: 2,
                                     foregroundColor: Colors.white,
                                     backgroundColor: const Color(0xFF30ADA2),
@@ -262,9 +267,11 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       // Simpan rekam medis
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
                                         const SnackBar(
-                                            content: Text('Rekam medis tersimpan')),
+                                            content:
+                                                Text('Rekam medis tersimpan')),
                                       );
                                     }
                                   },
@@ -292,25 +299,17 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
   Widget _buildFormRow(BuildContext context,
       {required String label, required Widget child}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width *
-                0.2,
+            width: MediaQuery.of(context).size.width * 0.2,
             padding: const EdgeInsets.only(top: 15),
-            child: Text(
-              label, 
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500
-                )
-              ),
+            child: Text(label,
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
           ),
-          SizedBox(width: 3), 
+          SizedBox(width: 3.w),
           Expanded(
             child: child,
           ),

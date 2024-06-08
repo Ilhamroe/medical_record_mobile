@@ -112,11 +112,11 @@ class _DataPasienState extends State<DataPasien> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.0275,
                       alignment: Alignment.center,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: pureWhite,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
+                          topLeft: const Radius.circular(35).r,
+                          topRight: const Radius.circular(35).r,
                         ),
                       ),
                     ),
@@ -221,7 +221,7 @@ class _DataPasienState extends State<DataPasien> {
                                       );
                                     },
                                     child: Image.asset(
-                                      "assets/images/tabler_edit.png",
+                                      "assets/images/edit_patient.png",
                                       width: 35.w,
                                       height: 35.w,
                                     ),
@@ -243,7 +243,7 @@ class _DataPasienState extends State<DataPasien> {
                                       );
                                     },
                                     child: Image.asset(
-                                      "assets/images/mynaui_trash.png",
+                                      "assets/images/delete_patient.png",
                                       width: 35.w,
                                       height: 35.w,
                                     ),
@@ -254,7 +254,7 @@ class _DataPasienState extends State<DataPasien> {
                           ),
                         );
                       } else {
-                        return SizedBox.shrink();
+                        return const SizedBox.shrink();
                       }
                     },
                     childCount: filteredList.length,

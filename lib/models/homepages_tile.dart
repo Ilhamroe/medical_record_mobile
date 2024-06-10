@@ -1,10 +1,14 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
+import 'package:e_klinik_pens/pages/admin/doctors_data.dart';
+import 'package:e_klinik_pens/pages/admin/patients_data.dart';
+import 'package:e_klinik_pens/pages/admin/add_account.dart';
+import 'package:e_klinik_pens/pages/doctor/add_medical_history.dart';
 import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/pages/doctor/patients_data_doctor.dart';
 import 'package:e_klinik_pens/pages/doctor/add_medical_history.dart';
+import 'package:e_klinik_pens/pages/doctor/patients_data_doctor.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminTile {
@@ -19,6 +23,36 @@ class AdminTile {
       required this.sub,
       required this.onTap});
 }
+
+List<AdminTile> adminTiles = [
+  AdminTile(
+    icon: Image.asset("assets/images/doctor.png"),
+    title: "3",
+    sub: "Data Pasien",
+    onTap: (context) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DataPasien()));
+    },
+  ),
+  AdminTile(
+    icon: Image.asset("assets/images/profile-big.png"),
+    title: "69",
+    sub: "Data Dokter",
+    onTap: (context) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DataDokter()));
+    },
+  ),
+  AdminTile(
+    icon: Image.asset("assets/images/add-acc.png"),
+    title: "Tambah Akun ",
+    sub: "Pasien / Dokter",
+    onTap: (context) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => TambahAkun()));
+    },
+  )
+];
 
 class DoctorTile {
   final Image icon;

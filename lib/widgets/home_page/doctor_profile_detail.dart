@@ -23,8 +23,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 35.0).r,
+                    padding: const EdgeInsets.only(top: 12.5).r,
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -39,17 +40,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0).r,
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Text("Dokter",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Dokter",
                             style: TextStyle(
                               color: pureWhite,
                               fontWeight: FontWeight.w600,
                               fontSize: 20.sp
                             ),),
-                          ),
+                          ],
                         )
                       ],
                     ),

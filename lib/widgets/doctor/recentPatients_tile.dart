@@ -1,5 +1,7 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
+import 'package:e_klinik_pens/models/recent_patients.dart';
+import 'package:e_klinik_pens/pages/admin/last_visit_patients.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,8 +1,14 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
+import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
+import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
+import 'package:e_klinik_pens/pages/common/login_register.dart';
+import 'package:e_klinik_pens/pages/common/register.dart';
 import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
-import 'package:e_klinik_pens/pages/doctor/data_pasien_doctor.dart';
-import 'package:e_klinik_pens/pages/doctor/tambah_rekam_medis.dart';
+import 'package:e_klinik_pens/pages/doctor/patients_data_doctor.dart';
+import 'package:e_klinik_pens/pages/doctor/doctor_homepage.dart';
+import 'package:e_klinik_pens/pages/doctor/add_medical_history.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
+import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -32,7 +38,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.generateRoute,
-        // home: TambahRekamMedisPage(),
+        // home: NavbarBottomAdmin(),
       ),  
     );
   }

@@ -1,4 +1,4 @@
-import 'package:e_klinik_pens/widgets/home_page/saran_masukan_card_detail.dart';
+import 'package:e_klinik_pens/widgets/home_page/suggestion_card_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/models/doctor_list.dart';
 

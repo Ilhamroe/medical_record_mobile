@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasienTerakhirBerkunjung extends StatefulWidget {
   const PasienTerakhirBerkunjung({super.key});
@@ -27,7 +28,7 @@ class _PasienTerakhirBerkunjungState extends State<PasienTerakhirBerkunjung> {
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: pureWhite,),
             ),
             title: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0), // Ubah nilai sesuai kebutuhan
+              padding: const EdgeInsets.symmetric(vertical: 20.0).w, // Ubah nilai sesuai kebutuhan
               child: Text(
                 "Pasien Terakhir Berkunjung",
                 style: TextStyle(
@@ -235,107 +236,106 @@ class _PasienTerakhirBerkunjungState extends State<PasienTerakhirBerkunjung> {
                       ),
                       children: <Widget>[
                         ListTile(
-  title: Text(
-    'Tanggal Periksa: 01 Mei 2024',
-    style: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w600,
-    ),
-  ),
-  subtitle: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(height: 8), 
-      Text(
-        'Dokter: Dr. M. Dwiya Lakhsmana',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8), // Add some spacing between the lines
-      Text(
-        'Gejala:',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        '• Kepala pusing\n'
-        '• Muntah\n'
-        '• Nafsu makan berkurang\n'
-        '• Perut kembung / tidak nyaman',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Diagnosa:',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Maag',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: Colors.red.shade500,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Obat:',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Mylanta',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Kritik & Saran:',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        '• Minum obat 2x sehari\n'
-        '• Minum air putih yang cukup sepanjang hari untuk menjaga hidrasi.\n'
-        '• Istirahat dan hindari stres berlebihan.\n'
-        '• Jangan makan makanan pedas, asam.',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          color: Colors.black,
-        ),
-      ),
-    ],
-  ),
-)
-
+                          title: Text(
+                            'Tanggal Periksa: 01 Mei 2024',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 8), 
+                              Text(
+                                'Dokter: Dr. M. Dwiya Lakhsmana',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8), // Add some spacing between the lines
+                              Text(
+                                'Gejala:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                '• Kepala pusing\n'
+                                '• Muntah\n'
+                                '• Nafsu makan berkurang\n'
+                                '• Perut kembung / tidak nyaman',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Diagnosa:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Maag',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.red.shade500,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Obat:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Mylanta',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Kritik & Saran:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                '• Minum obat 2x sehari\n'
+                                '• Minum air putih yang cukup sepanjang hari untuk menjaga hidrasi.\n'
+                                '• Istirahat dan hindari stres berlebihan.\n'
+                                '• Jangan makan makanan pedas, asam.',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),

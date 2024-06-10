@@ -1,6 +1,6 @@
 import 'package:e_klinik_pens/authentication/service_clinic.dart';
 import 'package:e_klinik_pens/models/clinics.dart';
-import 'package:e_klinik_pens/models/saran_masukan_list.dart';
+import 'package:e_klinik_pens/models/suggestion_list.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

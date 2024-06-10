@@ -34,22 +34,22 @@ Doctor doctor3 = doctors[2];
 ScheduleDoctor scheduleDoctor1 = ScheduleDoctor(
   doctor: doctor1,
   day: "Selasa",
-  startTime: TimeOfDay(hour: 10, minute: 0),
-  endTime: TimeOfDay(hour: 12, minute: 0),
+  startTime: const TimeOfDay(hour: 10, minute: 0),
+  endTime: const TimeOfDay(hour: 12, minute: 0),
 );
 
 ScheduleDoctor scheduleDoctor2 = ScheduleDoctor(
   doctor: doctor2,
   day: "Rabu",
-  startTime: TimeOfDay(hour: 9, minute: 0),
-  endTime: TimeOfDay(hour: 11, minute: 0),
+  startTime: const TimeOfDay(hour: 9, minute: 0),
+  endTime: const TimeOfDay(hour: 11, minute: 0),
 );
 
 ScheduleDoctor scheduleDoctor3 = ScheduleDoctor(
   doctor: doctor3,
   day: "Kamis",
-  startTime: TimeOfDay(hour: 13, minute: 0),
-  endTime: TimeOfDay(hour: 15, minute: 0),
+  startTime: const TimeOfDay(hour: 13, minute: 0),
+  endTime: const TimeOfDay(hour: 15, minute: 0),
 );
 
 List<ScheduleDoctor> scheduleDoctors = [

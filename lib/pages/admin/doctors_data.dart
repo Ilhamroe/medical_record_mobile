@@ -1,22 +1,20 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DataPasien extends StatefulWidget {
-  const DataPasien({Key? key}) : super(key: key);
+class DataDokter extends StatefulWidget {
+  const DataDokter({super.key});
 
   @override
-  State<DataPasien> createState() => _DataPasienState();
+  State<DataDokter> createState() => _DataDokterState();
 }
 
-class _DataPasienState extends State<DataPasien> {
+class _DataDokterState extends State<DataDokter> {
   String _searchMessage = '';
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
@@ -37,7 +35,7 @@ class _DataPasienState extends State<DataPasien> {
       if (results.isNotEmpty) {
         _searchMessage = '';
       } else {
-        _searchMessage = 'Tidak Ada Pasien Bernama atau NRP: "$enteredKeyword"';
+        _searchMessage = 'Tidak Ada Dokter Bernama atau NIP: "$enteredKeyword"';
       }
     }
 
@@ -70,7 +68,7 @@ class _DataPasienState extends State<DataPasien> {
         future: listData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
@@ -92,7 +90,7 @@ class _DataPasienState extends State<DataPasien> {
                     ),
                   ),
                   title: Text(
-                    "Data Pasien",
+                    "Data Dokter",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: MediaQuery.of(context).size.width * 0.055,
@@ -131,7 +129,7 @@ class _DataPasienState extends State<DataPasien> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: fill,
+                          color: pureWhite,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -142,7 +140,7 @@ class _DataPasienState extends State<DataPasien> {
                               Icons.search,
                               color: themeDark,
                             ),
-                            hintText: "Cari pasien",
+                            hintText: "Cari nama dokter",
                             hintStyle: TextStyle(
                               color: dark,
                               fontSize: 16,
@@ -185,7 +183,7 @@ class _DataPasienState extends State<DataPasien> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       User user = filteredList[index];
-                      if (user.role == "user") {
+                      if (user.role == "dokter") {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 5.0),
@@ -205,7 +203,7 @@ class _DataPasienState extends State<DataPasien> {
                                     fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                user.nrp ?? 'No NRP available',
+                                user.nrp ?? 'No NIP available',
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               trailing: Row(
@@ -267,15 +265,8 @@ class _DataPasienState extends State<DataPasien> {
               child: Text("Error: ${snapshot.error}"),
             );
           }
-          return Center(
-            child: Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            ),
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         },
       ),

@@ -42,7 +42,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
               children: [
                 const Header(),
                 Expanded(
-                  flex: 10,
+                  flex: 9,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(

@@ -1,21 +1,22 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DataPasienDoctor extends StatefulWidget {
-  const DataPasienDoctor({Key? key}) : super(key: key);
+class DataPasien extends StatefulWidget {
+  const DataPasien({super.key});
 
   @override
-  State<DataPasienDoctor> createState() => _DataPasienDoctorState();
+  State<DataPasien> createState() => _DataPasienState();
 }
 
-class _DataPasienDoctorState extends State<DataPasienDoctor> {
+class _DataPasienState extends State<DataPasien> {
   String _searchMessage = '';
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
@@ -130,7 +131,7 @@ class _DataPasienDoctorState extends State<DataPasienDoctor> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(250, 250, 250, 1),
+                          color: fill,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -139,11 +140,11 @@ class _DataPasienDoctorState extends State<DataPasienDoctor> {
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Color.fromRGBO(26, 154, 142, 1),
+                              color: themeDark,
                             ),
                             hintText: "Cari pasien",
                             hintStyle: TextStyle(
-                              color: Color.fromRGBO(171, 171, 171, 1),
+                              color: dark,
                               fontSize: 16,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -209,6 +210,45 @@ class _DataPasienDoctorState extends State<DataPasienDoctor> {
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditAkun(userId: "${user.id}",),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/tabler_edit.png",
+                                      width: 35.w,
+                                      height: 35.w,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5.w),
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertConfirmation(
+                                            titleText: "Sukses",
+                                            descText:
+                                                "Apakah Anda yakin untuk menghapus akun Anda?",
+                                            route: AppRoutes.dataPasien,
+                                            userId: '${user.id}',
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/mynaui_trash.png",
+                                      width: 35.w,
+                                      height: 35.w,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -227,8 +267,15 @@ class _DataPasienDoctorState extends State<DataPasienDoctor> {
               child: Text("Error: ${snapshot.error}"),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ),
           );
         },
       ),

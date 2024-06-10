@@ -1,20 +1,21 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
 import 'package:e_klinik_pens/models/users.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/utils/routes.dart';
 import 'package:e_klinik_pens/widgets/common/alert_confirm.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DataDokter extends StatefulWidget {
-  const DataDokter({super.key});
+class DataPasienDoctor extends StatefulWidget {
+  const DataPasienDoctor({Key? key}) : super(key: key);
 
   @override
-  State<DataDokter> createState() => _DataDokterState();
+  State<DataPasienDoctor> createState() => _DataPasienDoctorState();
 }
 
-class _DataDokterState extends State<DataDokter> {
+class _DataPasienDoctorState extends State<DataPasienDoctor> {
   String _searchMessage = '';
   ServiceAuth serviceAPI = ServiceAuth();
   late Future<List<User>> listData;
@@ -35,7 +36,7 @@ class _DataDokterState extends State<DataDokter> {
       if (results.isNotEmpty) {
         _searchMessage = '';
       } else {
-        _searchMessage = 'Tidak Ada Dokter Bernama atau NIP: "$enteredKeyword"';
+        _searchMessage = 'Tidak Ada Pasien Bernama atau NRP: "$enteredKeyword"';
       }
     }
 
@@ -68,7 +69,7 @@ class _DataDokterState extends State<DataDokter> {
         future: listData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
@@ -90,7 +91,7 @@ class _DataDokterState extends State<DataDokter> {
                     ),
                   ),
                   title: Text(
-                    "Data Dokter",
+                    "Data Pasien",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: MediaQuery.of(context).size.width * 0.055,
@@ -129,7 +130,7 @@ class _DataDokterState extends State<DataDokter> {
                       width: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: pureWhite,
+                          color: const Color.fromRGBO(250, 250, 250, 1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: TextFormField(
@@ -138,11 +139,11 @@ class _DataDokterState extends State<DataDokter> {
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: themeDark,
+                              color: Color.fromRGBO(26, 154, 142, 1),
                             ),
-                            hintText: "Cari nama dokter",
+                            hintText: "Cari pasien",
                             hintStyle: TextStyle(
-                              color: dark,
+                              color: Color.fromRGBO(171, 171, 171, 1),
                               fontSize: 16,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -183,7 +184,7 @@ class _DataDokterState extends State<DataDokter> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       User user = filteredList[index];
-                      if (user.role == "dokter") {
+                      if (user.role == "user") {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 5.0),
@@ -203,50 +204,11 @@ class _DataDokterState extends State<DataDokter> {
                                     fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                user.nrp ?? 'No NIP available',
+                                user.nrp ?? 'No NRP available',
                                 style: TextStyle(fontSize: 16.sp),
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EditAkun(userId: "${user.id}",),
-                                        ),
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      "assets/images/tabler_edit.png",
-                                      width: 35.w,
-                                      height: 35.w,
-                                    ),
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertConfirmation(
-                                            titleText: "Sukses",
-                                            descText:
-                                                "Apakah Anda yakin untuk menghapus akun Anda?",
-                                            route: AppRoutes.dataPasien,
-                                            userId: '${user.id}',
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      "assets/images/mynaui_trash.png",
-                                      width: 35.w,
-                                      height: 35.w,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ),

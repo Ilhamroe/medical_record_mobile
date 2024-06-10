@@ -1,7 +1,7 @@
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/home_page/doctor_profile_detail.dart';
-import 'package:e_klinik_pens/widgets/home_page/gejala_diagnosa_detail.dart';
-import 'package:e_klinik_pens/widgets/home_page/saran_masukan_detail.dart';
+import 'package:e_klinik_pens/widgets/home_page/diagnose_detail.dart';
+import 'package:e_klinik_pens/widgets/home_page/suggestion_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

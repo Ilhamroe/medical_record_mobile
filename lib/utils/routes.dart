@@ -1,9 +1,9 @@
 import 'package:e_klinik_pens/models/users.dart';
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
-import 'package:e_klinik_pens/pages/admin/data_dokter.dart';
-import 'package:e_klinik_pens/pages/admin/data_pasien.dart';
-import 'package:e_klinik_pens/pages/admin/edit_akun.dart';
-import 'package:e_klinik_pens/pages/admin/tambah_akun.dart';
+import 'package:e_klinik_pens/pages/admin/add_account.dart';
+import 'package:e_klinik_pens/pages/admin/doctors_data.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
+import 'package:e_klinik_pens/pages/admin/patients_data.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';

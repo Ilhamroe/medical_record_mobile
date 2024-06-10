@@ -1,10 +1,10 @@
 import 'package:e_klinik_pens/authentication/service_auth.dart';
-import 'package:e_klinik_pens/pages/doctor/tambah_rekam_medis.dart';
 import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/pages/doctor/data_pasien_doctor.dart';
+import 'package:e_klinik_pens/pages/doctor/patients_data_doctor.dart';
+import 'package:e_klinik_pens/pages/doctor/add_medical_history.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminTile {
@@ -74,7 +74,7 @@ final List<ProfileTile> profileTiles = [
     leading: const CircleAvatar(
       backgroundColor: aquaHaze,
       child: Image(
-        image: AssetImage("assets/images/profile1.png"),
+        image: AssetImage("assets/images/profile-tile.png"),
       ),
     ),
     trailing: Image.asset("assets/images/arrow.png"),

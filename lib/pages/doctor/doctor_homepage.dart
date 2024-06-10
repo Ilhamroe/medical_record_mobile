@@ -29,7 +29,8 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 26, right: 26, top: 45).r,
+                    padding:
+                        const EdgeInsets.only(left: 26, right: 26, top: 45).r,
                     child: Column(
                       children: [
                         Stack(
@@ -37,13 +38,13 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Hello Dokter!",
-                                style: TextStyle(
-                                  fontSize: 30.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: pureWhite
+                                Text(
+                                  "Hello kontol!",
+                                  style: TextStyle(
+                                      fontSize: 30.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: pureWhite),
                                 ),
-                              ),
                               ],
                             ),
                             Row(
@@ -55,8 +56,8 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: Image(
-                                      image: AssetImage("assets/images/profiles-pic.jpg")
-                                    ),
+                                        image: AssetImage(
+                                            "assets/images/profiles-pic.jpg")),
                                   ),
                                 ),
                               ],
@@ -66,11 +67,10 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Lihat daftar pasienmu!",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: pureWhite
-                            ),
+                            Text(
+                              "Lihat daftar pasienmu!",
+                              style:
+                                  TextStyle(fontSize: 16.sp, color: pureWhite),
                             ),
                           ],
                         )
@@ -79,49 +79,51 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                   ),
                 ),
                 Expanded(
-                  flex: 10,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(30).w,
-                        topRight: const Radius.circular(30).w,
+                    flex: 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(30).w,
+                          topRight: const Radius.circular(30).w,
+                        ),
+                        color: pureWhite,
                       ),
-                      color: pureWhite,
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: doctorTiles.length,
-                            itemBuilder: (context, index){
-                              final doctorTile= doctorTiles[index];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25.0).r,
-                                child: InkWell(
-                                  onTap: () => doctorTile.onTap(context),
-                                  child: Card(
-                                    surfaceTintColor: Colors.transparent,
-                                    elevation: 2,
-                                    color: pureWhite,
-                                    child: ListTile(
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).r,
-                                      leading: doctorTile.icon,
-                                      title: Text(doctorTile.title)
-                                    )
-                                  ),
-                                ),
-                              );
-                            }
-                          ),
-                          const DoctorBanner(),
-                          const RecentPatientsTile(), 
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: doctorTiles.length,
+                                itemBuilder: (context, index) {
+                                  final doctorTile = doctorTiles[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                            horizontal: 25.0)
+                                        .r,
+                                    child: InkWell(
+                                      onTap: () => doctorTile.onTap(context),
+                                      child: Card(
+                                          surfaceTintColor: Colors.transparent,
+                                          elevation: 2,
+                                          color: pureWhite,
+                                          child: ListTile(
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10)
+                                                      .r,
+                                              leading: doctorTile.icon,
+                                              title: Text(doctorTile.title))),
+                                    ),
+                                  );
+                                }),
+                            const DoctorBanner(),
+                            const RecentPatientsTile(),
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ),
+                    )),
               ],
             )
           ],

@@ -20,6 +20,10 @@ class _MedicalHistoryAdminState extends State<MedicalHistoryAdmin> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            leading: const SizedBox(
+              width: 0.0,
+              height: 0.0,
+            ),
             backgroundColor: themeLight,
             title: Text(
               "Riwayat Rekam Medis",

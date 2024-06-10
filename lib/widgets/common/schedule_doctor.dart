@@ -20,8 +20,8 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
   @override
   void initState() {
     super.initState();
-    DateTime now= DateTime.now();
-    selectedDay= _formatDay(now);
+    DateTime now = DateTime.now();
+    selectedDay = _formatDay(now);
   }
 
   void _onDaySelected(String day) {
@@ -31,30 +31,57 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
   }
 
   String _formatDay(DateTime date) {
-  List<String> days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-  return days[date.weekday % 7];
+    List<String> days = [
+      'Minggu',
+      'Senin',
+      'Selasa',
+      'Rabu',
+      'Kamis',
+      'Jumat',
+      'Sabtu'
+    ];
+    return days[date.weekday % 7];
   }
 
   String formatTanggal(DateTime date) {
     List<String> hari = [
-      'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+      'Minggu',
+      'Senin',
+      'Selasa',
+      'Rabu',
+      'Kamis',
+      'Jumat',
+      'Sabtu'
     ];
     List<String> bulan = [
-      '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      '',
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
     ];
     return '${hari[date.weekday % 7]}, ${date.day} ${bulan[date.month]} ${date.year}';
   }
 
   @override
   Widget build(BuildContext context) {
-    List<ScheduleDoctor> filteredSchedule = widget.scheduleDoctors; 
+    List<ScheduleDoctor> filteredSchedule = widget.scheduleDoctors;
     if (selectedDay != null) {
-      filteredSchedule = widget.scheduleDoctors.where((schedule) => schedule.day == selectedDay).toList();
+      filteredSchedule = widget.scheduleDoctors
+          .where((schedule) => schedule.day == selectedDay)
+          .toList();
     }
 
     DateTime now = DateTime.now();
-    String formattedDate =  formatTanggal(now);
+    String formattedDate = formatTanggal(now);
 
     return Scaffold(
       backgroundColor: themeLight,
@@ -69,13 +96,9 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
             fontSize: 20.sp,
           ),
         ),
-        // leading: IconButton(
-        //   onPressed: () => Navigator.pop(context),
-        //   icon: const Icon(
-        //     Icons.arrow_back_ios_new_outlined,
-        //     color: pureWhite,
-        //   ),
-        // ),
+        leading: const SizedBox(
+          width: 0.0,
+        ),
       ),
       body: Container(
         color: themeLight,
@@ -94,7 +117,7 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                     child: Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               formattedDate,
@@ -113,7 +136,9 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                                 ),
                                 color: today,
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10.5).w,
+                                  padding: const EdgeInsets.symmetric(
+                                          horizontal: 25, vertical: 10.5)
+                                      .w,
                                   child: Text(
                                     'Hari Ini',
                                     style: TextStyle(
@@ -145,11 +170,14 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                       children: [
                         DayCard(
                           onDaySelected: _onDaySelected,
-                          initialSelectedDay: selectedDay!,                      
-                          ),
+                          initialSelectedDay: selectedDay!,
+                        ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0,).w,
-                          child: ScheduleDoctorListView(scheduleDoctor: filteredSchedule),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                          ).w,
+                          child: ScheduleDoctorListView(
+                              scheduleDoctor: filteredSchedule),
                         ),
                       ],
                     ),
@@ -157,7 +185,7 @@ class _ScheduleDoctorScreenState extends State<ScheduleDoctorScreen> {
                 ),
               ],
             ),
-         ],
+          ],
         ),
       ),
     );

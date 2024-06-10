@@ -1,6 +1,7 @@
 import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
 import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
+import 'package:e_klinik_pens/pages/admin/patients_data.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/register.dart';
 import 'package:e_klinik_pens/pages/doctor/bottom_navbar_doctor.dart';
@@ -17,7 +18,7 @@ import 'package:e_klinik_pens/utils/color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras= await availableCameras();
+  cameras = await availableCameras();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
@@ -38,8 +39,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.generateRoute,
-        // home: NavbarBottomAdmin(),
-      ),  
+        // home: NavbarBottomDoctor(),
+      ),
     );
   }
 }

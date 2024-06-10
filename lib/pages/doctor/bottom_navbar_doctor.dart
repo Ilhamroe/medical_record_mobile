@@ -1,9 +1,11 @@
-import 'package:e_klinik_pens/pages/common/reset_password.dart';
-import 'package:e_klinik_pens/pages/common/test_page.dart';
 import 'package:e_klinik_pens/pages/doctor/doctor_homepage.dart';
+import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
+import 'package:e_klinik_pens/pages/doctor/medical_record_history_doctor.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';
+import 'package:e_klinik_pens/widgets/common/schedule_doctor.dart';
+import 'package:e_klinik_pens/widgets/doctor/medicalHistoryDoctor_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,10 +18,11 @@ class NavbarBottomDoctor extends StatefulWidget {
 
 class _NavbarBottomDoctorState extends State<NavbarBottomDoctor> {
   int currentTab = 0;
+
   final List<Widget> screens = [
     const DoctorHomePage(),
-    const TestPage(),
-    const ResetPassword(),
+    ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
+    const MedicalHistoryDoctor(),
     const ProfilePage(),
   ];
 
@@ -28,7 +31,6 @@ class _NavbarBottomDoctorState extends State<NavbarBottomDoctor> {
 
   @override
   Widget build(BuildContext context) {
-    // final Size screenSize = MediaQuery.of(context).size;
     return DoubleBackToCloseApp(
       snackBarMessage: 'Tekan sekali lagi untuk keluar',
       child: Scaffold(
@@ -87,7 +89,7 @@ class _NavbarBottomDoctorState extends State<NavbarBottomDoctor> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const TestPage();
+                        currentScreen = ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors);
                         currentTab = 1;
                       });
                     },
@@ -109,7 +111,7 @@ class _NavbarBottomDoctorState extends State<NavbarBottomDoctor> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const ResetPassword();
+                        currentScreen = const MedicalHistoryDoctor();
                         currentTab = 2;
                       });
                     },

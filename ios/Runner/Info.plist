@@ -49,5 +49,9 @@
 	<array>
 	<string>whatsapp</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>lib for profile image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>grant camera access</string>
 </dict>
 </plist>

@@ -214,7 +214,7 @@ class _DataDokterState extends State<DataDokter> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => EditAkun(),
+                                          builder: (context) => EditAkun(userId: "${user.id}",),
                                         ),
                                       );
                                     },

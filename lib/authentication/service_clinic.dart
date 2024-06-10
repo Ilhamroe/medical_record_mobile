@@ -28,7 +28,8 @@ class ServiceClinic {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = response.data;
-      List<dynamic> clininData = jsonResponse['user'];
+      print('tes;$jsonResponse');
+      List<dynamic> clininData = jsonResponse['data'];
       return clininData.map((user) => Clinic.fromJson(user)).toList();
     } else {
       throw Exception('Failed to load Data');
@@ -57,7 +58,8 @@ class ServiceClinic {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = response.data;
-      List<dynamic> clininData = jsonResponse['user'];
+      print('tes;$jsonResponse');
+      List<dynamic> clininData = jsonResponse['data'];
       return clininData.map((user) => Clinic.fromJson(user)).toList();
     } else {
       throw Exception('Failed to load Data');
@@ -83,7 +85,6 @@ class ServiceClinic {
         },
       ),
     );
-    print('emb:$response');
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = response.data;

@@ -1,7 +1,6 @@
-  import 'package:e_klinik_pens/widgets/home_page/doctor_card_detail.dart';
-  import 'package:flutter/material.dart';
-  import 'package:e_klinik_pens/utils/color.dart';
-  import 'package:e_klinik_pens/models/doctor_list.dart';
+import 'package:e_klinik_pens/widgets/home_page/doctor_card_detail.dart';
+import 'package:flutter/material.dart';
+import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -42,7 +42,7 @@ class SaranMasukanDetail extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 8.0).r,
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: Text("Gejala & Diagnosa",
+                            child: Text("Kritik dan Saran",
                             style: TextStyle(
                               color: pureWhite,
                               fontWeight: FontWeight.w600,

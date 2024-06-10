@@ -1,9 +1,11 @@
+import 'package:e_klinik_pens/models/camera_actions.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/user/profile.dart';
 import 'package:e_klinik_pens/widgets/common/button_confirm.dart';
 import 'package:e_klinik_pens/widgets/common/custom_edit_profiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:e_klinik_pens/models/users.dart';
@@ -89,6 +91,7 @@ class _EditProfileState extends State<EditProfile> {
     _emailController.dispose();
     _passwordController.dispose();
     _dateController.dispose();
+    _genderController.dispose();
     _numberController.dispose();
     _heightController.dispose();
     _weightController.dispose();
@@ -119,14 +122,92 @@ class _EditProfileState extends State<EditProfile> {
                       height: MediaQuery.of(context).size.height * 0.3,
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).padding.top + 16),
-                      child: Container(),
+                      child: Stack(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.arrow_back_ios_new_rounded), 
+                                color: pureWhite,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.0145),
+                                child: Column(
+                                  children: [
+                                    Text("Profil", style: TextStyle(
+                                      fontWeight: FontWeight.bold, 
+                                      color: pureWhite,
+                                      fontSize: MediaQuery.of(context).size.width * 0.055,
+                                    ),
+                                  ),
+                                    Container(
+                                      height: MediaQuery.of(context).size.height * 0.0275,
+                                    ),
+                                    GestureDetector(
+                                      child: Stack(
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context).size.width * 0.280,
+                                            height: MediaQuery.of(context).size.height * 0.133,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                Navigator.push(
+                                                  context, 
+                                                  MaterialPageRoute(builder: (context) => const CameraAction())
+                                                  );
+                                                },
+                                                child: Image(
+                                                  image: AssetImage("assets/images/profiles-pic.jpg"),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width * 0.07,
+                                              height: MediaQuery.of(context).size.height * 0.035,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(100),
+                                                  color: Colors.white),
+                                              child: Image.asset(
+                                                "assets/images/camera.png",
+                                                color: themeLight,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     Container(
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(45),
-                            topRight: Radius.circular(45)),
+                            topRight:  Radius.circular(45)),
                       ),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.7,

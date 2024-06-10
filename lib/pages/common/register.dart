@@ -81,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
   }
 
-   @override
+  @override
   void dispose() {
     _nameController.dispose();
     _nrpController.dispose();
@@ -200,6 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       controller: _nrpController,
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [
+                                        LengthLimitingTextInputFormatter(18),
                                         FilteringTextInputFormatter.digitsOnly,
                                       ],
                                     ),

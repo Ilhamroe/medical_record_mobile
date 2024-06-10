@@ -68,22 +68,17 @@ class DoctorTile {
 
 final List<DoctorTile> doctorTiles = [
   DoctorTile(
-      icon: Image.asset("assets/images/profile-big.png"), 
-      title: "Pasien",
-      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => DataPasienDoctor()
-      )
-    ), 
+    icon: Image.asset("assets/images/profile-big.png"),
+    title: "Pasien",
+    onTap: (context) => Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DataPasienDoctor())),
   ),
   DoctorTile(
       icon: Image.asset("assets/images/medical-record.png"),
       title: "Tambah Rekam Medis",
-      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => TambahRekamMedisPage()
-      )
-    )  
-  ),
+      onTap: (context) => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TambahRekamMedisPage()))),
 ];
-
-
 
 class ProfileTile {
   final Widget text;

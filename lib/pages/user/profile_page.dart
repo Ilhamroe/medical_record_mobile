@@ -77,16 +77,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             height: 8.h,
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 8.0).w,
+                            padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 8.0)
+                                .w,
                             child: Text(
                               _user != null
                                   ? "Hello ${_user!.name ?? "User"}!"
                                   : "",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22.sp,
-                                  fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                           Row(

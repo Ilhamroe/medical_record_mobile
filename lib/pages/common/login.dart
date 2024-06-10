@@ -230,6 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 50.h,
                                       placeholder: 'Masukkan email Anda',
                                       leadingIcon: 'assets/images/email.png',
+                                      keyboardType: TextInputType.emailAddress,
                                       controller: _emailController,
                                       trailing: isValid
                                           ? SvgPicture.asset(

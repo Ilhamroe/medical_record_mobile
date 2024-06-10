@@ -54,13 +54,18 @@ class _HeaderState extends State<Header> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Flexible(
+                    SizedBox(
+                      width: 250.w,
                       child: Text(
                         _user != null ? "Hello ${_user!.name}!" : "",
                         style: TextStyle(
-                            fontSize: 32.sp,
-                            color: pureWhite,
-                            fontFamily: 'Inter-Semi'),
+                          fontSize: 32.sp,
+                          color: pureWhite,
+                          fontFamily: 'Inter-Semi',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        // softWrap: false,
+                        maxLines: 1,
                       ),
                     ),
                   ],
@@ -69,14 +74,17 @@ class _HeaderState extends State<Header> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
+                      width: 80.w,
+                    ),
+                    SizedBox(
                       width: 45.w,
-                      height: 45.h,
+                      height: 45.w,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(100.r),
                           child: Image.asset(
                             "assets/images/profiles-pic.jpg",
                           )),
-                    ),
+                    )
                   ],
                 ),
               ],

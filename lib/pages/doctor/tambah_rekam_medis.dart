@@ -191,15 +191,6 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                       ),
                     ],
                   ),
-                  // Container(
-                  //   height: MediaQuery.of(context).size.height * 0.105,
-                  //   decoration: const BoxDecoration(
-                  //     image: DecorationImage(
-                  //       image: AssetImage("assets/images/atom.png"),
-                  //       fit: BoxFit.cover,
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.0275,
                     alignment: Alignment.center,
@@ -235,7 +226,7 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
                           items: _patientNames.map((name) {
                             return DropdownMenuItem(
                               value: name,
-                              child: Text(name),
+                              child: Text(name, style: const TextStyle(overflow: TextOverflow.ellipsis),),
                             );
                           }).toList(),
                           onChanged: (value) {
@@ -377,11 +368,10 @@ class _TambahRekamMedisPageState extends State<TambahRekamMedisPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 100.0.w,
+            width:50.0.w,
             padding: const EdgeInsets.only(top: 15).r,
             child: Text(label, style: TextStyle(fontSize: 16.sp)),
           ),
-          SizedBox(width: 3),
           Expanded(
             child: child,
           ),

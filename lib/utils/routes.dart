@@ -15,6 +15,7 @@ import 'package:e_klinik_pens/pages/onboarding/onboarding_page.dart';
 import 'package:e_klinik_pens/pages/onboarding/splash.dart';
 import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
+import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,8 @@ class AppRoutes {
   static const String dataPasien = "/dataPasien";
   static const String dataDokter = "/dataDokter";
   static const String editAkun = "/editAkun";
+  static const String editProfile = "/editProfile";
+  static const String profilePage = "/profilePage";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -89,6 +92,18 @@ class AppRoutes {
           builder: (_) => EditAkun(
             userId: "$user.id",
           ),
+        );
+
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const EditProfile(),
+        );
+
+      case AppRoutes.profilePage:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const ProfilePage(),
         );
 
       case AppRoutes.addAkun:

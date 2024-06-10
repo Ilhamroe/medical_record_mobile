@@ -38,19 +38,19 @@ final List<Doctor> doctors = [
   Doctor(
     icon: 'assets/images/avatar_doctor_1.png', 
     name: 'Dr. John Doe',
-    role: 'General Physician',
+    role: 'Dokter Umum',
     desc: 'Dokter umum yang berpengalaman dengan lebih dari 4 tahun pengalaman dalam memberikan perawatan dan diagnosis pasien yang komprehensif.'
   ),
   Doctor(
     icon: 'assets/images/avatar_doctor_2.png', 
     name: 'Dr. Jane Smith',
-    role: 'Pediatrician',
+    role: 'Dokter Umum',
     desc: 'Dokter umum yang terampil dalam evaluasi pasien, diagnosis, dan perawatan untuk membantu pasien mengendalikan gejala.'
   ),
   Doctor(
     icon: 'assets/images/avatar_doctor_3.png', 
     name: 'Dr. Alex Johnson',
-    role: 'Surgeon',
+    role: 'Dokter Umum',
     desc: 'Berpengalaman sebagai dokter umum selama 5 tahun. Siap melayani situasi medis dalam keadaan darurat atau non-darurat.'
   ),
 ];

@@ -1,25 +1,24 @@
-import 'package:e_klinik_pens/authentication/service_clinic.dart';
-import 'package:e_klinik_pens/models/clinics.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+import 'package:e_klinik_pens/authentication/service_clinic.dart';
+import 'package:e_klinik_pens/models/clinics.dart';
 
-class MedicalHistoryAdminTiles extends StatefulWidget {
-  const MedicalHistoryAdminTiles({super.key});
+class MedicalHistoryDoctorTiles extends StatefulWidget {
+  const MedicalHistoryDoctorTiles({super.key});
 
-  @override 
-  State<MedicalHistoryAdminTiles> createState() => _MedicalHistoryAdminTilesState();
+  @override
+  State<MedicalHistoryDoctorTiles> createState() => _MedicalHistoryDoctorTilesState();
 }
 
-class _MedicalHistoryAdminTilesState extends State<MedicalHistoryAdminTiles> {
+class _MedicalHistoryDoctorTilesState extends State<MedicalHistoryDoctorTiles> {
   final ServiceClinic serviceAPI = ServiceClinic();
   late Future<List<Clinic>> listData;
 
   @override
   void initState() {
     super.initState();
-    listData = serviceAPI.fetchAdminClinicData();
+    listData = serviceAPI.fetchDoctorClinicData();
   }
 
   @override
@@ -121,29 +120,10 @@ class _MedicalHistoryAdminTilesState extends State<MedicalHistoryAdminTiles> {
                                     ),
                                   ),
                                   Text(
-                                    formatTanggal(clinic.dated),
+                                    clinic.dated,
                                     style: TextStyle(fontSize: 14.sp),
                                   )
                                 ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0).w,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Dokter: ",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14.sp,
-                                      ),
-                                    ),
-                                    Text(
-                                      clinic.doctor,
-                                      style: TextStyle(fontSize: 14.sp),
-                                    )
-                                  ],
-                                ),
                               ),
                               Padding(
                                 padding:
@@ -277,25 +257,4 @@ class _MedicalHistoryAdminTilesState extends State<MedicalHistoryAdminTiles> {
       },
     );
   }
-}
-
-String formatTanggal(String dateStr) {
-  DateTime date = DateFormat('yyyy-MM-dd').parse(dateStr);
-
-  List<String> bulan = [
-    '',
-    'Januari',
-    'Februari',
-    'Maret',
-    'April',
-    'Mei',
-    'Juni',
-    'Juli',
-    'Agustus',
-    'September',
-    'Oktober',
-    'November',
-    'Desember'
-  ];
-  return '${date.day} ${bulan[date.month]} ${date.year}';
 }

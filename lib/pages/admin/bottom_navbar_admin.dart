@@ -1,8 +1,6 @@
 import 'package:e_klinik_pens/models/schedule_doctor_list.dart';
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
-import 'package:e_klinik_pens/pages/common/reset_password.dart';
-import 'package:e_klinik_pens/pages/common/test_page.dart';
-import 'package:e_klinik_pens/pages/user/medical_record_history.dart';
+import 'package:e_klinik_pens/pages/admin/medical_record_history_admin.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:e_klinik_pens/widgets/common/double_tap_close.dart';
@@ -22,7 +20,7 @@ class _NavbarBottomAdminState extends State<NavbarBottomAdmin> {
   final List<Widget> screens = [
     const AdminHomepage(),
     ScheduleDoctorScreen(scheduleDoctors: scheduleDoctors),
-    const MedicalHistory(),
+    const MedicalHistoryAdmin(),
     const ProfilePage(),
   ];
 
@@ -111,7 +109,7 @@ class _NavbarBottomAdminState extends State<NavbarBottomAdmin> {
                     splashColor: pureWhite,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const MedicalHistory();
+                        currentScreen = const MedicalHistoryAdmin();
                         currentTab = 2;
                       });
                     },

@@ -1,162 +1,184 @@
+import 'package:e_klinik_pens/authentication/service_clinic.dart';
+import 'package:e_klinik_pens/models/clinics.dart';
 import 'package:e_klinik_pens/models/suggestion_list.dart';
 import 'package:flutter/material.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
-class SaranMasukanCardDetail extends StatelessWidget {
-  final SaranMasukan saranMasukans;
+class SaranMasukanCardDetail extends StatefulWidget {
 
-  const SaranMasukanCardDetail({ required this.saranMasukans, super.key});
+  const SaranMasukanCardDetail({super.key,});
+
+  @override
+  State<SaranMasukanCardDetail> createState() => _SaranMasukanCardDetailState();
+}
+
+class _SaranMasukanCardDetailState extends State<SaranMasukanCardDetail> {
+  final ServiceClinic serviceAPI = ServiceClinic();
+  late Future<List<Clinic>> listData;
+
+  @override
+  void initState() {
+    super.initState();
+    listData = serviceAPI.fetchUserClinicData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      surfaceTintColor: Colors.transparent,
-      color: pureWhite,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20).r,
-      ),
-      margin: const EdgeInsets.only(top: 20.0, left: 15, right: 15).r,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: themeDark,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(20).r,
-                topRight: const Radius.circular(20).r,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0).r,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tanggal Periksa: ',
-                        style: TextStyle(
-                          color: pureWhite, 
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        formatTanggal(saranMasukans.tglPeriksa),
-                        style: TextStyle(
-                          color: pureWhite,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Dokter: ',
-                        style: TextStyle(
-                          color: pureWhite, 
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        saranMasukans.doctor.name,
-                        style: TextStyle(
-                          color: pureWhite,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0).r,
+    return FutureBuilder<List<Clinic>>(
+      future: listData,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text('No data available'));
+        } else {
+          final clinics = snapshot.data!;
+          return SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Kritik & Saran:',
-                  style: TextStyle(
-                    color: blackText,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12.sp,
+              children: clinics.map((clinic) {
+                return Card(
+                  elevation: 4,
+                  surfaceTintColor: Colors.transparent,
+                  color: pureWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                for (var gejala in saranMasukans.saranmasukan)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 4.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '\u2022 ',
-                          style: TextStyle(
-                            color: blackText,
-                            fontSize: 12.sp,
+                  margin: const EdgeInsets.only(top: 20.0, left: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: themeDark,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
                           ),
                         ),
-                        Expanded(
-                          child: Text(
-                            gejala,
-                            style: TextStyle(
-                              color: blackText,
-                              fontSize: 12.sp,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Tanggal Periksa: ',
+                                    style: TextStyle(
+                                      color: pureWhite,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    formatTanggal(clinic.dated),
+                                    style: const TextStyle(
+                                      color: pureWhite,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Dokter: ',
+                                    style: TextStyle(
+                                      color: pureWhite,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    clinic.doctor,
+                                    style: const TextStyle(
+                                      color: pureWhite,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                'Kritik dan Saran:',
+                                style: TextStyle(
+                                  color: blackText,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Text(
+                                clinic.advice,
+                                style: const TextStyle(
+                                  color: blackText,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-              ],
+                );
+              }).toList(),
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }
-
-
 
 class SaranMasukanListView extends StatelessWidget {
   const SaranMasukanListView({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: double.infinity),
-      child: ListView.separated(
-        padding: const EdgeInsets.all(8.0).r,
-        shrinkWrap: true,
-        itemCount: saranMasukanList.length,
-        itemBuilder: (context, index) {
-          return SaranMasukanCardDetail(saranMasukans: saranMasukanList[index]);
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 10.h);
-        },
-      ),
-    );
+        constraints: const BoxConstraints(maxWidth: double.infinity),
+        child: SaranMasukanCardDetail());
   }
 }
 
-String formatTanggal(DateTime date) {
+String formatTanggal(String dateStr) {
+  DateTime date = DateFormat('yyyy-MM-dd').parse(dateStr);
   List<String> bulan = [
-    '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    '',
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
   ];
 
   return '${date.day} ${bulan[date.month]} ${date.year}';

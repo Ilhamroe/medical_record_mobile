@@ -51,7 +51,7 @@ class _TambahAkunState extends State<TambahAkun> {
         _showDialog(const AlertConfirm(
           titleText: "Sukses",
           descText: "Akun anda telah berhasil didaftarkan",
-          route: AppRoutes.addAkun,
+          route: AppRoutes.navbarAdmin ,
           confirmText: 'Tutup',
         ));
       } catch (e) {

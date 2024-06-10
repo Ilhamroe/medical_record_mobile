@@ -12,6 +12,7 @@ class User {
   final double? height;
   final double? weight;
   final String? description;
+  final DateTime lastLogin;
 
   User({
     required this.id,
@@ -27,6 +28,7 @@ class User {
     this.height,
     this.weight,
     this.description,
+    required this.lastLogin,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,9 @@ class User {
       height: (json['height'] != null) ? json['height'].toDouble() : null,
       weight: (json['weight'] != null) ? json['weight'].toDouble() : null,
       description: json['description'] as String?,
+      lastLogin: json['lastLogin'] != null
+          ? DateTime.parse(json['lastLogin'])
+          : DateTime.now(),
     );
   }
 }

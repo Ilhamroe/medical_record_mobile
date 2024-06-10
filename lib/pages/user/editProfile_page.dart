@@ -122,11 +122,11 @@ class _EditProfileState extends State<EditProfile> {
                       child: Container(),
                     ),
                     Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(45),
-                            topRight: Radius.circular(45)),
+                            topLeft: const Radius.circular(35).r,
+                            topRight: const Radius.circular(35).r),
                       ),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.7,

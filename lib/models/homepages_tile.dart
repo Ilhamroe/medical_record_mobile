@@ -7,7 +7,6 @@ import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/faq_page.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
-import 'package:e_klinik_pens/pages/doctor/add_medical_history.dart';
 import 'package:e_klinik_pens/pages/doctor/patients_data_doctor.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -68,22 +67,17 @@ class DoctorTile {
 
 final List<DoctorTile> doctorTiles = [
   DoctorTile(
-      icon: Image.asset("assets/images/profile-big.png"), 
-      title: "Pasien",
-      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => DataPasienDoctor()
-      )
-    ), 
+    icon: Image.asset("assets/images/profile-big.png"),
+    title: "Pasien",
+    onTap: (context) => Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DataPasienDoctor())),
   ),
   DoctorTile(
       icon: Image.asset("assets/images/medical-record.png"),
       title: "Tambah Rekam Medis",
-      onTap: (context) => Navigator.push(context, MaterialPageRoute(builder: (context) => TambahRekamMedisPage()
-      )
-    )  
-  ),
+      onTap: (context) => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TambahRekamMedisPage()))),
 ];
-
-
 
 class ProfileTile {
   final Widget text;

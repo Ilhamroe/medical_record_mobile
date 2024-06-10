@@ -152,6 +152,7 @@ class _EditProfileState extends State<EditProfile> {
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(18),
                             ],
                           ),
                           const TextLabel(label: 'Email:'),
@@ -160,6 +161,7 @@ class _EditProfileState extends State<EditProfile> {
                             height: 50.h,
                             placeholder: "Masukkan email Anda",
                             controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
                           ),
                           const TextLabel(label: 'Password:'),
                           CustomProfilesField(
@@ -208,6 +210,7 @@ class _EditProfileState extends State<EditProfile> {
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(15),
                             ],
                           ),
                           Row(
@@ -229,9 +232,9 @@ class _EditProfileState extends State<EditProfile> {
                                       height: 50.h,
                                       placeholder: "-",
                                       controller: _heightController,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                                       inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                                       ],
                                     ),
                                   ],
@@ -253,9 +256,9 @@ class _EditProfileState extends State<EditProfile> {
                                       height: 50.h,
                                       placeholder: "-",
                                       controller: _weightController,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                                       inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                                       ],
                                     ),
                                   ],

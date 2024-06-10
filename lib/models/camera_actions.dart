@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 late List<CameraDescription> cameras;
 
 class CameraAction extends StatefulWidget {
-  const CameraAction({super.key});
+  const   CameraAction({super.key});
 
   @override
   State<CameraAction> createState() => _CameraActionState();

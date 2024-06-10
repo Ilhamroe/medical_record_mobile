@@ -216,7 +216,7 @@ class _DataPasienState extends State<DataPasien> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => EditAkun(),
+                                          builder: (context) => EditAkun(userId: "${user.id}",),
                                         ),
                                       );
                                     },

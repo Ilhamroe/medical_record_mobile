@@ -1,6 +1,8 @@
-import 'package:e_klinik_pens/pages/admin/add_account.dart';
+import 'package:e_klinik_pens/models/users.dart';
 import 'package:e_klinik_pens/pages/admin/admin_homepage.dart';
+import 'package:e_klinik_pens/pages/admin/add_account.dart';
 import 'package:e_klinik_pens/pages/admin/doctors_data.dart';
+import 'package:e_klinik_pens/pages/admin/edit_account.dart';
 import 'package:e_klinik_pens/pages/admin/patients_data.dart';
 import 'package:e_klinik_pens/pages/common/login_register.dart';
 import 'package:e_klinik_pens/pages/common/login.dart';
@@ -13,8 +15,11 @@ import 'package:e_klinik_pens/pages/onboarding/onboarding_page.dart';
 import 'package:e_klinik_pens/pages/onboarding/splash.dart';
 import 'package:e_klinik_pens/pages/admin/bottom_navbar_admin.dart';
 import 'package:e_klinik_pens/pages/user/bottom_navbar_user.dart';
+import 'package:e_klinik_pens/pages/user/editProfile_page.dart';
 import 'package:e_klinik_pens/pages/user/profile_page.dart';
 import 'package:flutter/material.dart';
+
+User? user;
 
 class AppRoutes {
   static const String splash = "/";
@@ -33,6 +38,9 @@ class AppRoutes {
   static const String addAkun = "/addAkun";
   static const String dataPasien = "/dataPasien";
   static const String dataDokter = "/dataDokter";
+  static const String editAkun = "/editAkun";
+  static const String editProfile = "/editProfile";
+  static const String profilePage = "/profilePage";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -76,6 +84,26 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const ResetPassword(),
+        );
+
+      case AppRoutes.editAkun:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => EditAkun(
+            userId: "$user.id",
+          ),
+        );
+
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const EditProfile(),
+        );
+
+      case AppRoutes.profilePage:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const ProfilePage(),
         );
 
       case AppRoutes.addAkun:

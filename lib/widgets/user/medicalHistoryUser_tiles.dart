@@ -1,19 +1,18 @@
-import 'package:e_klinik_pens/models/medical_records.dart';
 import 'package:e_klinik_pens/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_klinik_pens/authentication/service_clinic.dart';
 import 'package:e_klinik_pens/models/clinics.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class MedicalHistoryUser extends StatefulWidget {
-  const MedicalHistoryUser({super.key});
+class MedicalHistoryUserTiles extends StatefulWidget {
+  const MedicalHistoryUserTiles({super.key});
 
   @override
-  State<MedicalHistoryUser> createState() => _MedicalHistoryTilesState();
+  State<MedicalHistoryUserTiles> createState() => _MedicalHistoryUserTilesState();
 }
 
-class _MedicalHistoryTilesState extends State<MedicalHistoryUser> {
+class _MedicalHistoryUserTilesState extends State<MedicalHistoryUserTiles> {
   final ServiceClinic serviceAPI = ServiceClinic();
   late Future<List<Clinic>> listData;
 
@@ -122,7 +121,7 @@ class _MedicalHistoryTilesState extends State<MedicalHistoryUser> {
                                     ),
                                   ),
                                   Text(
-                                    clinic.dated,
+                                    formatTanggal(clinic.dated),
                                     style: TextStyle(fontSize: 14.sp),
                                   )
                                 ],
@@ -145,21 +144,6 @@ class _MedicalHistoryTilesState extends State<MedicalHistoryUser> {
                                     )
                                   ],
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Pasien: ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                  Text(
-                                    clinic.patient.toString(),
-                                    style: TextStyle(fontSize: 14.sp),
-                                  )
-                                ],
                               ),
                               Padding(
                                 padding:
@@ -275,3 +259,25 @@ class _MedicalHistoryTilesState extends State<MedicalHistoryUser> {
     );
   }
 }
+
+String formatTanggal(String dateStr) {
+  DateTime date = DateFormat('yyyy-MM-dd').parse(dateStr);
+
+  List<String> bulan = [
+    '',
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+  ];
+  return '${date.day} ${bulan[date.month]} ${date.year}';
+}
+

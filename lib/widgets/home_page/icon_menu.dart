@@ -23,7 +23,7 @@ class IconMenu extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DoctorProfileDetail(),
+                builder: (context) => const DoctorProfileDetail(),
               ),
             ),
           ),
@@ -33,7 +33,7 @@ class IconMenu extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => GejalaDiagnosaDetail(),
+                builder: (context) => const GejalaDiagnosaDetail(),
               ),
             ),
           ),
@@ -43,7 +43,7 @@ class IconMenu extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SaranMasukanDetail(),
+                builder: (context) => const SaranMasukanDetail(),
               ),
             ),
           ),

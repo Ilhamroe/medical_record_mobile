@@ -1,16 +1,16 @@
 import 'package:e_klinik_pens/utils/color.dart';
-import 'package:e_klinik_pens/widgets/common/medicalHistoryUser_tiles.dart';
+import 'package:e_klinik_pens/widgets/doctor/medicalHistoryDoctor_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MedicalHistory extends StatefulWidget {
-  const MedicalHistory({super.key});
+class MedicalHistoryDoctor extends StatefulWidget {
+  const MedicalHistoryDoctor({super.key});
 
   @override
-  State<MedicalHistory> createState() => _MedicalHistoryState();
+  State<MedicalHistoryDoctor> createState() => _MedicalHistoryDoctorState();
 }
 
-class _MedicalHistoryState extends State<MedicalHistory> {
+class _MedicalHistoryDoctorState extends State<MedicalHistoryDoctor> {
   final int contoh = 1;
 
   @override
@@ -20,10 +20,6 @@ class _MedicalHistoryState extends State<MedicalHistory> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            leading: const SizedBox(
-              width: 0.0,
-              height: 0.0,
-            ),
             backgroundColor: themeLight,
             title: Text(
               "Riwayat Rekam Medis",
@@ -57,7 +53,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
             ),
           ),
           contoh == 1
-              ? const MedicalHistoryUser()
+              ? const MedicalHistoryDoctorTiles()
               : SliverFillRemaining(
                   child: Center(
                     child: Column(

@@ -33,21 +33,49 @@ Doctor doctor3 = doctors[2];
 
 ScheduleDoctor scheduleDoctor1 = ScheduleDoctor(
   doctor: doctor1,
-  day: "Selasa",
+  day: "Senin",
   startTime: const TimeOfDay(hour: 10, minute: 0),
   endTime: const TimeOfDay(hour: 12, minute: 0),
 );
 
 ScheduleDoctor scheduleDoctor2 = ScheduleDoctor(
   doctor: doctor2,
-  day: "Rabu",
-  startTime: const TimeOfDay(hour: 9, minute: 0),
-  endTime: const TimeOfDay(hour: 11, minute: 0),
+  day: "Senin",
+  startTime: const TimeOfDay(hour: 13, minute: 0),
+  endTime: const TimeOfDay(hour: 15, minute: 0),
 );
 
 ScheduleDoctor scheduleDoctor3 = ScheduleDoctor(
-  doctor: doctor3,
+  doctor: doctor1,
+  day: "Selasa",
+  startTime: const TimeOfDay(hour: 13, minute: 0),
+  endTime: const TimeOfDay(hour: 15, minute: 0),
+);
+
+ScheduleDoctor scheduleDoctor4 = ScheduleDoctor(
+  doctor: doctor2,
+  day: "Rabu",
+  startTime: const TimeOfDay(hour: 10, minute: 0),
+  endTime: const TimeOfDay(hour: 12, minute: 0),
+);
+
+ScheduleDoctor scheduleDoctor5 = ScheduleDoctor(
+  doctor: doctor1,
+  day: "Rabu",
+  startTime: const TimeOfDay(hour: 13, minute: 0),
+  endTime: const TimeOfDay(hour: 15, minute: 0),
+);
+
+ScheduleDoctor scheduleDoctor6 = ScheduleDoctor(
+  doctor: doctor2,
   day: "Kamis",
+  startTime: const TimeOfDay(hour: 13, minute: 0),
+  endTime: const TimeOfDay(hour: 15, minute: 0),
+);
+
+ScheduleDoctor scheduleDoctor7 = ScheduleDoctor(
+  doctor: doctor3,
+  day: "Jumat",
   startTime: const TimeOfDay(hour: 13, minute: 0),
   endTime: const TimeOfDay(hour: 15, minute: 0),
 );
@@ -56,4 +84,8 @@ List<ScheduleDoctor> scheduleDoctors = [
   scheduleDoctor1,
   scheduleDoctor2,
   scheduleDoctor3,
+  scheduleDoctor4,
+  scheduleDoctor5,
+  scheduleDoctor6,
+  scheduleDoctor7,
 ];

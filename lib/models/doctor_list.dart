@@ -19,7 +19,6 @@ class DoctorList extends StatelessWidget {
   }
 }
 
-
 class Doctor {
   String? icon;
   final String name;
@@ -36,21 +35,21 @@ class Doctor {
 
 final List<Doctor> doctors = [
   Doctor(
-    icon: 'assets/images/avatar_doctor_1.png', 
-    name: 'Dr. John Doe',
-    role: 'General Physician',
-    desc: 'Dokter umum yang berpengalaman dengan lebih dari 4 tahun pengalaman dalam memberikan perawatan dan diagnosis pasien yang komprehensif.'
-  ),
+      icon: 'assets/images/avatar_doctor_1.png',
+      name: 'dr. Muhammad Dwiya Lakhsmana',
+      role: 'Dokter Umum',
+      desc:
+          'Dokter umum yang berpengalaman dengan lebih dari 4 tahun pengalaman dalam memberikan perawatan dan diagnosis pasien yang komprehensif.'),
   Doctor(
-    icon: 'assets/images/avatar_doctor_2.png', 
-    name: 'Dr. Jane Smith',
-    role: 'Pediatrician',
-    desc: 'Dokter umum yang terampil dalam evaluasi pasien, diagnosis, dan perawatan untuk membantu pasien mengendalikan gejala.'
-  ),
+      icon: 'assets/images/avatar_doctor_2.png',
+      name: 'dr. Firza Sharfina Izzati',
+      role: 'Dokter Umum',
+      desc:
+          'Dokter umum yang terampil dalam evaluasi pasien, diagnosis, dan perawatan untuk membantu pasien mengendalikan gejala.'),
   Doctor(
-    icon: 'assets/images/avatar_doctor_3.png', 
-    name: 'Dr. Alex Johnson',
-    role: 'Surgeon',
-    desc: 'Berpengalaman sebagai dokter umum selama 5 tahun. Siap melayani situasi medis dalam keadaan darurat atau non-darurat.'
-  ),
+      icon: 'assets/images/avatar_doctor_3.png',
+      name: 'dr. Budi Utomo',
+      role: 'Dokter Umum',
+      desc:
+          'Berpengalaman sebagai dokter umum selama 5 tahun. Siap melayani situasi medis dalam keadaan darurat atau non-darurat.'),
 ];
